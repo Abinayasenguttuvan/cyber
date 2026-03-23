@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Incidents - Admin Dashboard</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body, html { height:100%; }
+
+    body {
+      background: url('./cyber3.webp') no-repeat center center/cover;
+    }
+
+    body::before {
+      content:'';
+      position:absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.6);
+      z-index:0;
+    }
+
+    .dashboard { display:flex; position:relative; z-index:1; height:100vh; }
+
+    /* Sidebar */
+    .sidebar {
+      width:250px;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(15px);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      padding:20px;
+    }
+    .sidebar h2 { text-align:center; color:#00ffff; margin-bottom:30px; text-shadow:0 0 10px #00ffff; }
+    .sidebar a { text-decoration:none; color:#c0c0c0; margin:10px 0; padding:10px; border-radius:8px; display:flex; align-items:center; transition:0.3s; }
+    .sidebar a i { margin-right:10px; }
+    .sidebar a:hover { background: rgba(0,255,255,0.2); color:#00ffff; }
+
+    /* Main content */
+    .main { flex:1; display:flex; flex-direction:column; padding:20px; overflow-y:auto; }
+
+    /* Topbar */
+    .topbar { display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.05); padding:15px 20px; border-radius:10px; backdrop-filter: blur(10px); margin-bottom:20px; box-shadow:0 0 15px rgba(0,255,255,0.2); }
+    .user-info { display:flex; align-items:center; gap:10px; color:#c0c0c0; }
+    .user-info i { color:#00ffff; }
+    .logo { height:40px; }
+
+    /* Cards */
+    .cards { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px; }
+    .card { flex:1; min-width:220px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius:15px; padding:20px; box-shadow:0 0 15px rgba(0,255,255,0.2); color:#fff; }
+    .card h3 { margin-bottom:15px; color:#00ffff; }
+
+    /* Charts */
+    .charts { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px; }
+    canvas { background: rgba(255,255,255,0.05); border-radius:15px; padding:10px; }
+
+    /* Filter Tabs */
+    .filter-tabs { display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap; }
+    .filter-tabs button { padding:8px 15px; border:none; border-radius:8px; cursor:pointer; background: rgba(255,255,255,0.05); color:#c0c0c0; backdrop-filter: blur(10px); transition:0.3s; }
+    .filter-tabs button.active, .filter-tabs button:hover { background:#00ffff; color:#000; }
+
+    /* Incident Table */
+    table { width:100%; border-collapse:collapse; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius:10px; overflow:hidden; margin-bottom:20px; color:#fff; }
+    th, td { padding:10px; text-align:left; }
+    th { background: rgba(0,255,255,0.2); }
+    tr:nth-child(even){background: rgba(255,255,255,0.05);}
+    .badge { padding:5px 10px; border-radius:5px; font-weight:bold; color:#000; }
+    .critical { background:red; }
+    .high { background:orange; }
+    .medium { background:yellow; }
+    .low { background:green; }
+
+    /* Recent activity */
+    .activity { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius:15px; padding:15px; color:#fff; max-height:250px; overflow-y:auto; }
+    .activity h3 { color:#00ffff; margin-bottom:10px; }
+    .activity p { margin-bottom:8px; }
+
+    @media (max-width:992px){
+      .dashboard { flex-direction:column; }
+      .sidebar { width:100%; flex-direction:row; overflow-x:auto; }
+      .sidebar a { flex:1; justify-content:center; }
+      .main { padding:15px; }
+      .cards, .charts, .filter-tabs { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="./admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="./users.html"><i class="fas fa-user"></i> Users</a>
+    <a href="./incident.html"><i class="fas fa-bug"></i> Incidents</a>
+    <a href="./reports.html"><i class="fas fa-file-alt"></i> Reports</a>
+    <a href="./settings.html"><i class="fas fa-cog"></i> Settings</a>
+    <a href="./login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <!-- Topbar -->
+    <div class="topbar">
+      <img src="./logo.webp" alt="Stackly Logo" class="logo">
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <span id="username">User</span>
+        <span id="email">email@example.com</span>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>Active Incidents</h3>
+        <p>12</p>
+      </div>
+      <div class="card">
+        <h3>Resolved Incidents</h3>
+        <p>98</p>
+      </div>
+      <div class="card">
+        <h3>Pending Incidents</h3>
+        <p>5</p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+      <div class="card" style="flex:1; min-width:300px;">
+        <h3>Incident Types (Pie)</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="card" style="flex:1; min-width:300px;">
+        <h3>Monthly Incidents (Bar)</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="active" onclick="filterTable('all')">All</button>
+      <button onclick="filterTable('active')">Active</button>
+      <button onclick="filterTable('resolved')">Resolved</button>
+      <button onclick="filterTable('pending')">Pending</button>
+      <button onclick="filterTable('critical')">Critical</button>
+    </div>
+
+    <!-- Incident Table -->
+    <table id="incidentTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Severity</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Assigned To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-status="active" data-severity="critical">
+          <td>#101</td>
+          <td>Malware</td>
+          <td><span class="badge critical">Critical</span></td>
+          <td>Active</td>
+          <td>2026-03-23</td>
+          <td>John Doe</td>
+        </tr>
+        <tr data-status="resolved" data-severity="high">
+          <td>#102</td>
+          <td>Phishing</td>
+          <td><span class="badge high">High</span></td>
+          <td>Resolved</td>
+          <td>2026-03-20</td>
+          <td>Jane Smith</td>
+        </tr>
+        <tr data-status="pending" data-severity="medium">
+          <td>#103</td>
+          <td>DDoS</td>
+          <td><span class="badge medium">Medium</span></td>
+          <td>Pending</td>
+          <td>2026-03-21</td>
+          <td>Mike Lee</td>
+        </tr>
+        <tr data-status="active" data-severity="low">
+          <td>#104</td>
+          <td>Ransomware</td>
+          <td><span class="badge low">Low</span></td>
+          <td>Active</td>
+          <td>2026-03-22</td>
+          <td>Sarah Connor</td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+
+  </div>
+</div>
+
+<script>
+  // Load user info
+  const user = JSON.parse(localStorage.getItem('loggedUser') || sessionStorage.getItem('loggedUser'));
+  if(user){
+    document.getElementById('username').textContent = user.accountType.toUpperCase();
+    document.getElementById('email').textContent = user.email;
+  } else {
+    alert('Not logged in!');
+    window.location.href = 'login.html';
+  }
+
+  function logout(){
+    localStorage.removeItem('loggedUser');
+    sessionStorage.removeItem('loggedUser');
+    window.location.href = 'login.html';
+  }
+
+  // Chart.js
+  const pieCtx = document.getElementById('pieChart').getContext('2d');
+  const pieChart = new Chart(pieCtx, {
+    type:'pie',
+    data:{
+      labels:['Malware','Phishing','DDoS','Ransomware'],
+      datasets:[{
+        data:[5,3,2,2],
+        backgroundColor:['#00ffff','#0077ff','#ff00ff','#ff5555']
+      }]
+    },
+    options:{ responsive:true }
+  });
+
+  const barCtx = document.getElementById('barChart').getContext('2d');
+  const barChart = new Chart(barCtx, {
+    type:'bar',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets:[{
+        label:'Incidents',
+        data:[3,5,2,8,6,4],
+        backgroundColor:'#00ffff'
+      }]
+    },
+    options:{ responsive:true, scales:{y:{beginAtZero:true}} }
+  });
+
+  // Filter Table
+  function filterTable(filter){
+    const rows = document.querySelectorAll('#incidentTable tbody tr');
+    rows.forEach(row => {
+      if(filter === 'all'){
+        row.style.display = '';
+      } else if(filter === 'critical'){
+        row.style.display = row.dataset.severity === 'critical' ? '' : 'none';
+      } else {
+        row.style.display = row.dataset.status === filter ? '' : 'none';
+      }
+    });
+
+    // Update active button style
+    document.querySelectorAll('.filter-tabs button').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.filter-tabs button[onclick="filterTable('${filter}')"]`).classList.add('active');
+  }
+</script>
+
+</body>
+</html>

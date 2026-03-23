@@ -1,394 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyber Security Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Poppins', sans-serif; }
 
-<title>Cyber Security Login</title>
+    html, body {
+      height:100%;
+      overflow: hidden;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    body {
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: url('./cyber1.webp') no-repeat center center/cover;
+      position: relative;
+    }
 
-<style>
+    /* Overlay */
+    body::before {
+      content: '';
+      position:absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.6);
+      z-index:0;
+    }
 
-/* ROOT */
-:root{
---cyber-primary:#00ffcc;
---cyber-secondary:#0ea5e9;
---cyber-dark:#020617;
---cyber-card:rgba(255,255,255,0.05);
---cyber-border:rgba(255,255,255,0.12);
---cyber-text:#94a3b8;
-}
+    /* Container */
+    .container {
+      position: relative;
+      z-index:1;
+      display: flex;
+      width: 90%;
+      max-width: 1000px;
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      animation: fadeIn 1s ease forwards;
+    }
 
-/* GLOBAL */
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    @keyframes fadeIn { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
 
-body{
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-background:radial-gradient(circle at top,#020617,#000);
-overflow:hidden;
-color:#fff;
-}
+    /* Left side - form */
+    .login-left {
+      flex: 1;
+      padding: 50px 40px;
+      background: rgba(255,255,255,0.05);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+    }
 
-/* BACK BUTTON */
-.cyber-back{
-position:fixed;
-top:20px;
-left:20px;
-display:flex;
-align-items:center;
-gap:8px;
-text-decoration:none;
-color:#cbd5e1;
-font-size:14px;
-padding:8px 14px;
-border-radius:8px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.1);
-backdrop-filter:blur(10px);
-transition:.3s;
-}
+    .login-left h2 {
+      color: #00ffff;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px #00ffff;
+    }
 
-.cyber-back:hover{
-color:var(--cyber-primary);
-border-color:var(--cyber-primary);
-}
+    .form-group { margin-bottom: 20px; display:flex; flex-direction:column; }
+    .form-group label { margin-bottom:5px; font-size:14px; color:#c0c0c0; }
+    .form-group input, .form-group select {
+      padding:12px;
+      border-radius:10px;
+      border:none;
+      outline:none;
+      background: rgba(255,255,255,0.1);
+      color:#fff;
+      transition: 0.3s;
+    }
+    .form-group input:focus, .form-group select:focus { background: rgba(255,255,255,0.2); }
 
-/* GLOW BACKGROUND */
-body::before,
-body::after{
-content:"";
-position:absolute;
-width:400px;
-height:400px;
-border-radius:50%;
-filter:blur(90px);
-}
+    .remember-forgot {
+      display:flex;
+      justify-content:space-between;
+      font-size:12px;
+      color:#c0c0c0;
+      margin-bottom:20px;
+    }
+    .remember-forgot a { color:#00ffff; text-decoration:none; transition:0.3s; }
+    .remember-forgot a:hover { text-decoration:underline; }
 
-body::before{
-background:#00ffcc33;
-top:-100px;
-left:-100px;
-animation:float 6s infinite alternate;
-}
+    .btn {
+      padding:14px;
+      width:100%;
+      border:none;
+      border-radius:10px;
+      background: linear-gradient(90deg,#00ffff,#0077ff);
+      color:#000;
+      font-weight:bold;
+      cursor:pointer;
+      font-size:16px;
+      transition:0.3s;
+      box-shadow:0 0 20px rgba(0,255,255,0.5);
+    }
+    .btn:hover {
+      background: linear-gradient(90deg,#0077ff,#00ffff);
+      box-shadow:0 0 30px rgba(0,255,255,0.8);
+      transform:translateY(-2px);
+    }
 
-body::after{
-background:#0ea5e933;
-bottom:-100px;
-right:-100px;
-animation:float 8s infinite alternate;
-}
+    .signup { text-align:center; font-size:14px; margin-top:15px; color:black;}
+    .signup a { color:#00ffff; text-decoration:none; font-weight:bold; transition:0.3s; }
+    .signup a:hover { text-decoration:underline; }
 
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(40px)}
-}
+    /* Right side - logo + reviews */
+    .login-right {
+      flex: 1;
+      background: rgba(0,0,0,0.2);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:40px 20px;
+      backdrop-filter: blur(15px);
+      position:relative;
+    }
 
-/* WRAPPER */
-.cyber-wrapper{
-width:100%;
-max-width:420px;
-padding:20px;
-z-index:2;
-}
+    .login-right img {
+      width:120px;
+      margin-bottom:30px;
+      border-radius:50%;
+      box-shadow:0 0 20px rgba(0,255,255,0.7);
+      animation: float 3s ease-in-out infinite;
+    }
 
-/* CARD */
-.cyber-card{
-background:var(--cyber-card);
-border:1px solid var(--cyber-border);
-backdrop-filter:blur(16px);
-border-radius:18px;
-padding:35px 30px;
-box-shadow:0 20px 60px rgba(0,0,0,0.5);
-}
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
 
-/* LOGO */
-.cyber-logo{
-text-align:center;
-margin-bottom:20px;
-}
+    .reviews { font-size:14px; line-height:1.5; color:#c0c0c0; }
+    .reviews p { margin-bottom:15px; font-style:italic; }
 
-.cyber-logo i{
-font-size:30px;
-color:var(--cyber-primary);
-}
+    /* Responsive */
+    @media (max-width:768px){
+      .container { flex-direction:column; border-radius:15px; }
+      .login-left, .login-right { padding:30px 20px; }
+      .login-right img { margin-bottom:20px; }
+    }
 
-/* TITLE */
-.cyber-title{
-text-align:center;
-font-size:26px;
-margin-bottom:5px;
-}
-
-.cyber-sub{
-text-align:center;
-color:var(--cyber-text);
-font-size:13px;
-margin-bottom:25px;
-}
-
-/* INPUT */
-.cyber-input{
-margin-bottom:18px;
-}
-
-.cyber-input label{
-font-size:13px;
-display:block;
-margin-bottom:6px;
-}
-
-.cyber-input input,
-.cyber-input select{
-width:100%;
-height:45px;
-padding:0 12px;
-border-radius:10px;
-border:1px solid var(--cyber-border);
-background:transparent;
-color:#fff;
-outline:none;
-}
-
-.cyber-input input:focus{
-border-color:var(--cyber-primary);
-}
-
-/* PASSWORD */
-.cyber-pass{
-position:relative;
-}
-
-.cyber-pass span{
-position:absolute;
-right:10px;
-top:50%;
-transform:translateY(-50%);
-cursor:pointer;
-}
-
-/* ERROR */
-.cyber-error{
-font-size:11px;
-color:#ff4d4d;
-display:none;
-}
-
-/* ROW */
-.cyber-row{
-display:flex;
-justify-content:space-between;
-font-size:12px;
-margin-bottom:15px;
-}
-
-/* BUTTON */
-.cyber-btn{
-width:100%;
-padding:12px;
-border:none;
-border-radius:10px;
-background:linear-gradient(90deg,#00ffcc,#0ea5e9);
-color:#000;
-font-weight:600;
-cursor:pointer;
-transition:.3s;
-}
-
-.cyber-btn:hover{
-transform:translateY(-2px);
-box-shadow:0 0 20px #00ffcc66;
-}
-
-/* LINK */
-.cyber-link{
-text-align:center;
-margin-top:12px;
-font-size:13px;
-}
-
-.cyber-link a{
-color:var(--cyber-primary);
-text-decoration:none;
-}
-
-/* DEMO */
-.cyber-demo{
-margin-top:20px;
-padding:15px;
-border-radius:12px;
-background:rgba(255,255,255,0.05);
-border:1px solid rgba(255,255,255,0.12);
-font-size:12px;
-}
-
-.cyber-demo h4{
-margin-bottom:8px;
-color:#00ffcc;
-}
-
-/* RESPONSIVE */
-
-/* Tablet */
-@media(max-width:768px){
-.cyber-card{
-padding:28px 22px;
-}
-}
-
-/* Mobile */
-@media(max-width:480px){
-
-.cyber-title{
-font-size:22px;
-}
-
-.cyber-card{
-padding:24px 18px;
-}
-
-.cyber-back{
-top:10px;
-left:10px;
-font-size:12px;
-padding:6px 10px;
-}
-
-}
-
-</style>
+  </style>
 </head>
-
 <body>
 
-<a href="index.html" class="cyber-back">
-<i class="fa fa-arrow-left"></i> Back
-</a>
+<div class="container">
+  <!-- Left side - form -->
+  <div class="login-left">
+    <h2>Login to Cyber Security</h2>
+    <div class="form-group">
+      <label for="accountType">Account Type</label>
+      <select id="accountType">
+        <option value="client">Client</option>
+        <option value="admin">Admin</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+    </div>
+    <div class="remember-forgot">
+      <label><input type="checkbox" id="remember"> Remember me</label>
+      <a href="./404,html">Forgot Password?</a>
+    </div>
+    <button class="btn" onclick="login()">Login</button>
+    <div class="signup">Don't have an account? <a href="./register.html">Register now</a></div>
+  </div>
 
-<div class="cyber-wrapper">
-
-<div class="cyber-card">
-
-<div class="cyber-logo">
-<i class="fa-solid fa-shield-halved"></i>
-</div>
-
-<h2 class="cyber-title">Secure Login</h2>
-<p class="cyber-sub">Access your cybersecurity dashboard</p>
-
-<form id="cyberForm">
-
-<div class="cyber-input">
-<label>Access Level</label>
-<select id="role">
-<option>Admin</option>
-<option selected>Security Analyst</option>
-<option>User</option>
-</select>
-</div>
-
-<div class="cyber-input">
-<label>Email</label>
-<input type="email" id="email">
-<p id="emailErr" class="cyber-error">Invalid email</p>
-</div>
-
-<div class="cyber-input">
-<label>Password</label>
-<div class="cyber-pass">
-<input type="password" id="password">
-<span id="toggle"><i class="fa fa-eye"></i></span>
-</div>
-<p id="passErr" class="cyber-error">Min 6 characters</p>
-</div>
-
-<div class="cyber-row">
-<label><input type="checkbox"> Remember</label>
-<a href="404.html" style="color:#aaa;">Forgot?</a>
-</div>
-
-<button class="cyber-btn">Login Securely</button>
-
-<div class="cyber-link">
-New user? <a href="register.html">Create Account</a>
-</div>
-
-<div class="cyber-demo">
-<h4>Demo Access</h4>
-<ul>
-<li>Admin: admin@secure.com</li>
-<li>Analyst: analyst@secure.com</li>
-<li>User: user@secure.com</li>
-<li>Password: any (min 6 chars)</li>
-</ul>
-</div>
-
-</form>
-
-</div>
+  <!-- Right side - logo + reviews -->
+  <div class="login-right">
+    <img src="./logo.webp" alt="Cyber Security Logo">
+    <div class="reviews">
+      <p>"Excellent security services! Highly recommend."</p>
+      <p>"Professional team and fast support."</p>
+      <p>"Our data has never been safer."</p>
+    </div>
+  </div>
 </div>
 
 <script>
+  
+  // Check if already logged in
+  window.onload = () => {
+    const loggedUser = localStorage.getItem('loggedUser') || sessionStorage.getItem('loggedUser');
+    if(loggedUser){
+      const user = JSON.parse(loggedUser);
+      alert(`Already logged in as ${user.email} (${user.accountType})`);
+      // Redirect based on account type
+      if(user.accountType === 'admin'){
+        window.location.href = 'admin.html';
+      } else {
+        window.location.href = 'dashboard.html'; // client page
+      }
+    }
+  }
 
-/* PASSWORD TOGGLE */
-const pass = document.getElementById("password");
+  function login(){
+    const accountType = document.getElementById('accountType').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const remember = document.getElementById('remember').checked;
 
-document.getElementById("toggle").onclick = ()=>{
-pass.type = pass.type === "password" ? "text" : "password";
-};
+    if(email === '' || password === ''){
+      alert('Please enter email and password');
+      return;
+    }
 
-/* VALIDATION */
-const email = document.getElementById("email");
-const role = document.getElementById("role");
+    const user = { email, accountType };
 
-const emailErr = document.getElementById("emailErr");
-const passErr = document.getElementById("passErr");
+    // Store in localStorage or sessionStorage
+    if(remember){
+      localStorage.setItem('loggedUser', JSON.stringify(user));
+    } else {
+      sessionStorage.setItem('loggedUser', JSON.stringify(user));
+    }
 
-const emailPattern=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passPattern=/.{6,}/;
+    alert(`Logged in as ${email} (${accountType})`);
 
-document.getElementById("cyberForm").addEventListener("submit",(e)=>{
+    // Redirect based on account type
+    if(accountType === 'admin'){
+      window.location.href = 'admin.html';
+    } else {
+      window.location.href = 'client.html';
+    }
+  }
 
-e.preventDefault();
 
-let valid=true;
 
-if(!emailPattern.test(email.value)){
-emailErr.style.display="block";
-valid=false;
-}else emailErr.style.display="none";
 
-if(!passPattern.test(pass.value)){
-passErr.style.display="block";
-valid=false;
-}else passErr.style.display="none";
-
-if(!valid) return;
-
-localStorage.setItem("role", role.value);
-localStorage.setItem("email", email.value);
-
-/* REDIRECT */
-if(role.value==="Admin"){
-location.href="admin.html";
-}else if(role.value==="Security Analyst"){
-location.href="analyst.html";
-}else{
-location.href="user.html";
-}
-
-});
 
 </script>
+
 
 </body>
 </html>

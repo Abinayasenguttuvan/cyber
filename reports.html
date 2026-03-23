@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reports - Admin Dashboard</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body, html { height:100%; }
+body {
+  background: url('./cyber3.webp') no-repeat center center/cover;
+}
+body::before {
+  content:'';
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.6); z-index:0;
+}
+
+.dashboard { display:flex; position:relative; z-index:1; height:100vh; }
+
+/* Sidebar */
+.sidebar {
+  width:250px; background: rgba(0,0,0,0.25); backdrop-filter: blur(15px);
+  color:#fff; display:flex; flex-direction:column; padding:20px;
+}
+.sidebar h2 { text-align:center; color:#00ffff; margin-bottom:30px; text-shadow:0 0 10px #00ffff; }
+.sidebar a { text-decoration:none; color:#c0c0c0; margin:10px 0; padding:10px; border-radius:8px; display:flex; align-items:center; transition:0.3s; }
+.sidebar a i { margin-right:10px; }
+.sidebar a:hover { background: rgba(0,255,255,0.2); color:#00ffff; }
+
+/* Main */
+.main { flex:1; display:flex; flex-direction:column; padding:20px; overflow-y:auto; }
+
+/* Topbar */
+.topbar { display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.05); padding:15px 20px; border-radius:10px; backdrop-filter: blur(10px); margin-bottom:20px; box-shadow:0 0 15px rgba(0,255,255,0.2); }
+.user-info { display:flex; align-items:center; gap:10px; color:#c0c0c0; }
+.user-info i { color:#00ffff; }
+.logo { height:40px; }
+
+/* Cards */
+.cards { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px; }
+.card { flex:1; min-width:220px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius:15px; padding:20px; box-shadow:0 0 15px rgba(0,255,255,0.2); color:#fff; }
+.card h3 { margin-bottom:15px; color:#00ffff; }
+
+/* Charts */
+.charts { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px; }
+canvas { background: rgba(255,255,255,0.05); border-radius:15px; padding:10px; }
+
+/* Filters & Export */
+.filters { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:15px; }
+.filters input[type=text] { padding:8px 12px; border-radius:8px; border:none; backdrop-filter: blur(10px); background: rgba(255,255,255,0.05); color:#fff; flex:1; }
+.filters button { padding:8px 12px; border:none; border-radius:8px; cursor:pointer; background:#00ffff; color:#000; font-weight:bold; transition:0.3s; }
+.filters button:hover { background:#00aaaa; }
+
+/* Table */
+table { width:100%; border-collapse:collapse; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius:10px; overflow:hidden; margin-bottom:20px; color:#fff; }
+th, td { padding:10px; text-align:left; }
+th { background: rgba(0,255,255,0.2); }
+tr:nth-child(even){background: rgba(255,255,255,0.05);}
+.badge { padding:5px 10px; border-radius:5px; font-weight:bold; color:#000; }
+.pending { background:orange; }
+.completed { background:green; }
+.review { background:yellow; }
+.action-btn { margin-right:5px; padding:5px 8px; border:none; border-radius:5px; cursor:pointer; transition:0.2s; }
+.view { background:#0077ff; color:#fff; }
+.edit { background:#ff9900; color:#fff; }
+.approve { background:#00ff99; color:#000; }
+
+/* Activity Feed */
+.activity { background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius:15px; padding:15px; color:#fff; max-height:250px; overflow-y:auto; }
+.activity h3 { color:#00ffff; margin-bottom:10px; }
+.activity p { margin-bottom:8px; }
+
+@media (max-width:992px){
+  .dashboard { flex-direction:column; }
+  .sidebar { width:100%; flex-direction:row; overflow-x:auto; }
+  .sidebar a { flex:1; justify-content:center; }
+  .main { padding:15px; }
+  .cards, .charts, .filters { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<div class="dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <a href="./admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="./users.html"><i class="fas fa-user"></i> Users</a>
+    <a href="./incident.html"><i class="fas fa-bug"></i> Incidents</a>
+    <a href="./reports.html"><i class="fas fa-file-alt"></i> Reports</a>
+    <a href="./settings.html"><i class="fas fa-cog"></i> Settings</a>
+    <a href="./login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <!-- Topbar -->
+    <div class="topbar">
+      <img src="./logo.webp" alt="Stackly Logo" class="logo">
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <span id="username">User</span>
+        <span id="email">email@example.com</span>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card"><h3>Total Reports</h3><p>75</p></div>
+      <div class="card"><h3>Pending Reports</h3><p>12</p></div>
+      <div class="card"><h3>Completed Reports</h3><p>63</p></div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+      <div class="card" style="flex:1; min-width:300px;">
+        <h3>Report Types (Pie)</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="card" style="flex:1; min-width:300px;">
+        <h3>Reports Over Time (Line)</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="card" style="flex:1; min-width:300px;">
+        <h3>Reports by Priority (Stacked Bar)</h3>
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+
+    <!-- Filters & Export -->
+    <div class="filters">
+      <input type="text" id="searchInput" placeholder="Search Reports...">
+      <button onclick="exportCSV()">Export CSV</button>
+      <button onclick="exportPDF()">Export PDF</button>
+    </div>
+
+    <!-- Report Table -->
+    <table id="reportTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Status</th>
+          <th>Priority</th>
+          <th>Date</th>
+          <th>Submitted By</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#R101</td>
+          <td>Incident Report</td>
+          <td><span class="badge pending">Pending</span></td>
+          <td><span class="badge critical">Critical</span></td>
+          <td>2026-03-22</td>
+          <td>John Doe</td>
+          <td>
+            <button class="action-btn view">View</button>
+            <button class="action-btn edit">Edit</button>
+            <button class="action-btn approve">Approve</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#R102</td>
+          <td>Audit Report</td>
+          <td><span class="badge completed">Completed</span></td>
+          <td><span class="badge high">High</span></td>
+          <td>2026-03-21</td>
+          <td>Jane Smith</td>
+          <td>
+            <button class="action-btn view">View</button>
+            <button class="action-btn edit">Edit</button>
+            <button class="action-btn approve">Approve</button>
+          </td>
+        </tr>
+        <tr>
+          <td>#R103</td>
+          <td>Security Review</td>
+          <td><span class="badge review">In Review</span></td>
+          <td><span class="badge medium">Medium</span></td>
+          <td>2026-03-20</td>
+          <td>Mike Lee</td>
+          <td>
+            <button class="action-btn view">View</button>
+            <button class="action-btn edit">Edit</button>
+            <button class="action-btn approve">Approve</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    
+  </div>
+</div>
+
+<script>
+// Load user info
+const user = JSON.parse(localStorage.getItem('loggedUser') || sessionStorage.getItem('loggedUser'));
+if(user){
+  document.getElementById('username').textContent = user.accountType.toUpperCase();
+  document.getElementById('email').textContent = user.email;
+}else{
+  alert('Not logged in!');
+  window.location.href='login.html';
+}
+
+function logout(){
+  localStorage.removeItem('loggedUser');
+  sessionStorage.removeItem('loggedUser');
+  window.location.href='login.html';
+}
+
+// Charts
+const pieCtx = document.getElementById('pieChart').getContext('2d');
+new Chart(pieCtx, {
+  type:'pie',
+  data:{
+    labels:['Incident','Audit','Vulnerability','Review'],
+    datasets:[{data:[20,15,25,15], backgroundColor:['#00ffff','#0077ff','#ff00ff','#ff5555']}]
+  },
+  options:{responsive:true}
+});
+
+const lineCtx = document.getElementById('lineChart').getContext('2d');
+new Chart(lineCtx,{
+  type:'line',
+  data:{ labels:['Jan','Feb','Mar','Apr','May','Jun'], datasets:[{label:'Reports', data:[5,12,8,15,10,25], borderColor:'#00ffff', backgroundColor:'rgba(0,255,255,0.2)', tension:0.4}]},
+  options:{responsive:true, scales:{y:{beginAtZero:true}}}
+});
+
+const barCtx = document.getElementById('barChart').getContext('2d');
+new Chart(barCtx,{
+  type:'bar',
+  data:{
+    labels:['Jan','Feb','Mar','Apr','May','Jun'],
+    datasets:[
+      {label:'Critical', data:[3,2,4,5,3,2], backgroundColor:'red'},
+      {label:'High', data:[4,5,2,3,4,5], backgroundColor:'orange'},
+      {label:'Medium', data:[5,3,2,4,3,4], backgroundColor:'yellow'},
+      {label:'Low', data:[2,3,1,2,3,2], backgroundColor:'green'}
+    ]
+  },
+  options:{ responsive:true, scales:{y:{beginAtZero:true}}, stacked:true }
+});
+
+// Filter/Search
+document.getElementById('searchInput').addEventListener('input', function(){
+  const value=this.value.toLowerCase();
+  const rows=document.querySelectorAll('#reportTable tbody tr');
+  rows.forEach(row=>{
+    row.style.display=row.textContent.toLowerCase().includes(value)?'':'none';
+  });
+});
+
+// Export placeholders
+function exportCSV(){ alert('Export CSV functionality goes here!'); }
+function exportPDF(){ alert('Export PDF functionality goes here!'); }
+
+</script>
+
+</body>
+</html>

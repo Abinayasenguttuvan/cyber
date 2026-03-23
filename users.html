@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users - Admin Dashboard</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+    body, html { height:100%; }
+
+    body {
+      background: url('./cyber3.webp') no-repeat center center/cover;
+    }
+
+    /* Overlay */
+    body::before {
+      content:'';
+      position:absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: rgba(0,0,0,0.6);
+      z-index:0;
+    }
+
+    /* Layout */
+    .dashboard {
+      display:flex;
+      position:relative;
+      z-index:1;
+      height:100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width:250px;
+      background: rgba(0,0,0,0.25);
+      backdrop-filter: blur(15px);
+      color:#fff;
+      display:flex;
+      flex-direction:column;
+      padding:20px;
+    }
+    .sidebar h2 { text-align:center; color:#00ffff; margin-bottom:30px; text-shadow:0 0 10px #00ffff; }
+    .sidebar a { text-decoration:none; color:#c0c0c0; margin:10px 0; padding:10px; border-radius:8px; display:flex; align-items:center; transition:0.3s; }
+    .sidebar a i { margin-right:10px; }
+    .sidebar a:hover { background: rgba(0,255,255,0.2); color:#00ffff; }
+
+    /* Main content */
+    .main { flex:1; display:flex; flex-direction:column; padding:20px; overflow-y:auto; }
+
+    /* Top header */
+    .topbar { display:flex; justify-content:space-between; align-items:center; background: rgba(255,255,255,0.05); padding:15px 20px; border-radius:10px; backdrop-filter: blur(10px); margin-bottom:20px; box-shadow:0 0 15px rgba(0,255,255,0.2); }
+    .user-info { display:flex; align-items:center; gap:10px; color:#c0c0c0; }
+    .user-info i { color:#00ffff; }
+    .logo { height:40px; }
+
+    /* Cards */
+    .cards { display:flex; gap:20px; flex-wrap:wrap; margin-bottom:20px; }
+    .card { flex:1; min-width:220px; background: rgba(255,255,255,0.05); backdrop-filter: blur(10px); border-radius:15px; padding:20px; box-shadow:0 0 15px rgba(0,255,255,0.2); color:#fff; }
+    .card h3 { margin-bottom:15px; color:#00ffff; }
+
+    /* Charts */
+    .charts { display:flex; gap:20px; flex-wrap:wrap; }
+    canvas { background: rgba(255,255,255,0.05); border-radius:15px; padding:10px; }
+
+    /* Responsive */
+    @media (max-width:992px){
+      .dashboard { flex-direction:column; }
+      .sidebar { width:100%; flex-direction:row; overflow-x:auto; }
+      .sidebar a { flex:1; justify-content:center; }
+      .main { padding:15px; }
+      .cards, .charts { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dashboard">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Admin Panel</h2>
+    <<a href="./admin.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="./users.html"><i class="fas fa-user"></i> Users</a>
+    <a href="./incident.html"><i class="fas fa-bug"></i> Incidents</a>
+    <a href="./reports.html"><i class="fas fa-file-alt"></i> Reports</a>
+    <a href="./settings.html"><i class="fas fa-cog"></i> Settings</a>
+    <a href="./login.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  </div>
+
+  <!-- Main content -->
+  <div class="main">
+    <!-- Top header -->
+    <div class="topbar">
+      <img src="./logo.webp" alt="Stackly Logo" class="logo">
+      <div class="user-info">
+        <i class="fas fa-user-circle"></i>
+        <span id="username">User</span>
+        <span id="email">email@example.com</span>
+      </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>Total Users</h3>
+        <p>150</p>
+      </div>
+      <div class="card">
+        <h3>Active Users</h3>
+        <p>120</p>
+      </div>
+      <div class="card">
+        <h3>Inactive Users</h3>
+        <p>30</p>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+      <div class="card" style="flex:1; min-width:300px;">
+        <h3>User Roles (Pie)</h3>
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="card" style="flex:1; min-width:300px;">
+        <h3>New Users Over Months (Line)</h3>
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Load logged user info
+  const user = JSON.parse(localStorage.getItem('loggedUser') || sessionStorage.getItem('loggedUser'));
+  if(user){
+    document.getElementById('username').textContent = user.accountType.toUpperCase();
+    document.getElementById('email').textContent = user.email;
+  } else {
+    alert('Not logged in!');
+    window.location.href = 'login.html';
+  }
+
+  function logout(){
+    localStorage.removeItem('loggedUser');
+    sessionStorage.removeItem('loggedUser');
+    window.location.href = 'login.html';
+  }
+
+  // Chart.js
+  const pieCtx = document.getElementById('pieChart').getContext('2d');
+  const pieChart = new Chart(pieCtx, {
+    type:'pie',
+    data:{
+      labels:['Admin','Client','Guest'],
+      datasets:[{
+        data:[10, 120, 20],
+        backgroundColor:['#00ffff','#0077ff','#ff00ff']
+      }]
+    },
+    options:{ responsive:true }
+  });
+
+  const lineCtx = document.getElementById('lineChart').getContext('2d');
+  const lineChart = new Chart(lineCtx, {
+    type:'line',
+    data:{
+      labels:['Jan','Feb','Mar','Apr','May','Jun'],
+      datasets:[{
+        label:'New Users',
+        data:[5,15,10,20,12,18],
+        borderColor:'#00ffff',
+        backgroundColor:'rgba(0,255,255,0.2)',
+        tension:0.4
+      }]
+    },
+    options:{ responsive:true, scales:{y:{beginAtZero:true}} }
+  });
+</script>
+
+</body>
+</html>

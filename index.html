@@ -212,338 +212,335 @@
     
     </body>
 
+
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber Hero Glass</title>
+
 <style>
-
-    /* RESET */
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body{
-    background:#0a0f1c;
-    color:#fff;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
+body{background:#000;color:#fff;}
 
 /* HERO */
 .hero{
     position:relative;
-    min-height:100vh;
+    width:100%;
+    height:100vh;
     display:flex;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:80px 20px;
     overflow:hidden;
 }
 
-/* GRID LINES */
-.grid-lines div{
+/* VIDEO */
+.hero video{
     position:absolute;
-    width:1px;
+    width:100%;
     height:100%;
-    background:rgba(255,255,255,0.05);
-    top:0;
+    object-fit:cover;
+    z-index:1;
 }
 
-.grid-line-1{ left:20%;}
-.grid-line-2{ left:40%;}
-.grid-line-3{ left:60%;}
-.grid-line-4{ left:80%;}
-.grid-line-5{ left:90%;}
+/* OVERLAY */
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+    z-index:2;
+}
 
-/* CONTENT */
-.hero-content{
+/* GLASS CONTAINER */
+.container{
+    position:relative;
+    z-index:3;
     max-width:900px;
-    margin:auto;
+    padding:40px;
+    border-radius:20px;
+
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.1);
+
+    box-shadow:0 0 40px rgba(0,255,213,0.15);
 }
 
-.section-title h3{
-    color:#00ffd5;
-    font-size:16px;
-    margin-bottom:10px;
-    letter-spacing:1px;
-}
-
-.section-title h1{
-    font-size:48px;
-    line-height:1.2;
-    margin-bottom:20px;
-}
-
-.section-title h1 span{
-    color:#00ffd5;
-}
-
-.section-title p{
-    font-size:16px;
-    color:#bbb;
-    margin-bottom:30px;
-}
+/* TEXT */
+.hero-content h3{font-size:20px;}
+.hero-content h1{font-size:55px;margin-top:10px;}
+.hero-content p{font-size:18px;margin-top:15px;}
 
 /* BUTTONS */
 .hero-btn{
+    margin-top:25px;
     display:flex;
     justify-content:center;
     gap:15px;
     flex-wrap:wrap;
 }
 
-.btn-default{
-    padding:12px 25px;
-    border-radius:30px;
-    border:1px solid #00ffd5;
+.hero-btn a{
+    padding:12px 28px;
+    border-radius:50px;
     text-decoration:none;
-    color:#fff;
+    font-weight:600;
     transition:0.3s;
 }
 
-.btn-default:hover{
+/* BUTTON STYLES */
+.btn-primary{
     background:#00ffd5;
     color:#000;
+    box-shadow:0 0 15px #00ffd5;
 }
 
-.btn-highlighted{
-    background:#00ffd5;
-    color:#000;
+.btn-secondary{
+    border:2px solid #00ffd5;
+    color:#00ffd5;
 }
 
-/* SECTION */
-.hero-company-slider {
-    margin-top: 60px;
-    text-align: center;
-    overflow: hidden;
+.hero-btn a:hover{
+    transform:scale(1.08);
 }
 
-.hero-company-slider p {
-    margin-bottom: 25px;
-    color: #aaa;
-    font-size: 16px;
+/* LOGO SLIDER */
+.logo-slider{
+    overflow:hidden;
+    margin-top:30px;
 }
 
-.hero-company-slider span {
-    color: #00ffd5;
-    font-weight: bold;
+.logo-track{
+    display:flex;
+    width:200%;
+    animation:scrollRight 20s linear infinite;
 }
 
-/* SLIDER */
-.logo-slider {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
+.logo-item{
+    padding:0 25px;
+    transition:0.3s;
 }
 
-/* TRACK */
-.logo-track {
-    display: flex;
-    width: calc(200px * 8); /* adjust based on items */
-    animation: scrollLeft 20s linear infinite;
+/* LOGO HOVER EFFECT */
+.logo-item img{
+    height:40px;
+    transition:0.4s ease;
+    filter:grayscale(100%);
 }
 
-/* ITEM */
-.logo-item {
-    width: 200px;
-    margin: 0 15px;
-    padding: 20px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 15px;
-
-    /* GLASSMORPHISM */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    border: 1px solid rgba(255,255,255,0.1);
-
-    transition: 0.4s;
+.logo-item img:hover{
+    transform:scale(1.2);
+    filter:grayscale(0%) brightness(1.3);
 }
 
-/* IMAGE */
-.logo-item img {
-    width: 100%;
-    max-width: 120px;
-    opacity: 0.6;
-    transition: 0.4s;
+/* KEYFRAME LEFT → RIGHT */
+@keyframes scrollRight{
+    0%{transform:translateX(-50%);}
+    100%{transform:translateX(0);}
 }
 
-/* HOVER EFFECT 🔥 */
-.logo-item:hover {
-    transform: scale(1.15);
-    background: rgba(0, 255, 213, 0.15);
-    border-color: #00ffd5;
+/* FADE UP */
+.fade-up{
+    opacity:0;
+    transform:translateY(50px);
+    transition:0.8s;
 }
-
-.logo-item:hover img {
-    opacity: 1;
-    transform: scale(1.1);
-    filter: brightness(1.2);
-}
-
-/* PAUSE ON HOVER */
-.logo-slider:hover .logo-track {
-    animation-play-state: paused;
-}
-
-/* ANIMATION LEFT → RIGHT */
-@keyframes scrollLeft {
-    0% {
-        transform: translateX(-50%);
-    }
-    100% {
-        transform: translateX(0%);
-    }
+.fade-up.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* ================= RESPONSIVE ================= */
 
 /* TABLET */
-@media (max-width: 992px) {
-    .logo-item {
-        width: 160px;
-    }
-
-    .logo-item img {
-        max-width: 100px;
-    }
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-    .logo-item {
-        width: 130px;
-        margin: 0 10px;
-        padding: 15px;
-    }
-
-    .logo-item img {
-        max-width: 80px;
-    }
-
-    .hero-company-slider p {
-        font-size: 14px;
-    }
-}
-/* RESPONSIVE */
-
-/* TABLET */
 @media(max-width:992px){
-    .section-title h1{
-        font-size:36px;
-    }
+    .hero{height:auto;padding:80px 20px;}
+    .container{padding:30px;}
+    .hero-content h1{font-size:40px;}
+    .hero-content p{font-size:16px;}
 }
 
-/* MOBILE */
-@media(max-width:600px){
-    .section-title h1{
-        font-size:28px;
-    }
+//* ================= FIXED MOBILE VIEW ================= */
+@media (max-width: 768px){
 
-    .section-title p{
-        font-size:14px;
-    }
-
-    .hero{
-        padding:60px 15px;
-    }
+/* HERO FIX */
+.hero{
+    height:auto !important;
+    min-height:100vh;
+    padding:60px 15px;
+    align-items:center;
 }
 
+/* GLASS CONTAINER FIX */
+.container{
+    width:100%;
+    padding:20px 15px;
+    border-radius:15px;
+}
+
+/* TEXT FIX */
+.hero-content h3{
+    font-size:15px;
+    line-height:1.4;
+}
+
+.hero-content h1{
+    font-size:26px;
+    line-height:1.3;
+    margin-top:8px;
+}
+
+.hero-content p{
+    font-size:14px;
+    line-height:1.6;
+    margin-top:10px;
+}
+
+/* BUTTON FIX */
+.hero-btn{
+    flex-direction:column;
+    gap:10px;
+    margin-top:20px;
+}
+
+.hero-btn a{
+    width:100%;
+    padding:12px;
+    font-size:14px;
+}
+
+/* LOGO TEXT */
+.fade-up p{
+    font-size:13px;
+    margin-top:20px;
+}
+
+/* LOGO SLIDER FIX */
+.logo-slider{
+    margin-top:15px;
+}
+
+.logo-track{
+    animation-duration:25s; /* smoother on mobile */
+}
+
+.logo-item{
+    padding:0 12px;
+}
+
+.logo-item img{
+    height:26px !important;
+}
+
+/* VIDEO FIX */
+.hero video{
+    object-fit:cover;
+    height:100%;
+}
+}
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width: 480px){
+
+.hero{
+    padding:50px 10px;
+    margin-top: 50px;;
+}
+
+.container{
+    padding:15px 10px;
+}
+
+.hero-content h1{
+    font-size:12px;
+}
+
+.hero-content h3{
+    font-size:10px;
+}
+
+.hero-content p{
+    font-size:10px;
+}
+
+.hero-btn a{
+    font-size:13px;
+    padding:10px;
+}
+
+.logo-item img{
+    height:22px !important;
+}
+}
+
+/* SMALL MOBILE */
+@media(max-width:480px){
+    .hero-content h1{font-size:24px;}
+    .logo-item img{height:24px;}
+}
 </style>
 </head>
+
 <body>
 
-<!-- ===== HERO WITH INLINE VIDEO BACKGROUND ===== -->
-<div class="hero" style="position:relative; width:100%; height:100vh; overflow:hidden;">
+<div class="hero">
 
-    <!-- VIDEO BACKGROUND -->
-    <video autoplay muted loop playsinline 
-        style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;">
+    <!-- VIDEO -->
+    <video autoplay muted loop playsinline>
         <source src="./cyber.mp4" type="video/mp4">
     </video>
 
-    <!-- DARK OVERLAY -->
-    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:2;"></div>
+    <!-- OVERLAY -->
+    <div class="overlay"></div>
 
-    <!-- GRID -->
-    <div class="grid-lines" style="position:absolute; width:100%; height:100%; z-index:3;">
-        <div class="grid-line-1"></div>
-        <div class="grid-line-2"></div>
-        <div class="grid-line-3"></div>
-        <div class="grid-line-4"></div>
-        <div class="grid-line-5"></div>
-    </div>
-
-    <div class="container" style="position:relative; z-index:4; color:#fff;">
+    <!-- GLASS CONTENT -->
+    <div class="container fade-up">
 
         <div class="hero-content">
-            <div class="section-title">
 
-                <h3 class="animate__animated animate__fadeInUp">
-                    Protect your business from cyber threat
-                </h3>
+            <h3 class="fade-up">Protect your business from cyber threat</h3>
 
-                <h1 class="animate__animated animate__fadeInUp animate__delay-1s">
-                    Advanced cybersecurity solutions tailored to 
-                    <span style="color:#00ffd5;">keep you safe</span>
-                </h1>
+            <h1 class="fade-up">
+                Advanced cybersecurity <br> solutions tailored to <br>
+                <span style="color:#00ffd5;">keep you safe</span>
+            </h1>
 
-                <p class="animate__animated animate__fadeInUp animate__delay-2s">
-                    In a world where cyberattacks are becoming more sophisticated,
-                    your business deserves the best protection with cutting-edge technology.
-                </p>
+            <p class="fade-up">
+                In a world where cyberattacks are becoming <br> more sophisticated,
+                your business deserves the best protection.
+            </p>
 
+            <div class="hero-btn fade-up">
+                <a href="./404.html" class="btn-primary">Get Free Assessment</a>
+                <a href="./404.html" class="btn-secondary">View our services</a>
             </div>
 
-            <div class="hero-btn animate__animated animate__fadeInUp animate__delay-3s">
-                <a href="./404.html" class="btn-default btn-highlighted">Get Free Assessment</a>
-                <a href="./404.html" class="btn-default">View our services</a>
-            </div>
         </div>
 
-        <!-- COMPANY SLIDER -->
-        <div class="hero-company-slider" style="margin-top:40px;">
+        <!-- LOGO SLIDER -->
+        <div class="fade-up">
 
-            <p>We're Trusted by more than <span style="color:#00ffd5;">1000+</span> companies</p>
+            <p style="margin-top:25px;">
+                We're Trusted by <span style="color:#00ffd5;">1000+</span> companies
+            </p>
 
-            <div class="logo-slider" style="overflow:hidden; margin-top:20px;">
-                <div class="logo-track" style="
-                    display:flex;
-                    width:calc(200%);
-                    animation:scrollLogo 20s linear infinite;
-                ">
+            <div class="logo-slider">
+                <div class="logo-track">
 
-                    <!-- Logos -->
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT1.webp" style="height:40px;">
-                    </div>
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT2.webp" style="height:40px;">
-                    </div>
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT3.webp" style="height:40px;">
-                    </div>
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT4.webp" style="height:40px;">
-                    </div>
+                    <div class="logo-item"><img src="./IT1.webp"></div>
+                    <div class="logo-item"><img src="./IT2.webp"></div>
+                    <div class="logo-item"><img src="./IT3.webp"></div>
+                    <div class="logo-item"><img src="./IT4.webp"></div>
 
                     <!-- DUPLICATE -->
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT1.webp" style="height:40px;">
-                    </div>
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT2.webp" style="height:40px;">
-                    </div>
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT3.webp" style="height:40px;">
-                    </div>
-                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
-                        <img src="./IT4.webp" style="height:40px;">
-                    </div>
+                    <div class="logo-item"><img src="./IT1.webp"></div>
+                    <div class="logo-item"><img src="./IT2.webp"></div>
+                    <div class="logo-item"><img src="./IT3.webp"></div>
+                    <div class="logo-item"><img src="./IT4.webp"></div>
 
                 </div>
             </div>
@@ -553,6 +550,37 @@ body{
     </div>
 
 </div>
+
+<script>
+// FADE-UP ANIMATION
+window.addEventListener("load", ()=>{
+    document.querySelectorAll(".fade-up").forEach(el=>{
+        el.classList.add("show");
+    });
+});
+
+// VIDEO OPTIMIZATION
+const video = document.querySelector("video");
+
+document.addEventListener("visibilitychange", ()=>{
+    if(document.hidden){
+        video.pause();
+    } else {
+        video.play();
+    }
+});
+
+// MOBILE PERFORMANCE
+if(window.innerWidth < 480){
+    video.style.display="none";
+    document.querySelector(".hero").style.background =
+        "url('./cyber1.webp') center/cover no-repeat";
+}
+</script>
+
+
+
+
 
 <!-- KEYFRAME (ONLY PART NOT INLINE) -->
 <style>
@@ -640,7 +668,7 @@ let interval = setInterval(()=>{
     backdrop-filter:blur(8px);
     border:1px solid rgba(255,255,255,0.1);
 
-    font-size:14px;
+    font-size:24px;
     color:#ccc;
 
     transition:0.3s;
@@ -2170,9 +2198,11 @@ reveals.forEach(el => observer.observe(el));
                 <p>Protecting enterprise systems.</p>
     
                 <div class="vcs-icons">
+                    <a href=./404.html>
                     <i class="fab fa-facebook-f"></i>
                     <i class="fab fa-twitter"></i>
                     <i class="fab fa-youtube"></i>
+                    </a>
                 </div>
     
                 <a href="404.html" class="vcs-btn">View More</a>
@@ -2186,9 +2216,11 @@ reveals.forEach(el => observer.observe(el));
                 <p>Secure encryption systems.</p>
     
                 <div class="vcs-icons">
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-twitter"></i>
-                    <i class="fab fa-youtube"></i>
+                    <a href=./404.html>
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-youtube"></i>
+                        </a>
                 </div>
     
                 <a href="404.html" class="vcs-btn">View More</a>
@@ -2202,9 +2234,11 @@ reveals.forEach(el => observer.observe(el));
                 <p>AI cyber defense.</p>
     
                 <div class="vcs-icons">
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-twitter"></i>
-                    <i class="fab fa-youtube"></i>
+                    <a href=./404.html>
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-twitter"></i>
+                        <i class="fab fa-youtube"></i>
+                        </a>
                 </div>
     
                 <a href="404.html" class="vcs-btn">View More</a>
@@ -3254,6 +3288,58 @@ reveals.forEach(el => observer.observe(el));
     }
     
     </style>
+
+!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="cyber-ticker">
+
+    <div class="ticker-wrapper">
+
+        <!-- LINE 1 -->
+        <div class="ticker-content">
+            <span><i class="fas fa-shield-halved"></i> Threat Detection</span>
+            <span><i class="fas fa-network-wired"></i> Network Security</span>
+            <span><i class="fas fa-lock"></i> Data Encryption</span>
+            <span><i class="fas fa-cloud"></i> Cloud Security</span>
+            <span><i class="fas fa-laptop-medical"></i> Endpoint Protection</span>
+            <span><i class="fas fa-robot"></i> AI Cyber Defense</span>
+            <span><i class="fas fa-user-shield"></i> Zero Trust Security</span>
+
+            <!-- DUPLICATE -->
+            <span><i class="fas fa-shield-halved"></i> Threat Detection</span>
+            <span><i class="fas fa-network-wired"></i> Network Security</span>
+            <span><i class="fas fa-lock"></i> Data Encryption</span>
+            <span><i class="fas fa-cloud"></i> Cloud Security</span>
+            <span><i class="fas fa-laptop-medical"></i> Endpoint Protection</span>
+            <span><i class="fas fa-robot"></i> AI Cyber Defense</span>
+            <span><i class="fas fa-user-shield"></i> Zero Trust Security</span>
+        </div>
+
+        <!-- LINE 2 -->
+        <div class="ticker-content reverse">
+            <span><i class="fas fa-firewall"></i> Firewall Protection</span>
+            <span><i class="fas fa-bug"></i> Malware Prevention</span>
+            <span><i class="fas fa-envelope-open-text"></i> Phishing Protection</span>
+            <span><i class="fas fa-eye"></i> Security Monitoring</span>
+            <span><i class="fas fa-chart-line"></i> Risk Assessment</span>
+            <span><i class="fas fa-file-shield"></i> Compliance & Auditing</span>
+            <span><i class="fas fa-search"></i> Digital Forensics</span>
+
+            <!-- DUPLICATE -->
+            <span><i class="fas fa-firewall"></i> Firewall Protection</span>
+            <span><i class="fas fa-bug"></i> Malware Prevention</span>
+            <span><i class="fas fa-envelope-open-text"></i> Phishing Protection</span>
+            <span><i class="fas fa-eye"></i> Security Monitoring</span>
+            <span><i class="fas fa-chart-line"></i> Risk Assessment</span>
+            <span><i class="fas fa-file-shield"></i> Compliance & Auditing</span>
+            <span><i class="fas fa-search"></i> Digital Forensics</span>
+        </div>
+
+    </div>
+
+</div>
+
     
     <!-- HEADER -->
     <div class="cbsx-header cbsx-anim cbsx-bottom">
@@ -3576,58 +3662,7 @@ reveals.forEach(el => observer.observe(el));
     
     </section>
 
-    <!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<div class="cyber-ticker">
-
-    <div class="ticker-wrapper">
-
-        <!-- LINE 1 -->
-        <div class="ticker-content">
-            <span><i class="fas fa-shield-halved"></i> Threat Detection</span>
-            <span><i class="fas fa-network-wired"></i> Network Security</span>
-            <span><i class="fas fa-lock"></i> Data Encryption</span>
-            <span><i class="fas fa-cloud"></i> Cloud Security</span>
-            <span><i class="fas fa-laptop-medical"></i> Endpoint Protection</span>
-            <span><i class="fas fa-robot"></i> AI Cyber Defense</span>
-            <span><i class="fas fa-user-shield"></i> Zero Trust Security</span>
-
-            <!-- DUPLICATE -->
-            <span><i class="fas fa-shield-halved"></i> Threat Detection</span>
-            <span><i class="fas fa-network-wired"></i> Network Security</span>
-            <span><i class="fas fa-lock"></i> Data Encryption</span>
-            <span><i class="fas fa-cloud"></i> Cloud Security</span>
-            <span><i class="fas fa-laptop-medical"></i> Endpoint Protection</span>
-            <span><i class="fas fa-robot"></i> AI Cyber Defense</span>
-            <span><i class="fas fa-user-shield"></i> Zero Trust Security</span>
-        </div>
-
-        <!-- LINE 2 -->
-        <div class="ticker-content reverse">
-            <span><i class="fas fa-firewall"></i> Firewall Protection</span>
-            <span><i class="fas fa-bug"></i> Malware Prevention</span>
-            <span><i class="fas fa-envelope-open-text"></i> Phishing Protection</span>
-            <span><i class="fas fa-eye"></i> Security Monitoring</span>
-            <span><i class="fas fa-chart-line"></i> Risk Assessment</span>
-            <span><i class="fas fa-file-shield"></i> Compliance & Auditing</span>
-            <span><i class="fas fa-search"></i> Digital Forensics</span>
-
-            <!-- DUPLICATE -->
-            <span><i class="fas fa-firewall"></i> Firewall Protection</span>
-            <span><i class="fas fa-bug"></i> Malware Prevention</span>
-            <span><i class="fas fa-envelope-open-text"></i> Phishing Protection</span>
-            <span><i class="fas fa-eye"></i> Security Monitoring</span>
-            <span><i class="fas fa-chart-line"></i> Risk Assessment</span>
-            <span><i class="fas fa-file-shield"></i> Compliance & Auditing</span>
-            <span><i class="fas fa-search"></i> Digital Forensics</span>
-        </div>
-
-    </div>
-
-</div>
-
-
+    
 <!-- ================= FOOTER ================= -->
 <footer class="bio-footer">
 
@@ -3657,21 +3692,23 @@ reveals.forEach(el => observer.observe(el));
       <!-- QUICK LINKS -->
       <div class="footer-col">
         <h4>Quick Links</h4>
-        <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="services.html">services</a></li>
-          <li><a href="contact.html">Contact</a></li>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="services.html">services</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
       </div>
   
       <!-- LAB SERVICES -->
       <div class="footer-col">
-        <h4>Cyber security Services</h4>
+        <h4>cyber secrity Services</h4>
         <ul>
-          <li><a href="404.html">Network Security</a></li>
-          <li><a href="404.html">Threat Detection</a></li>
-          <li><a href="404.html">Managed Security</a></li>
-          <li><a href="404.html">Data Encryption</a></li>
-          <li><a href="404.html">Ransome protection</a></li>
+            <li><a href="404.html">Network Security</a></li>
+            <li><a href="404.html">Threat Detection</a></li>
+            <li><a href="404.html">Managed Security</a></li>
+            <li><a href="404.html">Data Encryption</a></li>
+            <li><a href="404.html">Ransome protection</a></li>
         </ul>
       </div>
   
@@ -3945,4 +3982,3 @@ reveals.forEach(el => observer.observe(el));
     </script>
   </body>
   </html>
-
