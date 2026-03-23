@@ -1,0 +1,3945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stackly Cyber security </title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+<!-- Swiper -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+<!-- Animate -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+
+<style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
+    body{height:2000px;background:linear-gradient(120deg,#e0f2fe,#f5f9ff);}
+    
+    
+    /* HEADER */
+    header{
+    position:fixed;
+    top:0;left:0;width:100%;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid rgba(255,255,255,0.3);
+    box-shadow:0 8px 30px rgba(0,0,0,0.05);
+    transition:0.3s;
+    z-index:1000;
+    }
+    
+    /* SHRINK */
+    header.shrink{
+    padding:5px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    }
+    
+    .navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 40px;
+    position:relative;
+    }
+    
+    /* LEFT LOGO */
+    .logo img{height:40px;}
+    
+    /* CENTER NAV */
+    .nav-links{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:30px;
+    }
+    
+    .nav-links a{
+    text-decoration:none;
+    color:#0f172a;
+    font-weight:500;
+    position:relative;
+    }
+    
+    /* ACTIVE */
+    .nav-links a.active,
+    .nav-links a:hover{color:#00f7ff;;}
+    
+    .nav-links a.active::after,
+    .nav-links a:hover::after{
+    content:"";
+    position:absolute;
+    bottom:-6px;left:0;
+    width:100%;height:2px;
+    background:#00f7ff;
+    }
+    
+    /* RIGHT */
+    .right{display:flex;gap:12px;}
+    
+    .btn{
+    padding:8px 18px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+    font-size:14px;
+    transition:0.3s;
+    }
+    
+    .login{background:transparent;border:1px solid #00d1a7;color:#00f7ff;}
+    .login:hover{background:#00f7ff;;color:white;}
+    
+    .register{background:#00f7ff;;color:white;}
+    .register:hover{background:#00f7ff;}
+    
+    /* MENU */
+    .menu-toggle{display:none;font-size:22px;cursor:pointer;}
+    
+    /* MOBILE MENU */
+    .mobile-menu{
+    position:fixed;
+    top:0;left:-100%;
+    width:260px;height:100vh;
+    background:white;
+    padding:20px;
+    transition:0.3s;
+    box-shadow:10px 0 25px rgba(0,0,0,0.1);
+    z-index:2000;
+    }
+    .mobile-menu.active{left:0;}
+    .mobile-menu a{display:block;margin:15px 0;text-decoration:none;color:#0f172a;}
+    
+    /* OVERLAY */
+    .overlay{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(0,0,0,0.4);display:none;z-index:1500;
+    }
+    .overlay.active{display:block;}
+    
+    /* RESPONSIVE */
+    @media(max-width:900px){
+    .nav-links{display:none;}
+    .right{display:none;}
+    .menu-toggle{display:block;}
+    }
+    
+    </style>
+    </head>
+    
+    <body>
+    
+      
+    
+    <div class="overlay" id="overlay"></div>
+    
+    <header id="header">
+    
+    <div class="navbar">
+    
+    <div class="menu-toggle" onclick="toggleMenu()">
+    <i class="fa fa-bars"></i>
+    </div>
+    
+    <div class="logo">
+      <a href="./index.html">
+    <img src="./logo.webp" alt="Stackly">
+      </a>
+    </div>
+    
+    <div class="nav-links" id="navLinks">
+        <a href="./index.html">Home</a>
+        <a href="./about.html">About</a>
+        <a href="./services.html">Services</a>
+        <a href="./contact.html">Contact</a>
+    </div>
+    
+    
+    <div class="right">
+      <button class="btn login" onclick="location.href='login.html'">Login</button>
+      <button class="btn register" onclick="location.href='register.html'">Register</button>
+    </div>
+    
+    </div>
+    
+    </header>
+    
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+    <a href="./index.html">Home</a>
+    <a href="./about.html">About</a>
+    <a href="./services.html">Services</a>
+    <a href="./contact.html">Contact</a>
+    <hr>
+    <a href="./login.html">Login</a>
+    <a href="./register.html">Register</a>
+    </div>
+    
+    <script>
+    // MENU
+    function toggleMenu(){
+    const menu=document.getElementById("mobileMenu");
+    const overlay=document.getElementById("overlay");
+    menu.classList.toggle("active");
+    overlay.classList.toggle("active");
+    }
+    
+    overlay.onclick=()=>{
+    document.getElementById("mobileMenu").classList.remove("active");
+    overlay.classList.remove("active");
+    };
+    
+    // SHRINK HEADER
+    window.addEventListener("scroll",()=>{
+    const header=document.getElementById("header");
+    header.classList.toggle("shrink",window.scrollY>50);
+    });
+    
+    // ACTIVE LINK
+    const links=document.querySelectorAll(".nav-links a");
+    links.forEach(link=>{
+    link.addEventListener("click",()=>{
+    links.forEach(l=>l.classList.remove("active"));
+    link.classList.add("active");
+    });
+    });
+    </script>
+    
+    
+    
+    </body>
+
+<style>
+
+    /* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    background:#0a0f1c;
+    color:#fff;
+}
+
+/* HERO */
+.hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:80px 20px;
+    overflow:hidden;
+}
+
+/* GRID LINES */
+.grid-lines div{
+    position:absolute;
+    width:1px;
+    height:100%;
+    background:rgba(255,255,255,0.05);
+    top:0;
+}
+
+.grid-line-1{ left:20%;}
+.grid-line-2{ left:40%;}
+.grid-line-3{ left:60%;}
+.grid-line-4{ left:80%;}
+.grid-line-5{ left:90%;}
+
+/* CONTENT */
+.hero-content{
+    max-width:900px;
+    margin:auto;
+}
+
+.section-title h3{
+    color:#00ffd5;
+    font-size:16px;
+    margin-bottom:10px;
+    letter-spacing:1px;
+}
+
+.section-title h1{
+    font-size:48px;
+    line-height:1.2;
+    margin-bottom:20px;
+}
+
+.section-title h1 span{
+    color:#00ffd5;
+}
+
+.section-title p{
+    font-size:16px;
+    color:#bbb;
+    margin-bottom:30px;
+}
+
+/* BUTTONS */
+.hero-btn{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.btn-default{
+    padding:12px 25px;
+    border-radius:30px;
+    border:1px solid #00ffd5;
+    text-decoration:none;
+    color:#fff;
+    transition:0.3s;
+}
+
+.btn-default:hover{
+    background:#00ffd5;
+    color:#000;
+}
+
+.btn-highlighted{
+    background:#00ffd5;
+    color:#000;
+}
+
+/* SECTION */
+.hero-company-slider {
+    margin-top: 60px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-company-slider p {
+    margin-bottom: 25px;
+    color: #aaa;
+    font-size: 16px;
+}
+
+.hero-company-slider span {
+    color: #00ffd5;
+    font-weight: bold;
+}
+
+/* SLIDER */
+.logo-slider {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* TRACK */
+.logo-track {
+    display: flex;
+    width: calc(200px * 8); /* adjust based on items */
+    animation: scrollLeft 20s linear infinite;
+}
+
+/* ITEM */
+.logo-item {
+    width: 200px;
+    margin: 0 15px;
+    padding: 20px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 15px;
+
+    /* GLASSMORPHISM */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    transition: 0.4s;
+}
+
+/* IMAGE */
+.logo-item img {
+    width: 100%;
+    max-width: 120px;
+    opacity: 0.6;
+    transition: 0.4s;
+}
+
+/* HOVER EFFECT 🔥 */
+.logo-item:hover {
+    transform: scale(1.15);
+    background: rgba(0, 255, 213, 0.15);
+    border-color: #00ffd5;
+}
+
+.logo-item:hover img {
+    opacity: 1;
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* PAUSE ON HOVER */
+.logo-slider:hover .logo-track {
+    animation-play-state: paused;
+}
+
+/* ANIMATION LEFT → RIGHT */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media (max-width: 992px) {
+    .logo-item {
+        width: 160px;
+    }
+
+    .logo-item img {
+        max-width: 100px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .logo-item {
+        width: 130px;
+        margin: 0 10px;
+        padding: 15px;
+    }
+
+    .logo-item img {
+        max-width: 80px;
+    }
+
+    .hero-company-slider p {
+        font-size: 14px;
+    }
+}
+/* RESPONSIVE */
+
+/* TABLET */
+@media(max-width:992px){
+    .section-title h1{
+        font-size:36px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .section-title h1{
+        font-size:28px;
+    }
+
+    .section-title p{
+        font-size:14px;
+    }
+
+    .hero{
+        padding:60px 15px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ===== HERO WITH INLINE VIDEO BACKGROUND ===== -->
+<div class="hero" style="position:relative; width:100%; height:100vh; overflow:hidden;">
+
+    <!-- VIDEO BACKGROUND -->
+    <video autoplay muted loop playsinline 
+        style="position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:1;">
+        <source src="./cyber.mp4" type="video/mp4">
+    </video>
+
+    <!-- DARK OVERLAY -->
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:2;"></div>
+
+    <!-- GRID -->
+    <div class="grid-lines" style="position:absolute; width:100%; height:100%; z-index:3;">
+        <div class="grid-line-1"></div>
+        <div class="grid-line-2"></div>
+        <div class="grid-line-3"></div>
+        <div class="grid-line-4"></div>
+        <div class="grid-line-5"></div>
+    </div>
+
+    <div class="container" style="position:relative; z-index:4; color:#fff;">
+
+        <div class="hero-content">
+            <div class="section-title">
+
+                <h3 class="animate__animated animate__fadeInUp">
+                    Protect your business from cyber threat
+                </h3>
+
+                <h1 class="animate__animated animate__fadeInUp animate__delay-1s">
+                    Advanced cybersecurity solutions tailored to 
+                    <span style="color:#00ffd5;">keep you safe</span>
+                </h1>
+
+                <p class="animate__animated animate__fadeInUp animate__delay-2s">
+                    In a world where cyberattacks are becoming more sophisticated,
+                    your business deserves the best protection with cutting-edge technology.
+                </p>
+
+            </div>
+
+            <div class="hero-btn animate__animated animate__fadeInUp animate__delay-3s">
+                <a href="./404.html" class="btn-default btn-highlighted">Get Free Assessment</a>
+                <a href="./404.html" class="btn-default">View our services</a>
+            </div>
+        </div>
+
+        <!-- COMPANY SLIDER -->
+        <div class="hero-company-slider" style="margin-top:40px;">
+
+            <p>We're Trusted by more than <span style="color:#00ffd5;">1000+</span> companies</p>
+
+            <div class="logo-slider" style="overflow:hidden; margin-top:20px;">
+                <div class="logo-track" style="
+                    display:flex;
+                    width:calc(200%);
+                    animation:scrollLogo 20s linear infinite;
+                ">
+
+                    <!-- Logos -->
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT1.webp" style="height:40px;">
+                    </div>
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT2.webp" style="height:40px;">
+                    </div>
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT3.webp" style="height:40px;">
+                    </div>
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT4.webp" style="height:40px;">
+                    </div>
+
+                    <!-- DUPLICATE -->
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT1.webp" style="height:40px;">
+                    </div>
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT2.webp" style="height:40px;">
+                    </div>
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT3.webp" style="height:40px;">
+                    </div>
+                    <div class="logo-item" style="flex:0 0 auto; padding:0 20px;">
+                        <img src="./IT4.webp" style="height:40px;">
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- KEYFRAME (ONLY PART NOT INLINE) -->
+<style>
+@keyframes scrollLogo{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+// SWIPER
+var swiper = new Swiper(".mySwiper", {
+    slidesPerView: 2,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+        delay: 2000,
+    },
+    breakpoints:{
+        768:{ slidesPerView:3 },
+        1024:{ slidesPerView:4 }
+    }
+});
+
+// COUNTER
+let count = 0;
+let target = 1000;
+
+let interval = setInterval(()=>{
+    count += 20;
+    document.getElementById("counter").innerText = count;
+    if(count >= target){
+        clearInterval(interval);
+    }
+},20);
+</script>
+
+
+
+
+
+
+
+<style>
+    /* SECTION */
+.cyber-ticker{
+    width:100%;
+    overflow:hidden;
+    padding:30px 0;
+    background:rgba(255,255,255,0.02);
+}
+
+/* WRAPPER */
+.ticker-wrapper{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+/* CONTENT */
+.ticker-content{
+    display:flex;
+    width:max-content;
+    animation:scrollLeft 25s linear infinite;
+}
+
+/* REVERSE */
+.ticker-content.reverse{
+    animation:scrollRight 25s linear infinite;
+}
+
+/* ITEMS */
+.ticker-content span{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0 20px;
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    /* GLASS */
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.1);
+
+    font-size:14px;
+    color:#ccc;
+
+    transition:0.3s;
+}
+
+/* ICON */
+.ticker-content i{
+    color:#00ffd5;
+    font-size:14px;
+    transition:0.3s;
+}
+
+/* HOVER */
+.ticker-content span:hover{
+    background:rgba(0,255,213,0.15);
+    color:#00ffd5;
+    transform:scale(1.1);
+}
+
+.ticker-content span:hover i{
+    transform:rotate(10deg) scale(1.2);
+}
+
+/* PAUSE ON HOVER */
+.cyber-ticker:hover .ticker-content{
+    animation-play-state:paused;
+}
+
+/* ANIMATION */
+@keyframes scrollLeft{
+    0%{ transform:translateX(0); }
+    100%{ transform:translateX(-50%); }
+}
+
+@keyframes scrollRight{
+    0%{ transform:translateX(-50%); }
+    100%{ transform:translateX(0); }
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media(max-width:992px){
+    .ticker-content span{
+        font-size:13px;
+        padding:8px 14px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    .ticker-content span{
+        font-size:12px;
+        padding:6px 12px;
+        margin:0 12px;
+    }
+
+    .ticker-content i{
+        font-size:12px;
+    }
+}
+</style>
+
+
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+
+    /* INITIAL STATE */
+.reveal{
+    opacity:0;
+    transform:translateY(40px);
+    transition:all 0.8s ease;
+}
+
+/* ACTIVE STATE */
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#0a0f1c;
+    color:#fff;
+}
+
+/* SECTION */
+.about-us{
+    padding:80px 20px;
+}
+
+/* TITLE */
+.section-title{
+    text-align:center;
+    max-width:800px;
+    margin:0 auto 60px;
+}
+
+.section-title h3{
+    color:#00ffd5;
+}
+
+.section-title h2{
+    font-size:40px;
+    line-height:1.3;
+}
+
+.section-title span{
+    color:#00ffd5;
+}
+
+/* COUNTER */
+.about-counter-box{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.about-counter-box h2{
+    font-size:50px;
+    color:#00ffd5;
+}
+
+/* ROW */
+.about-row{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    margin-bottom:60px;
+    flex-wrap:wrap;
+}
+
+/* ===== IMAGE CARD ===== */
+.about-image{
+    flex:1;
+    min-width:280px;
+    position:relative;
+    border-radius:20px;
+    overflow:hidden;
+
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+}
+
+/* GLOW BORDER */
+.about-image::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:20px;
+    padding:2px;
+    background:linear-gradient(120deg,#00ffd5,#0066ff,#00ffd5);
+    background-size:300% 300%;
+    animation:glowBorder 4s linear infinite;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+@keyframes glowBorder{
+    0%{ background-position:0% 50%; }
+    100%{ background-position:100% 50%; }
+}
+
+/* IMAGE */
+.about-image img{
+    width:100%;
+    display:block;
+    transition:0.5s ease;
+}
+
+/* ZOOM */
+.about-image:hover img{
+    transform:scale(1.15);
+}
+
+/* LIGHT EFFECT */
+.about-image::after{
+    content:"";
+    position:absolute;
+    top:var(--y,50%);
+    left:var(--x,50%);
+    width:200px;
+    height:200px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle, rgba(0,255,213,0.3), transparent 70%);
+    pointer-events:none;
+    opacity:0;
+    transition:opacity 0.3s;
+}
+
+.about-image:hover::after{
+    opacity:1;
+}
+
+/* CONTENT */
+.about-content{
+    flex:1;
+    min-width:280px;
+    padding:25px;
+
+    border-radius:15px;
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,0.1);
+}
+
+.about-content i{
+    font-size:28px;
+    color:#00ffd5;
+    margin-bottom:10px;
+}
+
+.about-content h3{
+    margin-bottom:15px;
+}
+
+.about-content p{
+    color:#bbb;
+    line-height:1.6;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:992px){
+    .about-row{
+        flex-direction:column;
+    }
+
+    .section-title h2{
+        font-size:32px;
+    }
+}
+
+@media(max-width:600px){
+    .section-title h2{
+        font-size:26px;
+    }
+
+    .about-counter-box h2{
+        font-size:40px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="about-us">
+
+    <!-- TITLE -->
+    <div class="section-title reveal">
+        <h3>About Us</h3>
+        <h2>
+            We provide innovative solutions to help your cybersecurity startup grow,
+            building a trusted <span>brand with precision</span>
+        </h2>
+    </div>
+
+    <!-- COUNTER -->
+    <div class="about-counter-box reveal">
+        <h2><span id="counter">0</span>+</h2>
+        <p>Years of cybersecurity expertise</p>
+    </div>
+
+    <!-- MISSION -->
+    <div class="about-row reveal">
+
+        <div class="about-image reveal">
+            <img src="./cyber1.webp">
+        </div>
+
+        <div class="about-content">
+            <i class="fas fa-shield-halved"></i>
+            <h3>Our Mission</h3>
+            <p>
+                Deliver advanced cybersecurity solutions to protect businesses from evolving threats
+                with precision and innovation.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- VISION -->
+    <div class="about-row">
+
+        <div class="about-content reveal">
+            <i class="fas fa-eye"></i>
+            <h3>Our Vision</h3>
+            <p>
+                Build intelligent, adaptive security systems that redefine protection in the digital era.
+            </p>
+        </div>
+
+        <div class="about-image">
+            <img src="./cyber2.webp">
+        </div>
+
+    </div>
+
+</div>
+
+<!-- COUNTER -->
+<script>
+let count = 0;
+let target = 26;
+
+let counter = setInterval(()=>{
+    count++;
+    document.getElementById("counter").innerText = count;
+
+    if(count >= target){
+        clearInterval(counter);
+    }
+},50);
+</script>
+
+<!-- MOUSE LIGHT EFFECT -->
+<script>
+document.querySelectorAll(".about-image").forEach(card => {
+    card.addEventListener("mousemove", e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        card.style.setProperty('--x', x + 'px');
+        card.style.setProperty('--y', y + 'px');
+    });
+});
+
+
+
+const reveals = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+
+            // delay for one-by-one effect
+            setTimeout(() => {
+                entry.target.classList.add('active');
+            }, index * 200);
+
+        }
+    });
+}, {
+    threshold: 0.2
+});
+
+reveals.forEach(el => observer.observe(el));
+
+</script>
+
+
+
+
+<!-- ===== CYBER SERVICES SECTION (CENTERED HEADER) ===== -->
+<section class="cs-services">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* WRAPPER */
+    .cs-services{
+        padding:80px 20px;
+        text-align:center;
+    }
+    
+    /* HEADER CENTER */
+    .cs-header{
+        max-width:700px;
+        margin:0 auto 50px;
+    }
+    
+    /* TITLE */
+    .cs-title h3{
+        color:#00ffd5;
+        margin-bottom:10px;
+    }
+    
+    .cs-title h2{
+        font-size:34px;
+        color:#fff;
+        line-height:1.4;
+    }
+    
+    /* HIGHLIGHT */
+    .cs-title span{
+        color:#00ffd5;
+    }
+    
+    /* BUTTON CENTER */
+    .cs-view-btn{
+        margin-top:20px;
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+    
+        padding:12px 25px;
+        border-radius:50px;
+        background:#23263a;
+        color:#fff;
+        text-decoration:none;
+        transition:0.3s;
+    }
+    
+    .cs-view-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    .cs-view-btn i{
+        transition:0.3s;
+    }
+    
+    .cs-view-btn:hover i{
+        transform:translateX(5px);
+    }
+    
+    /* GRID */
+    .cs-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:30px;
+    }
+    
+    /* CARD */
+    .cs-card{
+        padding:30px;
+        border-radius:20px;
+        background:linear-gradient(145deg,#1c2038,#14182c);
+        border:1px solid rgba(255,255,255,0.05);
+    
+        transition:0.4s;
+        opacity:0;
+        transform:translateY(40px);
+    }
+    
+    /* SHOW */
+    .cs-card.cs-show{
+        opacity:1;
+        transform:translateY(0);
+    }
+    
+    /* HOVER */
+    .cs-card:hover{
+        transform:translateY(-10px);
+        box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    
+    /* ICON */
+    .cs-icon{
+        font-size:30px;
+        margin-bottom:20px;
+        color:#4da3ff;
+        transition:0.4s;
+    }
+    
+    /* ICON GLOW */
+    .cs-card:hover .cs-icon{
+        color:#00ffd5;
+        text-shadow:0 0 15px rgba(0,255,213,0.8);
+        transform:scale(1.2) rotate(-10deg);
+    }
+    
+    /* TEXT */
+    .cs-card h3{
+        font-size:18px;
+        margin-bottom:12px;
+    }
+    
+    .cs-card p{
+        color:#bbb;
+        font-size:14px;
+    }
+    
+    /* READ MORE BUTTON */
+    .cs-btn{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+    
+        margin-top:15px;
+        padding:10px 20px;
+    
+        border-radius:50px;
+        background:#23263a;
+        color:#fff;
+        text-decoration:none;
+    
+        transition:0.3s;
+        position:relative;
+    }
+    
+    .cs-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    .cs-btn i{
+        transition:0.3s;
+    }
+    
+    .cs-btn:hover i{
+        transform:translateX(5px);
+    }
+    
+    /* LOADING */
+    .cs-btn.cs-loading{
+        pointer-events:none;
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    .cs-btn.cs-loading span{
+        opacity:0;
+    }
+    
+    .cs-btn.cs-loading::after{
+        content:"";
+        width:16px;
+        height:16px;
+        border:2px solid #000;
+        border-top:2px solid transparent;
+        border-radius:50%;
+        position:absolute;
+        animation:cs-spin 1s linear infinite;
+    }
+    
+    @keyframes cs-spin{
+        100%{transform:rotate(360deg);}
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .cs-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    
+    @media(max-width:600px){
+        .cs-grid{grid-template-columns:1fr;}
+    
+        .cs-title h2{
+            font-size:26px;
+        }
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div class="cs-header">
+        <div class="cs-title">
+            <h3>Our Services</h3>
+            <h2>
+                Protecting your business with <span>Cyber Security</span>
+            </h2>
+        </div>
+    
+        <a href="./404.html" class="cs-view-btn">
+            View All Services <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+    <!-- GRID -->
+    <div class="cs-grid">
+    
+        <div class="cs-card">
+            <i class="fas fa-layer-group cs-icon"></i>
+            <h3>Advanced Network Security</h3>
+            <p>Protect systems with real-time monitoring and advanced threat detection.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-shapes cs-icon"></i>
+            <h3>Threat Detection</h3>
+            <p>AI-powered cyber defense to detect and respond instantly.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-database cs-icon"></i>
+            <h3>Managed Security</h3>
+            <p>Complete monitoring and protection for your infrastructure.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-box cs-icon"></i>
+            <h3>Data Encryption</h3>
+            <p>Secure sensitive data with advanced encryption systems.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-gem cs-icon"></i>
+            <h3>Risk Assessment</h3>
+            <p>Identify vulnerabilities and ensure compliance standards.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-heartbeat cs-icon"></i>
+            <h3>Ransomware Protection</h3>
+            <p>Prevent attacks and recover systems efficiently.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+    </div>
+    
+    <script>
+    (function(){
+        const cards = document.querySelectorAll('.cs-card');
+    
+        const observer = new IntersectionObserver((entries)=>{
+            entries.forEach((entry,i)=>{
+                if(entry.isIntersecting){
+                    setTimeout(()=>{
+                        entry.target.classList.add('cs-show');
+                    }, i*150);
+                }
+            });
+        },{threshold:0.2});
+    
+        cards.forEach(card=>observer.observe(card));
+    
+        document.querySelectorAll(".cs-btn").forEach(btn=>{
+            btn.addEventListener("click",function(e){
+                e.preventDefault();
+    
+                btn.classList.add("cs-loading");
+    
+                setTimeout(()=>{
+                    window.location.href="404.html";
+                },1200);
+            });
+        });
+    })();
+    </script>
+    
+    </section>
+
+
+
+    <!-- ===== GLASS SPECIALTIES SECTION ===== -->
+<section class="gx-specialties">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .gx-specialties{
+        padding:80px 20px;
+        color:#fff;
+    }
+    
+    /* CONTAINER */
+    .gx-wrapper{
+        max-width:1200px;
+        margin:auto;
+    }
+    
+    /* GRID */
+    .gx-row{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:40px;
+        align-items:center;
+    }
+    
+    /* GLASS CARD MAIN */
+    .gx-glass{
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(12px);
+        border:1px solid rgba(255,255,255,0.1);
+        border-radius:20px;
+        padding:25px;
+    }
+    
+    /* TITLE */
+    .gx-title h3{
+        color:#00ffd5;
+        margin-bottom:10px;
+    }
+    
+    .gx-title h2{
+        font-size:30px;
+        margin-bottom:15px;
+    }
+    
+    .gx-title span{
+        color:#00ffd5;
+    }
+    
+    .gx-title p{
+        color:#ccc;
+    }
+    
+    /* BUTTON */
+    .gx-btn{
+        display:inline-block;
+        margin-top:15px;
+        padding:10px 22px;
+        border-radius:50px;
+        background:rgba(0,255,213,0.1);
+        border:1px solid #00ffd5;
+        color:#00ffd5;
+        text-decoration:none;
+        transition:0.3s;
+    }
+    
+    .gx-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    /* VIDEO BOX */
+    .gx-video{
+        position:relative;
+        overflow:hidden;
+        border-radius:20px;
+    }
+    
+    .gx-video img{
+        width:100%;
+        display:block;
+        transition:0.4s;
+    }
+    
+    .gx-video:hover img{
+        transform:scale(1.05);
+    }
+    
+    /* PLAY BUTTON */
+    .gx-play{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        width:60px;
+        height:60px;
+        border-radius:50%;
+        background:#00ffd5;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:#000;
+        font-size:20px;
+    }
+    
+    /* LIST */
+    .gx-list{
+        display:grid;
+        gap:20px;
+    }
+    
+    /* SMALL GLASS CARD */
+    .gx-item{
+        display:flex;
+        gap:15px;
+        padding:18px;
+        border-radius:15px;
+    
+        background:rgba(255,255,255,0.04);
+        backdrop-filter:blur(10px);
+        border:1px solid rgba(255,255,255,0.08);
+    
+        transition:0.3s;
+    }
+    
+    /* HOVER */
+    .gx-item:hover{
+        transform:translateY(-5px);
+        border-color:#00ffd5;
+    }
+    
+    /* ICON */
+    .gx-icon{
+        font-size:22px;
+        color:#00ffd5;
+    }
+    
+    /* TEXT */
+    .gx-item h4{
+        margin-bottom:5px;
+    }
+    
+    .gx-item p{
+        font-size:14px;
+        color:#bbb;
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .gx-row{
+            grid-template-columns:1fr;
+        }
+    }
+    
+    @media(max-width:600px){
+        .gx-title h2{
+            font-size:24px;
+        }
+    }
+    
+    </style>
+    
+    <div class="gx-wrapper">
+    
+        <div class="gx-row">
+    
+            <!-- LEFT SIDE (VIDEO + TEXT) -->
+            <div class="gx-glass">
+    
+                <div class="gx-title">
+                    <h3>Our Specialties</h3>
+                    <h2>Trusted experts securing <span>your digital world</span></h2>
+                    <p>We provide advanced cybersecurity solutions using cutting-edge technology.</p>
+                </div>
+    
+                <!-- VIDEO -->
+                <div class="gx-video" style="margin-top:20px;">
+                    <img src="f1.webp" alt="">
+                    <a href="./cyber.mp4" class="gx-play">
+                        <i class="fas fa-play"></i>
+                    </a>
+                </div>
+    
+                <a href="./404.html" class="gx-btn">Contact Now</a>
+    
+            </div>
+    
+            <!-- RIGHT SIDE (CARDS) -->
+            <div class="gx-list">
+    
+                <div class="gx-item">
+                    <i class="fas fa-clock gx-icon"></i>
+                    <div>
+                        <h4>24/7 Threat Monitoring</h4>
+                        <p>Continuous monitoring to detect threats instantly.</p>
+                    </div>
+                </div>
+    
+                <div class="gx-item">
+                    <i class="fas fa-shield-halved gx-icon"></i>
+                    <div>
+                        <h4>End-to-End Security</h4>
+                        <p>Complete protection from risk assessment to defense.</p>
+                    </div>
+                </div>
+    
+                <div class="gx-item">
+                    <i class="fas fa-microchip gx-icon"></i>
+                    <div>
+                        <h4>Cutting-Edge Technology</h4>
+                        <p>AI-driven tools to stay ahead of cyber threats.</p>
+                    </div>
+                </div>
+    
+                <div class="gx-item">
+                    <i class="fas fa-user-lock gx-icon"></i>
+                    <div>
+                        <h4>Expert Team</h4>
+                        <p>Certified professionals delivering trusted solutions.</p>
+                    </div>
+                </div>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    </section>
+    <!-- ===== KEY FACTS PREMIUM SECTION ===== -->
+<section class="kf-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .kf-section{
+        padding:80px 20px;
+        color:#fff;
+    }
+    
+    /* CONTAINER */
+    .kf-container{
+        max-width:1200px;
+        margin:auto;
+    }
+    
+    /* GRID */
+    .kf-row{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:50px;
+        align-items:center;
+    }
+    
+    /* TAG */
+    .kf-tag{
+        display:inline-block;
+        padding:6px 14px;
+        border-radius:30px;
+        background:rgba(255,255,255,0.05);
+        border:1px solid rgba(255,255,255,0.1);
+        margin-bottom:15px;
+        font-size:14px;
+    }
+    
+    /* TITLE */
+    .kf-title{
+        font-size:38px;
+        line-height:1.3;
+        margin-bottom:15px;
+    }
+    
+    /* GRADIENT TEXT */
+    .kf-title span{
+        background:linear-gradient(90deg,#00ffd5,#6c63ff);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
+    
+    /* TEXT */
+    .kf-text{
+        color:#bbb;
+        margin-bottom:15px;
+    }
+    
+    /* BUTTON */
+    .kf-btn{
+        display:inline-block;
+        margin-top:15px;
+        padding:12px 25px;
+        border-radius:50px;
+        background:linear-gradient(90deg,#4da3ff,#8e2de2);
+        color:#fff;
+        text-decoration:none;
+    }
+    
+    /* COUNTER */
+    .kf-stats{
+        display:flex;
+        gap:40px;
+        margin-top:30px;
+    }
+    
+    .kf-stat h2{
+        font-size:30px;
+    }
+    
+    .kf-stat p{
+        color:#aaa;
+    }
+    
+    /* IMAGE BOX */
+    .kf-img-box{
+        position:relative;
+    }
+    
+    /* IMAGE */
+    .kf-img{
+        width:100%;
+        border-radius:25px;
+        transition:0.5s;
+    }
+    
+    /* ZOOM */
+    .kf-img-box:hover .kf-img{
+        transform:scale(1.08);
+    }
+    
+    /* FLOAT CARD */
+    .kf-card{
+        position:absolute;
+        top:40%;
+        left:-40px;
+        background:#4da3ff;
+        padding:20px;
+        border-radius:15px;
+        color:#fff;
+        box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    }
+    
+    /* VIDEO BOX */
+    .kf-video{
+        position:absolute;
+        bottom:20px;
+        right:-40px;
+        background:#1c2038;
+        padding:15px 20px;
+        border-radius:15px;
+        display:flex;
+        align-items:center;
+        gap:10px;
+    }
+    
+    /* PLAY */
+    .kf-play{
+        width:40px;
+        height:40px;
+        border-radius:50%;
+        background:linear-gradient(45deg,#6c63ff,#00ffd5);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    
+    /* SCROLL ANIMATION */
+    .kf-animate{
+        opacity:0;
+        transform:translateY(40px);
+        transition:0.8s ease;
+    }
+    
+    .kf-animate.show{
+        opacity:1;
+        transform:translateY(0);
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .kf-row{
+            grid-template-columns:1fr;
+        }
+    
+        .kf-card{
+            left:10px;
+        }
+    
+        .kf-video{
+            right:10px;
+        }
+    }
+    
+    @media(max-width:600px){
+        .kf-title{
+            font-size:26px;
+        }
+    }
+    
+    </style>
+    
+    <div class="kf-container">
+    <div class="kf-row">
+    
+        <!-- LEFT CONTENT -->
+        <div class="kf-animate">
+    
+            <div class="kf-tag">
+                <i class="fas fa-lock"></i> Our Key Facts
+            </div>
+    
+            <h2 class="kf-title">
+                Insights into the growing importance <span>of cybersecurity</span>
+            </h2>
+    
+            <p class="kf-text">
+                In a world where cyberattacks are becoming more sophisticated, your business deserves the best protection.
+            </p>
+    
+            <p class="kf-text">
+                Our expert team leverages cutting-edge technology to secure your digital future.
+            </p>
+    
+            <a href="./404.html" class="kf-btn">Learn More</a>
+    
+            <!-- STATS -->
+            <div class="kf-stats">
+                <div class="kf-stat">
+                    <h2>350+</h2>
+                    <p>Projects Success Rate 99%</p>
+                </div>
+                <div class="kf-stat">
+                    <h2>293+</h2>
+                    <p>Award For Digital Innovation</p>
+                </div>
+            </div>
+    
+        </div>
+    
+        <!-- RIGHT IMAGE -->
+        <div class="kf-img-box kf-animate">
+    
+            <img src="./cyber4.webp" class="kf-img">
+    
+            <!-- FLOAT CARD -->
+            <div class="kf-card">
+                <h2>240+</h2>
+                <p>Award For Digital Innovation</p>
+            </div>
+    
+            <!-- VIDEO -->
+            <div class="kf-video">
+                <div class="kf-play">
+                    <i class="fas fa-play"></i>
+                </div>
+                <span>Let's See How We Did It</span>
+            </div>
+    
+        </div>
+    
+    </div>
+    </div>
+    
+    <script>
+    
+    /* SCROLL ANIMATION */
+    const kfItems = document.querySelectorAll('.kf-animate');
+    
+    const kfObserver = new IntersectionObserver((entries)=>{
+        entries.forEach((entry,i)=>{
+            if(entry.isIntersecting){
+                setTimeout(()=>{
+                    entry.target.classList.add('show');
+                }, i*200);
+            }
+        });
+    },{threshold:0.2});
+    
+    kfItems.forEach(el=>kfObserver.observe(el));
+    
+    </script>
+    
+    </section>
+
+
+    <!-- ===== WHY CHOOSE US SECTION ===== -->
+<section class="wc-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .wc-section{
+        padding:80px 20px;
+    }
+    
+    /* CONTAINER */
+    .wc-box{
+        max-width:1200px;
+        margin:auto;
+        padding:50px;
+    
+        border-radius:25px;
+        background:rgba(255,255,255,0.04);
+        backdrop-filter:blur(12px);
+        border:1px solid rgba(255,255,255,0.08);
+    
+        color:#fff;
+    }
+    
+    /* TAG */
+    .wc-tag{
+        display:inline-block;
+        padding:6px 14px;
+        border-radius:30px;
+        border:1px solid rgba(255,255,255,0.1);
+        margin-bottom:15px;
+    }
+    
+    /* TITLE */
+    .wc-title{
+        font-size:36px;
+        margin-bottom:40px;
+    }
+    
+    .wc-title span{
+        background:linear-gradient(90deg,#00ffd5,#6c63ff);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
+    
+    /* GRID */
+    .wc-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:30px;
+    }
+    
+    /* ITEM */
+    .wc-item{
+        padding:20px;
+        border-radius:15px;
+        transition:0.4s;
+    
+        opacity:0;
+    }
+    
+    /* ICON */
+    .wc-icon{
+        font-size:28px;
+        margin-bottom:15px;
+        color:#4da3ff;
+        cursor:pointer;
+        transition:0.4s;
+    }
+    
+    /* CLICK EFFECT */
+    .wc-icon.active{
+        color:#00ffd5;
+        transform:rotate(15deg) scale(1.2);
+        text-shadow:0 0 15px #00ffd5;
+    }
+    
+    /* TEXT */
+    .wc-item h3{
+        margin-bottom:10px;
+    }
+    
+    .wc-item p{
+        color:#bbb;
+        font-size:14px;
+    }
+    
+    /* ANIMATIONS */
+    .wc-left{transform:translateX(-50px);}
+    .wc-right{transform:translateX(50px);}
+    .wc-up{transform:translateY(50px);}
+    
+    .wc-show{
+        opacity:1;
+        transform:translate(0);
+        transition:0.8s ease;
+    }
+    
+    /* BOTTOM TEXT */
+    .wc-bottom{
+        margin-top:40px;
+        text-align:center;
+        color:#aaa;
+    }
+    
+    .wc-bottom span{
+        color:#6c63ff;
+        font-weight:600;
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .wc-grid{
+            grid-template-columns:1fr;
+        }
+    
+        .wc-title{
+            font-size:26px;
+        }
+    }
+    
+    </style>
+    
+    <div class="wc-box">
+    
+        <!-- TAG -->
+        <div class="wc-tag">
+            <i class="fas fa-lock"></i> Why Choose Us
+        </div>
+    
+        <!-- TITLE -->
+        <h2 class="wc-title">
+            Trusted experts committed to securing <span>your digital</span>
+        </h2>
+    
+        <!-- GRID -->
+        <div class="wc-grid">
+    
+            <!-- ITEM 1 -->
+            <div class="wc-item wc-left">
+                <i class="fas fa-cube wc-icon"></i>
+                <h3>Tailored Security Solutions</h3>
+                <p>Customized strategies designed to meet your unique business needs.</p>
+            </div>
+    
+            <!-- ITEM 2 -->
+            <div class="wc-item wc-up">
+                <i class="fas fa-clipboard-list wc-icon"></i>
+                <h3>Advanced Technology</h3>
+                <p>Cutting-edge tools to safeguard your digital infrastructure.</p>
+            </div>
+    
+            <!-- ITEM 3 -->
+            <div class="wc-item wc-right">
+                <i class="fas fa-crosshairs wc-icon"></i>
+                <h3>Real-Time Threat Detection</h3>
+                <p>24/7 monitoring to stay ahead of cyber threats.</p>
+            </div>
+    
+        </div>
+    
+        
+        
+    
+    </div>
+    
+    <script>
+    
+    /* SCROLL ANIMATION */
+    const wcItems = document.querySelectorAll('.wc-item');
+    
+    const wcObserver = new IntersectionObserver((entries)=>{
+        entries.forEach((entry,i)=>{
+            if(entry.isIntersecting){
+                setTimeout(()=>{
+                    entry.target.classList.add('wc-show');
+                }, i*200);
+            }
+        });
+    },{threshold:0.2});
+    
+    wcItems.forEach(el=>wcObserver.observe(el));
+    
+    /* ICON CLICK EFFECT */
+    document.querySelectorAll('.wc-icon').forEach(icon=>{
+        icon.addEventListener('click',()=>{
+            icon.classList.toggle('active');
+        });
+    });
+    
+    </script>
+    
+    </section>
+
+    <!-- ===== CASE STUDIES (VERTICAL CARDS) ===== -->
+<section class="vcs-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .vcs-section{
+        padding:80px 20px;
+        background:#0b0f1a;
+        color:#fff;
+    }
+    
+    /* HEADER */
+    .vcs-header{
+        text-align:center;
+        margin-bottom:50px;
+    }
+    
+    .vcs-tag{
+        display:inline-block;
+        padding:8px 18px;
+        border:1px solid #333;
+        border-radius:30px;
+        margin-bottom:10px;
+    }
+    
+    .vcs-title{
+        font-size:32px;
+    }
+    
+    .vcs-title span{
+        color:#00ffd5;
+    }
+    
+    .vcs-btn-top{
+        display:inline-block;
+        margin-top:10px;
+        padding:10px 22px;
+        border-radius:30px;
+        background:#1a1f2e;
+        color:#fff;
+        text-decoration:none;
+    }
+    
+    /* GRID */
+    .vcs-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:25px;
+    }
+    
+    /* CARD */
+    .vcs-card{
+        position:relative;
+        border-radius:15px;
+        overflow:hidden;
+        background:#111;
+    }
+    
+    /* IMAGE (VERTICAL RECTANGLE) */
+    .vcs-card img{
+        width:100%;
+        height:420px;   /* 👈 vertical height */
+        object-fit:cover;
+        display:block;
+        transition:0.4s;
+    }
+    
+    /* ZOOM */
+    .vcs-card:hover img{
+        transform:scale(1.08);
+    }
+    
+    /* OVERLAY */
+    .vcs-overlay{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+    
+        background:rgba(0,0,0,0.6);
+    
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        text-align:center;
+    
+        opacity:0;
+        transition:0.4s;
+    }
+    
+    .vcs-card:hover .vcs-overlay{
+        opacity:1;
+    }
+    
+    /* TEXT */
+    .vcs-overlay h3{
+        margin-bottom:10px;
+    }
+    
+    .vcs-overlay p{
+        font-size:14px;
+        margin-bottom:15px;
+    }
+    
+    /* ICONS */
+    .vcs-icons{
+        display:flex;
+        gap:10px;
+        margin-bottom:15px;
+    }
+    
+    .vcs-icons i{
+        padding:10px;
+        border-radius:50%;
+        background:#fff;
+        color:#000;
+        transition:0.3s;
+    }
+    
+    .vcs-icons i:hover{
+        background:#00ffd5;
+    }
+    
+    /* BUTTON */
+    .vcs-btn{
+        padding:8px 18px;
+        border-radius:30px;
+        background:#00ffd5;
+        color:#000;
+        text-decoration:none;
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .vcs-grid{
+            grid-template-columns:repeat(2,1fr);
+        }
+    }
+    
+    @media(max-width:600px){
+        .vcs-grid{
+            grid-template-columns:1fr;
+        }
+    
+        .vcs-card img{
+            height:350px;
+        }
+    
+        .vcs-title{
+            font-size:24px;
+        }
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div class="vcs-header">
+        <div class="vcs-tag">Case Studies</div>
+    
+        <h2 class="vcs-title">
+            Real world <span>Cyber Security Success</span>
+        </h2>
+    
+        <a href="404.html" class="vcs-btn-top">
+            View More Case Studies
+        </a>
+    </div>
+    
+    <!-- GRID -->
+    <div class="vcs-grid">
+    
+        <!-- CARD -->
+        <div class="vcs-card">
+            <img src="./cyber3.webp">
+            <div class="vcs-overlay">
+                <h3>Network Security</h3>
+                <p>Protecting enterprise systems.</p>
+    
+                <div class="vcs-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+    
+                <a href="404.html" class="vcs-btn">View More</a>
+            </div>
+        </div>
+    
+        <div class="vcs-card">
+            <img src="./cyber4.webp">
+            <div class="vcs-overlay">
+                <h3>Data Protection</h3>
+                <p>Secure encryption systems.</p>
+    
+                <div class="vcs-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+    
+                <a href="404.html" class="vcs-btn">View More</a>
+            </div>
+        </div>
+    
+        <div class="vcs-card">
+            <img src="./cyber5.webp">
+            <div class="vcs-overlay">
+                <h3>Threat Detection</h3>
+                <p>AI cyber defense.</p>
+    
+                <div class="vcs-icons">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+    
+                <a href="404.html" class="vcs-btn">View More</a>
+            </div>
+        </div>
+    
+    </div>
+    
+    </section>
+
+    <!-- ===== OUR FEATURES (FINAL FIXED LOADER) ===== -->
+<section class="ofxb-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .ofxb-section{
+        padding:80px 20px;
+        background:#0b0f1a;
+        color:#fff;
+        text-align:center;
+    }
+    
+    /* HEADER */
+    .ofxb-tag{
+        display:inline-block;
+        padding:8px 20px;
+        border-radius:30px;
+        border:1px solid #333;
+        margin-bottom:15px;
+    }
+    
+    .ofxb-title{
+        font-size:32px;
+    }
+    
+    .ofxb-title span{
+        color:#00ffd5;
+    }
+    
+    .ofxb-sub{
+        color:#aaa;
+        max-width:600px;
+        margin:auto;
+    }
+    
+    /* GRID */
+    .ofxb-grid{
+        margin-top:50px;
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:20px;
+    }
+    
+    /* CARD */
+    .ofxb-card{
+        position:relative;
+        height:260px;
+        border-radius:15px;
+        overflow:hidden;
+        cursor:pointer;
+    
+        background-size:cover;
+        background-position:center;
+    
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    
+    /* DARK OVERLAY */
+    .ofxb-card::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        background:rgba(0,0,0,0.6);
+    }
+    
+    /* CONTENT */
+    .ofxb-content{
+        position:relative;
+        z-index:2;
+        text-align:center;
+        opacity:0;
+        transform:translateY(10px);
+        transition:0.4s;
+    }
+    
+    /* SHOW CONTENT */
+    .ofxb-card.active .ofxb-content{
+        opacity:1;
+        transform:translateY(0);
+    }
+    
+    /* ICON */
+    .ofxb-icon{
+        font-size:30px;
+        margin-bottom:10px;
+        color:#4da3ff;
+        transition:0.4s;
+    }
+    
+    /* ICON EFFECT */
+    .ofxb-card.active .ofxb-icon{
+        transform:rotate(15deg) scale(1.2);
+        color:#00ffd5;
+    }
+    
+    /* TEXT */
+    .ofxb-card h3{
+        margin-bottom:8px;
+    }
+    
+    .ofxb-card p{
+        font-size:14px;
+        color:#ddd;
+    }
+    
+    /* LOADER */
+    .ofxb-loader{
+        position:absolute;
+        z-index:3;
+        width:40px;
+        height:40px;
+        border:4px solid #00ffd5;
+        border-top:4px solid transparent;
+        border-radius:50%;
+        animation:spin 1s linear infinite;
+    
+        opacity:1;
+        transition:opacity 0.4s ease;
+    }
+    
+    /* HIDE LOADER */
+    .ofxb-card.active .ofxb-loader{
+        opacity:0;
+        pointer-events:none;
+    }
+    
+    /* SPIN */
+    @keyframes spin{
+        100%{transform:rotate(360deg);}
+    }
+    
+    /* GLOW */
+    .ofxb-card:hover{
+        box-shadow:0 0 20px rgba(0,255,213,0.4);
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .ofxb-grid{
+            grid-template-columns:repeat(2,1fr);
+        }
+    }
+    
+    @media(max-width:600px){
+        .ofxb-grid{
+            grid-template-columns:1fr;
+        }
+    
+        .ofxb-title{
+            font-size:24px;
+        }
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div>
+        <div class="ofxb-tag">Our Features</div>
+    
+        <h2 class="ofxb-title">
+            Powerful <span>Cyber Security Features</span>
+        </h2>
+    
+        <p class="ofxb-sub">
+            Advanced protection solutions designed for modern businesses.
+        </p>
+    </div>
+    
+    <!-- GRID -->
+    <div class="ofxb-grid">
+    
+        <!-- CARD -->
+        <div class="ofxb-card" style="background-image:url('./f1.webp')">
+            <div class="ofxb-loader"></div>
+            <div class="ofxb-content">
+                <div class="ofxb-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Advanced Protection</h3>
+                <p>Multi-layer security against cyber threats.</p>
+            </div>
+        </div>
+    
+        <div class="ofxb-card" style="background-image:url('./f2.webp')">
+            <div class="ofxb-loader"></div>
+            <div class="ofxb-content">
+                <div class="ofxb-icon"><i class="fas fa-user-lock"></i></div>
+                <h3>Identity Security</h3>
+                <p>Protect user authentication systems.</p>
+            </div>
+        </div>
+    
+        <div class="ofxb-card" style="background-image:url('./f3.webp')">
+            <div class="ofxb-loader"></div>
+            <div class="ofxb-content">
+                <div class="ofxb-icon"><i class="fas fa-network-wired"></i></div>
+                <h3>Network Monitoring</h3>
+                <p>Real-time cyber threat tracking.</p>
+            </div>
+        </div>
+    
+    </div>
+    
+    <script>
+    
+    /* LOADER → CONTENT TRANSITION */
+    document.querySelectorAll('.ofxb-card').forEach(card=>{
+        let timer;
+    
+        card.addEventListener('mouseenter',()=>{
+            timer = setTimeout(()=>{
+                card.classList.add('active');
+            },800); // loading delay
+        });
+    
+        card.addEventListener('mouseleave',()=>{
+            clearTimeout(timer);
+            card.classList.remove('active');
+        });
+    });
+    
+    </script>
+    
+    </section>
+
+    <!-- ===== ULTRA PREMIUM PRICING ===== -->
+<section class="prxu-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .prxu-section{
+        padding:100px 20px;
+        background:#05070d;
+        color:#fff;
+        text-align:center;
+        overflow:hidden;
+    }
+    
+    /* HEADER */
+    .prxu-tag{
+        display:inline-block;
+        padding:8px 22px;
+        border-radius:30px;
+        border:1px solid rgba(255,255,255,0.2);
+        margin-bottom:15px;
+    }
+    
+    .prxu-title{
+        font-size:38px;
+    }
+    
+    .prxu-title span{
+        background:linear-gradient(90deg,#00ffd5,#6c63ff);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
+    
+    .prxu-sub{
+        color:#aaa;
+        max-width:600px;
+        margin:15px auto;
+    }
+    
+    /* TOGGLE */
+    .prxu-toggle{
+        display:inline-flex;
+        background:#111;
+        border-radius:40px;
+        padding:6px;
+    }
+    
+    .prxu-toggle button{
+        border:none;
+        padding:10px 22px;
+        border-radius:30px;
+        background:transparent;
+        color:#fff;
+        cursor:pointer;
+    }
+    
+    .prxu-toggle .active{
+        background:linear-gradient(90deg,#00ffd5,#6c63ff);
+        color:#000;
+    }
+    
+    /* GRID */
+    .prxu-grid{
+        margin-top:60px;
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:30px;
+    }
+    
+    /* CARD */
+    .prxu-card{
+        position:relative;
+        padding:40px 25px;
+        border-radius:25px;
+    
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(12px);
+    
+        transition:0.4s;
+        transform-style:preserve-3d;
+    }
+    
+    /* GLOW BORDER */
+    .prxu-card::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        border-radius:25px;
+        padding:1px;
+        background:linear-gradient(45deg,#00ffd5,#6c63ff,#00ffd5);
+        -webkit-mask:
+          linear-gradient(#000 0 0) content-box,
+          linear-gradient(#000 0 0);
+        -webkit-mask-composite:xor;
+        mask-composite:exclude;
+        animation:prxuGlow 4s linear infinite;
+    }
+    
+    @keyframes prxuGlow{
+        0%{filter:hue-rotate(0deg);}
+        100%{filter:hue-rotate(360deg);}
+    }
+    
+    /* HOVER */
+    .prxu-card:hover{
+        transform:translateY(-15px) scale(1.03);
+        box-shadow:0 20px 40px rgba(0,255,213,0.2);
+    }
+    
+    /* POPULAR */
+    .prxu-popular{
+        position:absolute;
+        top:-15px;
+        right:20px;
+        background:#00ffd5;
+        color:#000;
+        padding:6px 14px;
+        border-radius:20px;
+        font-size:12px;
+        animation:pulse 1.5s infinite;
+    }
+    
+    @keyframes pulse{
+        0%{box-shadow:0 0 0 0 rgba(0,255,213,0.6);}
+        100%{box-shadow:0 0 0 15px rgba(0,255,213,0);}
+    }
+    
+    /* TEXT */
+    .prxu-plan{
+        font-size:22px;
+    }
+    
+    .prxu-price{
+        font-size:40px;
+        margin:15px 0;
+    }
+    
+    /* FEATURES */
+    .prxu-features{
+        list-style:none;
+        padding:0;
+        margin:20px 0;
+    }
+    
+    .prxu-features li{
+        margin:10px 0;
+        color:#bbb;
+    }
+    
+    /* BUTTON */
+    .prxu-btn{
+        position:relative;
+        padding:12px 28px;
+        border-radius:30px;
+        background:#373c3b;
+        color:#fff;
+        text-decoration:none;
+        overflow:hidden;
+    }
+    
+    /* LIQUID EFFECT */
+    .prxu-btn::before{
+        content:"";
+        position:absolute;
+        top:0;
+        left:-100%;
+        width:100%;
+        height:100%;
+        
+        transition:0.4s;
+        
+    }
+    
+    .prxu-btn:hover::before{
+        left:0;
+    }
+    
+    .prxu-btn:hover{
+        color:#000;
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .prxu-grid{
+            grid-template-columns:repeat(2,1fr);
+        }
+    }
+    
+    @media(max-width:600px){
+        .prxu-grid{
+            grid-template-columns:1fr;
+        }
+    
+        .prxu-title{
+            font-size:26px;
+        }
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div>
+        <div class="prxu-tag">Our Pricing</div>
+    
+        <h2 class="prxu-title">
+            Ultra <span>Premium Plans</span>
+        </h2>
+    
+        <p class="prxu-sub">
+            Experience next-gen cybersecurity pricing with powerful features.
+        </p>
+    
+        <div class="prxu-toggle">
+            <button class="active" onclick="prxuSet('month',this)">Monthly</button>
+            <button onclick="prxuSet('year',this)">Yearly</button>
+        </div>
+    </div>
+    
+    <!-- GRID -->
+    <div class="prxu-grid">
+    
+        <div class="prxu-card">
+            <h3 class="prxu-plan">Basic</h3>
+            <div class="prxu-price" data-m="19" data-y="190">$19</div>
+            <ul class="prxu-features">
+                <li>Basic Protection</li>
+                <li>Email Support</li>
+                <li>Energy efficient infrastructure</li>
+                <li>Energy efficient infrastructure</li>
+                <li>Energy efficient infrastructure</li>
+            </ul>
+            <a href="404.html" class="prxu-btn">Choose Plan</a>
+        </div>
+    
+        <div class="prxu-card">
+            <div class="prxu-popular">Popular</div>
+            <h3 class="prxu-plan">Popular</h3>
+            <div class="prxu-price" data-m="49" data-y="490">$49</div>
+            <ul class="prxu-features">
+                <li>Advanced Security</li>
+                <li>Email Support</li>
+                <li>24/7 Monitoring</li>
+                <li>Energy efficient infrastructure</li>
+                <li>Energy efficient infrastructure</li>
+            </ul>
+            <a href="404.html" class="prxu-btn">Choose Plan</a>
+        </div>
+    
+        <div class="prxu-card">
+            <h3 class="prxu-plan">Pro</h3>
+            <div class="prxu-price" data-m="99" data-y="990">$99</div>
+            <ul class="prxu-features">
+                <li>Full Protection</li>
+                <li>Email Support</li>
+                <li>24/7 Monitoring</li>
+                <li>AI Detection</li>
+                <li>Energy efficient infrastructure</li>
+            </ul>
+            <a href="404.html" class="prxu-btn">Choose Plan</a>
+        </div>
+    
+    </div>
+    
+    <script>
+    
+    /* TOGGLE + ANIMATION */
+    function prxuSet(type,btn){
+        document.querySelectorAll('.prxu-toggle button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+    
+        document.querySelectorAll('.prxu-price').forEach(el=>{
+            let target = type === 'month' ? el.dataset.m : el.dataset.y;
+            let start = parseInt(el.innerText.replace('$',''));
+            let end = parseInt(target);
+    
+            let step = (end - start)/20;
+            let i = 0;
+    
+            let interval = setInterval(()=>{
+                start += step;
+                el.innerText = "$" + Math.round(start);
+                i++;
+                if(i>=20){
+                    el.innerText = "$" + end;
+                    clearInterval(interval);
+                }
+            },20);
+        });
+    }
+    
+    /* 3D TILT */
+    document.querySelectorAll('.prxu-card').forEach(card=>{
+        card.addEventListener('mousemove',e=>{
+            let rect = card.getBoundingClientRect();
+            let x = e.clientX - rect.left;
+            let y = e.clientY - rect.top;
+    
+            let rotateX = -(y - rect.height/2)/10;
+            let rotateY = (x - rect.width/2)/10;
+    
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+    
+        card.addEventListener('mouseleave',()=>{
+            card.style.transform = "rotateX(0) rotateY(0)";
+        });
+    });
+    
+    </script>
+    
+    </section>
+
+
+    <!-- ===== ULTRA TESTIMONIAL WITH LEFT CARD ===== -->
+<section class="tsul-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .tsul-section{
+        position:relative;
+        padding:100px 20px;
+        background:#070a14;
+        color:#fff;
+        overflow:hidden;
+    }
+    
+    /* AI GLOW */
+    .tsul-section::before{
+        content:"";
+        position:absolute;
+        width:500px;
+        height:500px;
+        background:radial-gradient(circle,#00ffd5,transparent);
+        top:-100px;
+        left:-100px;
+        filter:blur(120px);
+        animation:tsulGlow 10s infinite alternate;
+    }
+    @keyframes tsulGlow{
+        100%{transform:translate(200px,150px);}
+    }
+    
+    /* HEADER */
+    .tsul-header{
+        text-align:center;
+        margin-bottom:50px;
+    }
+    
+    .tsul-title{
+        font-size:36px;
+    }
+    .tsul-title span{
+        background:linear-gradient(90deg,#00ffd5,#a855f7);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
+    
+    /* LAYOUT */
+    .tsul-wrapper{
+        max-width:1200px;
+        margin:auto;
+        display:grid;
+        grid-template-columns:320px 1fr;
+        gap:40px;
+    }
+    
+    /* LEFT CARD */
+    .tsul-left{
+        padding:35px;
+        border-radius:20px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(12px);
+        text-align:center;
+    }
+    
+    .tsul-rating{
+        font-size:60px;
+        font-weight:bold;
+    }
+    
+    .tsul-stars{
+        color:#a855f7;
+        margin:10px 0;
+    }
+    
+    .tsul-left p{
+        color:#aaa;
+    }
+    
+    /* AVATARS */
+    .tsul-avatars{
+        display:flex;
+        justify-content:center;
+        margin-top:15px;
+    }
+    
+    .tsul-avatars img{
+        width:45px;
+        height:45px;
+        border-radius:50%;
+        border:2px solid #070a14;
+        margin-left:-12px;
+    }
+    
+    /* RIGHT CAROUSEL */
+    .tsul-carousel{
+        overflow:hidden;
+        position:relative;
+    }
+    
+    .tsul-track{
+        display:flex;
+        transition:0.5s;
+    }
+    
+    /* CARD */
+    .tsul-card{
+        min-width:100%;
+        padding:40px;
+        border-radius:20px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(10px);
+    }
+    
+    /* TEXT */
+    .tsul-text{
+        font-size:18px;
+        color:#ccc;
+    }
+    
+    /* USER */
+    .tsul-user{
+        display:flex;
+        align-items:center;
+        gap:15px;
+        margin-top:20px;
+    }
+    .tsul-user img{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+    }
+    
+    /* VIDEO BUTTON */
+    .tsul-video-btn{
+        margin-top:20px;
+        padding:10px 20px;
+        border-radius:30px;
+        background:#111;
+        cursor:pointer;
+        display:inline-flex;
+        gap:10px;
+    }
+    .tsul-video-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    /* ARROWS */
+    .tsul-arrows{
+        margin-top:20px;
+    }
+    .tsul-arrows button{
+        width:40px;
+        height:40px;
+        border:none;
+        border-radius:10px;
+        background:#1a1f2e;
+        color:#fff;
+        cursor:pointer;
+    }
+    
+    /* MODAL */
+    .tsul-modal{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.8);
+        display:none;
+        justify-content:center;
+        align-items:center;
+    }
+    .tsul-modal iframe{
+        width:90%;
+        max-width:700px;
+        height:400px;
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .tsul-wrapper{
+            grid-template-columns:1fr;
+        }
+    }
+    
+    @media(max-width:600px){
+        .tsul-title{font-size:24px;}
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div class="tsul-header">
+        <h2 class="tsul-title">
+            Our clients speak <span>real protection</span>
+        </h2>
+    </div>
+    
+    <!-- MAIN -->
+    <div class="tsul-wrapper">
+    
+        <!-- LEFT RATING CARD -->
+        <div class="tsul-left">
+            <div class="tsul-rating">4.9</div>
+    
+            <div class="tsul-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+    
+            <p>(40+ Reviews)</p>
+    
+            <div class="tsul-avatars">
+                <img src="./sana.webp">
+                <img src="./nithiya.webp">
+                <img src="./sana.webp">
+                <img src="./nithiya.webp">
+            </div>
+    
+            <p style="margin-top:15px;">Customer experiences that speak for themselves</p>
+        </div>
+    
+        <!-- RIGHT SLIDER -->
+        <div>
+            <div class="tsul-carousel">
+                <div class="tsul-track" id="tsulTrack">
+    
+                    <!-- SLIDE 1 -->
+                    <div class="tsul-card">
+                        <p class="tsul-text">
+                            Our cybersecurity improved drastically. Zero breaches and real-time monitoring changed everything.
+                        </p>
+    
+                        <div class="tsul-user">
+                            <img src="./sana.webp">
+                            <div>
+                                <strong>Sarah Mitchell</strong><br>
+                                <small>Security Analyst</small>
+                            </div>
+                        </div>
+    
+                        <div class="tsul-video-btn" onclick="tsulOpenVideo()">
+                            <i class="fas fa-play"></i> Watch Video
+                        </div>
+                    </div>
+    
+                    <!-- SLIDE 2 -->
+                    <div class="tsul-card">
+                        <p class="tsul-text">
+                            Their AI detection system prevented multiple attacks automatically.
+                        </p>
+    
+                        <div class="tsul-user">
+                            <img src="./nithiya.webp">
+                            <div>
+                                <strong>John Carter</strong><br>
+                                <small>IT Manager</small>
+                            </div>
+                        </div>
+    
+                        <div class="tsul-video-btn" onclick="tsulOpenVideo()">
+                            <i class="fas fa-play"></i> Watch Video
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="tsul-arrows">
+                <button onclick="tsulPrev()"><i class="fas fa-arrow-left"></i></button>
+                <button onclick="tsulNext()"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    
+    </div>
+    
+    <!-- VIDEO -->
+    <div class="tsul-modal" id="tsulModal" onclick="tsulCloseVideo()">
+        <iframe src="./cyber.mp4"></iframe>
+    </div>
+    
+    <script>
+    
+    let tsulIndex=0;
+    const tsulTrack=document.getElementById("tsulTrack");
+    const tsulSlides=document.querySelectorAll(".tsul-card");
+    
+    setInterval(()=>tsulNext(),4000);
+    
+    function tsulNext(){
+        tsulIndex=(tsulIndex+1)%tsulSlides.length;
+        tsulTrack.style.transform=`translateX(-${tsulIndex*100}%)`;
+    }
+    function tsulPrev(){
+        tsulIndex=(tsulIndex-1+tsulSlides.length)%tsulSlides.length;
+        tsulTrack.style.transform=`translateX(-${tsulIndex*100}%)`;
+    }
+    
+    /* VIDEO */
+    function tsulOpenVideo(){
+        document.getElementById("tsulModal").style.display="flex";
+    }
+    function tsulCloseVideo(){
+        document.getElementById("tsulModal").style.display="none";
+    }
+    
+    </script>
+    
+    </section>
+
+
+    <!-- ===== CYBER BLOG SAFE SECTION ===== -->
+<section class="cbsx-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* RESET (SCOPED ONLY INSIDE SECTION) */
+    .cbsx-section *{
+        box-sizing:border-box;
+        margin:0;
+        padding:0;
+    }
+    
+    /* SECTION */
+    .cbsx-section{
+        padding:80px 15px;
+        background:#06090f;
+        color:#fff;
+        font-family:sans-serif;
+    }
+    
+    /* HEADER */
+    .cbsx-header{
+        text-align:center;
+        margin-bottom:40px;
+    }
+    
+    .cbsx-tag{
+        display:inline-block;
+        padding:6px 16px;
+        border:1px solid rgba(255,255,255,0.2);
+        border-radius:20px;
+        font-size:12px;
+    }
+    
+    .cbsx-title{
+        font-size:32px;
+        margin-top:10px;
+    }
+    
+    .cbsx-title span{
+        color:#00ffd5;
+    }
+    
+    .cbsx-sub{
+        font-size:14px;
+        color:#aaa;
+        margin-top:10px;
+    }
+    
+    /* GRID */
+    .cbsx-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:20px;
+    }
+    
+    /* CARD */
+    .cbsx-card{
+        position:relative;
+        height:300px;
+        border-radius:15px;
+        overflow:hidden;
+    }
+    
+    /* IMAGE */
+    .cbsx-img{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        object-fit:cover;
+        z-index:1;
+        transition:0.4s;
+    }
+    
+    /* DARK OVERLAY */
+    .cbsx-overlay{
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+        z-index:2;
+    }
+    
+    /* CONTENT */
+    .cbsx-content{
+        position:absolute;
+        bottom:0;
+        left:0;
+        width:100%;
+        padding:20px;
+        z-index:3;
+    
+        transform:translateY(100%);
+        transition:0.4s;
+    
+        background:rgba(255,255,255,0.05);
+    }
+    
+    /* SHOW CONTENT */
+    .cbsx-card:hover .cbsx-content{
+        transform:translateY(0);
+    }
+    
+    /* ZOOM IMAGE */
+    .cbsx-card:hover .cbsx-img{
+        transform:scale(1.1);
+    }
+    
+    /* TEXT */
+    .cbsx-content h3{
+        font-size:18px;
+        margin-bottom:8px;
+    }
+    
+    .cbsx-content p{
+        font-size:13px;
+        color:#ccc;
+    }
+    
+    /* ICON */
+    .cbsx-icon{
+        margin-bottom:8px;
+        color:#00ffd5;
+    }
+    
+    /* BUTTON */
+    .cbsx-btn{
+        display:inline-block;
+        margin-top:10px;
+        padding:6px 14px;
+        border-radius:20px;
+        background:#111;
+        color:#fff;
+        text-decoration:none;
+        font-size:12px;
+    }
+    
+    .cbsx-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    /* ANIMATION BASE */
+    .cbsx-anim{
+        opacity:0;
+        transition:0.8s;
+    }
+    
+    /* DIRECTIONS */
+    .cbsx-left{transform:translateX(-60px);}
+    .cbsx-bottom{transform:translateY(60px);}
+    .cbsx-right{transform:translateX(60px);}
+    
+    /* SHOW */
+    .cbsx-show{
+        opacity:1;
+        transform:translate(0);
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .cbsx-grid{
+            grid-template-columns:repeat(2,1fr);
+        }
+    }
+    
+    @media(max-width:600px){
+        .cbsx-grid{
+            grid-template-columns:1fr;
+        }
+    
+        .cbsx-title{
+            font-size:22px;
+        }
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div class="cbsx-header cbsx-anim cbsx-bottom">
+        <div class="cbsx-tag">Latest Blog</div>
+        <h2 class="cbsx-title">Cyber <span>Insights</span></h2>
+        <p class="cbsx-sub">Latest updates in cybersecurity trends</p>
+    </div>
+    
+    <!-- GRID -->
+    <div class="cbsx-grid">
+    
+        <!-- CARD 1 -->
+        <div class="cbsx-card cbsx-anim cbsx-left">
+            <img src="./a1.webp" class="cbsx-img">
+    
+            <div class="cbsx-overlay"></div>
+    
+            <div class="cbsx-content">
+                <div class="cbsx-icon"><i class="fas fa-shield-virus"></i></div>
+                <h3>Cyber Threats 2026</h3>
+                <p>Learn modern attack prevention strategies.</p>
+                <a href="404.html" class="cbsx-btn">Read More →</a>
+            </div>
+        </div>
+    
+        <!-- CARD 2 -->
+        <div class="cbsx-card cbsx-anim cbsx-bottom">
+            <img src="./a2.webp" class="cbsx-img">
+    
+            <div class="cbsx-overlay"></div>
+    
+            <div class="cbsx-content">
+                <div class="cbsx-icon"><i class="fas fa-lock"></i></div>
+                <h3>Data Protection</h3>
+                <p>Secure business data effectively.</p>
+                <a href="404.html" class="cbsx-btn">Read More →</a>
+            </div>
+        </div>
+    
+        <!-- CARD 3 -->
+        <div class="cbsx-card cbsx-anim cbsx-right">
+            <img src="./a3.webp" class="cbsx-img">
+    
+            <div class="cbsx-overlay"></div>
+    
+            <div class="cbsx-content">
+                <div class="cbsx-icon"><i class="fas fa-user-secret"></i></div>
+                <h3>Prevent Attacks</h3>
+                <p>Best practices for cyber defense.</p>
+                <a href="404.html" class="cbsx-btn">Read More →</a>
+            </div>
+        </div>
+    
+    </div>
+    
+    <script>
+    
+    /* SAFE SCROLL ANIMATION */
+    const cbsxObserver = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add('cbsx-show');
+            }
+        });
+    },{threshold:0.2});
+    
+    document.querySelectorAll('.cbsx-anim').forEach(el=>{
+        cbsxObserver.observe(el);
+    });
+    
+    </script>
+    
+    </section>
+
+
+    <!-- ===== FAQ SECTION ===== -->
+<section class="faqx-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* RESET (SAFE) */
+    .faqx-section *{
+        box-sizing:border-box;
+        margin:0;
+        padding:0;
+    }
+    
+    /* SECTION */
+    .faqx-section{
+        padding:80px 20px;
+        background:#06090f;
+        color:#fff;
+        font-family:sans-serif;
+    }
+    
+    /* CONTAINER */
+    .faqx-container{
+        max-width:1200px;
+        margin:auto;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:40px;
+        align-items:center;
+    }
+    
+    /* LEFT SIDE */
+    .faqx-left{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+    
+    /* TITLE */
+    .faqx-title{
+        margin-bottom:20px;
+    }
+    
+    .faqx-title h2{
+        font-size:32px;
+    }
+    .faqx-title span{
+        color:#00ffd5;
+    }
+    
+    .faqx-title p{
+        color:#aaa;
+        margin-top:10px;
+    }
+    
+    /* FAQ ITEM */
+    .faqx-item{
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(10px);
+        border-radius:15px;
+        overflow:hidden;
+        transition:0.3s;
+    }
+    
+    /* HEADER */
+    .faqx-question{
+        padding:15px 20px;
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+    
+    /* ICON */
+    .faqx-icon{
+        font-size:18px;
+        transition:0.3s;
+    }
+    
+    /* ANSWER */
+    .faqx-answer{
+        max-height:0;
+        overflow:hidden;
+        transition:0.4s ease;
+        padding:0 20px;
+        color:#ccc;
+    }
+    
+    /* ACTIVE */
+    .faqx-item.active .faqx-answer{
+        max-height:150px;
+        padding:15px 20px;
+    }
+    
+    .faqx-item.active .faqx-icon{
+        transform:rotate(45deg);
+    }
+    
+    /* RIGHT IMAGE */
+    .faqx-right{
+        position:relative;
+    }
+    
+    .faqx-right img{
+        width:100%;
+        border-radius:20px;
+        transition:0.5s;
+    }
+    
+    /* ZOOM HOVER */
+    .faqx-right:hover img{
+        transform:scale(1.05);
+    }
+    
+    /* GLOW BORDER */
+    .faqx-right::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        border-radius:20px;
+        background:linear-gradient(45deg,#00ffd5,#6c63ff,#00ffd5);
+        opacity:0.2;
+        filter:blur(20px);
+    }
+    
+    /* ANIMATION */
+    .faqx-anim{
+        opacity:0;
+        transform:translateY(40px);
+        transition:0.8s;
+    }
+    .faqx-show{
+        opacity:1;
+        transform:translateY(0);
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .faqx-container{
+            grid-template-columns:1fr;
+        }
+    }
+    
+    @media(max-width:600px){
+        .faqx-title h2{
+            font-size:24px;
+        }
+    }
+    
+    </style>
+    
+    <div class="faqx-container">
+    
+        <!-- LEFT FAQ -->
+        <div class="faqx-left faqx-anim">
+    
+            <div class="faqx-title">
+                <h2>Frequently Asked <span>Questions</span></h2>
+                <p>Your cybersecurity doubts answered clearly.</p>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>What is cybersecurity protection?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    Cybersecurity protects systems, networks, and data from digital attacks and unauthorized access.
+                </div>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>How do you prevent cyber attacks?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    We use AI monitoring, encryption, firewalls, and real-time threat detection systems.
+                </div>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>Is my data safe with your services?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    Yes, we implement multi-layer security with backups and compliance standards.
+                </div>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>Do you provide 24/7 monitoring?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    Yes, our system continuously monitors threats and responds instantly.
+                </div>
+            </div>
+    
+        </div>
+    
+        <!-- RIGHT IMAGE -->
+        <div class="faqx-right faqx-anim">
+            <img src="./cyber2.webp" alt="faq">
+        </div>
+    
+    </div>
+    
+    <script>
+    
+    /* ACCORDION */
+    document.querySelectorAll(".faqx-question").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            const item = btn.parentElement;
+    
+            document.querySelectorAll(".faqx-item").forEach(i=>{
+                if(i!==item) i.classList.remove("active");
+            });
+    
+            item.classList.toggle("active");
+        });
+    });
+    
+    /* SCROLL ANIMATION */
+    const faqxObserver = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add("faqx-show");
+            }
+        });
+    },{threshold:0.2});
+    
+    document.querySelectorAll(".faqx-anim").forEach(el=>{
+        faqxObserver.observe(el);
+    });
+    
+    </script>
+    
+    </section>
+
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div class="cyber-ticker">
+
+    <div class="ticker-wrapper">
+
+        <!-- LINE 1 -->
+        <div class="ticker-content">
+            <span><i class="fas fa-shield-halved"></i> Threat Detection</span>
+            <span><i class="fas fa-network-wired"></i> Network Security</span>
+            <span><i class="fas fa-lock"></i> Data Encryption</span>
+            <span><i class="fas fa-cloud"></i> Cloud Security</span>
+            <span><i class="fas fa-laptop-medical"></i> Endpoint Protection</span>
+            <span><i class="fas fa-robot"></i> AI Cyber Defense</span>
+            <span><i class="fas fa-user-shield"></i> Zero Trust Security</span>
+
+            <!-- DUPLICATE -->
+            <span><i class="fas fa-shield-halved"></i> Threat Detection</span>
+            <span><i class="fas fa-network-wired"></i> Network Security</span>
+            <span><i class="fas fa-lock"></i> Data Encryption</span>
+            <span><i class="fas fa-cloud"></i> Cloud Security</span>
+            <span><i class="fas fa-laptop-medical"></i> Endpoint Protection</span>
+            <span><i class="fas fa-robot"></i> AI Cyber Defense</span>
+            <span><i class="fas fa-user-shield"></i> Zero Trust Security</span>
+        </div>
+
+        <!-- LINE 2 -->
+        <div class="ticker-content reverse">
+            <span><i class="fas fa-firewall"></i> Firewall Protection</span>
+            <span><i class="fas fa-bug"></i> Malware Prevention</span>
+            <span><i class="fas fa-envelope-open-text"></i> Phishing Protection</span>
+            <span><i class="fas fa-eye"></i> Security Monitoring</span>
+            <span><i class="fas fa-chart-line"></i> Risk Assessment</span>
+            <span><i class="fas fa-file-shield"></i> Compliance & Auditing</span>
+            <span><i class="fas fa-search"></i> Digital Forensics</span>
+
+            <!-- DUPLICATE -->
+            <span><i class="fas fa-firewall"></i> Firewall Protection</span>
+            <span><i class="fas fa-bug"></i> Malware Prevention</span>
+            <span><i class="fas fa-envelope-open-text"></i> Phishing Protection</span>
+            <span><i class="fas fa-eye"></i> Security Monitoring</span>
+            <span><i class="fas fa-chart-line"></i> Risk Assessment</span>
+            <span><i class="fas fa-file-shield"></i> Compliance & Auditing</span>
+            <span><i class="fas fa-search"></i> Digital Forensics</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+<footer class="bio-footer">
+
+    <div class="footer-container">
+  
+      <!-- LOGO + ABOUT -->
+  <div class="footer-col">
+    <img src="./logo.webp" class="footer-logo">
+  
+    <p>
+      Advancing biotechnology through innovation and research.
+      Transforming healthcare and life sciences globally.
+    </p>
+  
+    <!-- FOLLOW US -->
+    <h4 class="follow-title">Follow Us</h4>
+  
+    <div class="social-icons">
+      <a href="404.html"><i class="ri-facebook-fill"></i></a>
+      <a href="404.html"><i class="ri-twitter-x-line"></i></a>
+      <a href="404.html"><i class="ri-instagram-line"></i></a>
+      <a href="404.html"><i class="ri-linkedin-fill"></i></a>
+     
+    </div>
+  </div>
+  
+      <!-- QUICK LINKS -->
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+      </div>
+  
+      <!-- LAB SERVICES -->
+      <div class="footer-col">
+        <h4>Cyber security Services</h4>
+        <ul>
+          <li><a href="404.html">Network Security</a></li>
+          <li><a href="404.html">Threat Detection</a></li>
+          <li><a href="404.html">Managed Security</a></li>
+          <li><a href="404.html">Data Encryption</a></li>
+          <li><a href="404.html">Ransome protection</a></li>
+        </ul>
+      </div>
+  
+      <!-- LOCATION -->
+      <div class="footer-col">
+        <h4>Location</h4>
+        <div class="map">
+          <iframe src="https://www.google.com/maps?q=Salem%20Tamil%20Nadu&output=embed"></iframe>
+        </div>
+      </div>
+  
+      <!-- SUBSCRIBE -->
+      <div class="footer-col">
+        <h4>Research Updates</h4>
+  
+        <div class="subscribe">
+          <input type="email" id="email" placeholder="Enter Email">
+          <button onclick="subscribe()">Subscribe</button>
+        </div>
+  
+        <span id="msg"></span>
+      </div>
+  
+    </div>
+  
+    <!-- BOTTOM -->
+    <div class="footer-bottom">
+      <p>
+        © 2026 BioGen | All Rights Reserved |
+        <a href="404.html">Privacy Policy</a> |
+        <a href="404.html">Terms & Conditions</a>
+      </p>
+    </div>
+  
+  </footer>
+  
+  <style>
+    /* FOLLOW TITLE */
+  .follow-title {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #00f7ff;
+  }
+  
+  /* SOCIAL ICONS */
+  .social-icons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  /* ICON STYLE */
+  .social-icons a {
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    font-size: 18px;
+    color: #fff;
+    transition: 0.3s ease;
+  }
+  
+  /* HOVER EFFECT (BIO GLOW) */
+  .social-icons a:hover {
+    /* background: #00f7ff; */
+    color: #000;
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 0 15px #00f7ff;
+  }
+  
+  /* MOBILE CENTER ALIGN */
+  @media (max-width: 480px) {
+    .social-icons {
+      justify-content: center;
+    }
+  
+    .follow-title {
+      text-align: center;
+    }
+  }
+    /* PRE FOOTER */
+  .pre-footer {
+    background: #0a0f1a;
+    padding: 40px 20px;
+  }
+  
+  .pre-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .pre-box {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .pre-box i {
+    font-size: 30px;
+    color: #00f7ff;
+    margin-bottom: 10px;
+  }
+  
+  /* FOOTER */
+  .bio-footer {
+    background: #05070d;
+    color: #fff;
+    padding: 60px 20px;
+  }
+  
+  .footer-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+  }
+  
+  /* LOGO */
+  .footer-logo {
+    width: 140px;
+    margin-bottom: 10px;
+  }
+  
+  /* TEXT */
+  .footer-col p {
+    font-size: 14px;
+    color: #aaa;
+  }
+  
+  /* LINKS */
+  .footer-col h4 {
+    margin-bottom: 15px;
+    color: #00f7ff;
+  }
+  
+  .footer-col ul {
+    list-style: none;
+  }
+  
+  .footer-col ul li {
+    margin-bottom: 10px;
+  }
+  
+  .footer-col ul li a {
+    color: #aaa;
+    text-decoration: none;
+  }
+  
+  .footer-col ul li a:hover {
+    color: #00f7ff;
+  }
+  
+  /* SOCIAL */
+  .social-icons a {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #fff;
+  }
+  
+  .social-icons a:hover {
+    color: #00f7ff;
+  }
+  
+  /* MAP */
+  .map iframe {
+    width: 100%;
+    height: 180px;
+    border: 0;
+    border-radius: 10px;
+  }
+  
+  /* SUBSCRIBE */
+  .subscribe {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .subscribe input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+  }
+  
+  .subscribe button {
+    padding: 10px;
+    background: #00f7ff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* MESSAGE */
+  #msg {
+    display: block;
+    margin-top: 8px;
+    font-size: 13px;
+  }
+  
+  /* BOTTOM */
+  .footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid #222;
+    padding-top: 15px;
+    font-size: 14px;
+  }
+  
+  .footer-bottom a {
+    color: #00f7ff;
+    text-decoration: none;
+  }
+  
+  /* ================= RESPONSIVE ================= */
+  
+  /* TABLET */
+  @media (max-width: 1024px) {
+    .footer-container {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* MOBILE */
+  @media (max-width: 768px) {
+    .footer-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  
+    .subscribe {
+      flex-direction: column;
+    }
+  }
+  
+  /* SMALL MOBILE */
+  @media (max-width: 480px) {
+    .footer-container {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  
+    .social-icons {
+      margin-top: 10px;
+    }
+  }
+    </style>
+  
+  <script>
+    function subscribe() {
+      let email = document.getElementById("email").value;
+      let msg = document.getElementById("msg");
+    
+      let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    
+      if (email === "" || !email.match(pattern)) {
+        msg.style.color = "red";
+        msg.innerText = "Please fill correct mail id";
+        return;
+      }
+    
+      msg.style.color = "lightgreen";
+      msg.innerText = "Subscribed successfully!";
+    
+      setTimeout(() => {
+        window.location.href = "404.html";
+      }, 1200);
+    }
+    </script>
+  </body>
+  </html>
+
