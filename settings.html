@@ -62,6 +62,187 @@ body.dark-mode .section { background: rgba(255,255,255,0.05); }
   .sidebar a{flex:1; justify-content:center;}
   .main{padding:15px;}
 }
+
+
+/* ================= LARGE DESKTOP ================= */
+@media (min-width:1200px){
+  .section{
+    max-width:800px;
+  }
+}
+
+
+/* ================= LAPTOP ================= */
+@media (max-width:1200px){
+  .section{
+    padding:18px;
+  }
+}
+
+
+/* ================= TABLET ================= */
+@media (max-width:992px){
+
+  .dashboard{
+    flex-direction: column;
+    height:auto;
+  }
+
+  /* SIDEBAR → TOP NAV */
+  .sidebar{
+    width:100%;
+    flex-direction: row;
+    overflow-x:auto;
+    padding:10px;
+    gap:10px;
+  }
+
+  .sidebar h2{
+    display:none;
+  }
+
+  .sidebar a{
+    flex:1;
+    justify-content:center;
+    font-size:14px;
+    padding:8px;
+    white-space:nowrap;
+  }
+
+  .main{
+    padding:15px;
+  }
+
+  /* TOPBAR */
+  .topbar{
+    flex-direction: column;
+    gap:10px;
+    text-align:center;
+  }
+
+  .user-info{
+    justify-content:center;
+  }
+}
+
+
+/* ================= MOBILE ================= */
+@media (max-width:768px){
+
+  body{
+    overflow-x:hidden;
+  }
+
+  /* SIDEBAR */
+  .sidebar{
+    padding:8px;
+  }
+
+  .sidebar a{
+    font-size:12px;
+    padding:6px;
+  }
+
+  .sidebar a i{
+    margin-right:5px;
+  }
+
+  /* TOPBAR */
+  .topbar{
+    padding:10px;
+  }
+
+  .logo{
+    height:30px;
+  }
+
+  .user-info{
+    flex-direction: column;
+    gap:5px;
+    font-size:13px;
+  }
+
+  /* SECTIONS */
+  .section{
+    padding:15px;
+  }
+
+  .section h3{
+    font-size:16px;
+  }
+
+  /* INPUTS */
+  .section input{
+    font-size:14px;
+    padding:10px;
+  }
+
+  /* BUTTONS */
+  .section button{
+    width:100%;
+    font-size:14px;
+    padding:10px;
+  }
+
+  /* TOGGLES ALIGN FIX */
+  .section label{
+    font-size:14px;
+  }
+
+  .toggle{
+    transform: scale(0.9);
+  }
+}
+
+
+/* ================= SMALL MOBILE ================= */
+@media (max-width:480px){
+
+  .sidebar a{
+    font-size:11px;
+    padding:5px;
+  }
+
+  .topbar{
+    padding:8px;
+  }
+
+  .logo{
+    height:25px;
+  }
+
+  .user-info{
+    font-size:12px;
+  }
+
+  .section{
+    padding:12px;
+  }
+
+  .section h3{
+    font-size:15px;
+  }
+
+  .section input{
+    font-size:13px;
+  }
+
+  .section button{
+    font-size:13px;
+    padding:8px;
+  }
+
+  .toggle{
+    transform: scale(0.8);
+  }
+}
+
+.sidebar{
+  scrollbar-width:none;
+}
+.sidebar::-webkit-scrollbar{
+  display:none;
+}
 </style>
 </head>
 <body>
