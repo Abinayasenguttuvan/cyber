@@ -11,105 +11,6 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
     body{height:2000px;background:linear-gradient(120deg,#e0f2fe,#f5f9ff);}
     
-    /* PRELOADER WRAPPER */
-    #preloader {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #05070d;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease, visibility 0.6s;
-    }
-    
-    /* CONTENT */
-    .loader-content {
-      position: relative;
-      text-align: center;
-    }
-    
-    /* LOGO */
-    .loader-logo {
-      width: 120px;
-      animation: pulse 2s infinite;
-      z-index: 2;
-      position: relative;
-    }
-    
-    /* GLOW RING */
-    .loader-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 160px;
-      height: 160px;
-      border: 2px solid rgba(0, 247, 255, 0.2);
-      border-top: 2px solid #00f7ff;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: spin 1.5s linear infinite;
-    }
-    
-    /* PULSE */
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 5px #00f7ff);
-      }
-      50% {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 20px #00f7ff);
-      }
-    }
-    
-    /* SPIN */
-    @keyframes spin {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-    
-    /* HIDE PRELOADER */
-    #preloader.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-    
-    /* ================= RESPONSIVE ================= */
-    
-    /* TABLET */
-    @media (max-width: 1024px) {
-      .loader-logo {
-        width: 100px;
-      }
-      .loader-ring {
-        width: 140px;
-        height: 140px;
-      }
-    }
-    
-    /* MOBILE */
-    @media (max-width: 768px) {
-      .loader-logo {
-        width: 80px;
-      }
-      .loader-ring {
-        width: 120px;
-        height: 120px;
-      }
-    }
-    
-    /* SMALL MOBILE */
-    @media (max-width: 480px) {
-      .loader-logo {
-        width: 70px;
-      }
-      .loader-ring {
-        width: 100px;
-        height: 100px;
-      }
-    }
     /* HEADER */
     header{
     position:fixed;
@@ -217,19 +118,13 @@
     .menu-toggle{display:block;}
     }
     
+   
     </style>
     </head>
     
     <body>
     
-      <!-- PRELOADER -->
-    <div id="preloader">
-      <div class="loader-content">
-        <img src="./logo.webp" alt="Stackly Logo" class="loader-logo">
-        <div class="loader-ring"></div>
-      </div>
-    </div>
-    
+      
     <div class="overlay" id="overlay"></div>
     
     <header id="header">
@@ -315,6 +210,947 @@
       </script>
     
     </body>
+
+
+
+    <!-- ===== GLASS SPECIALTIES SECTION ===== -->
+    <section class="gx-specialties">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        
+        <style>
+        
+        /* SECTION */
+        
+        .gx-specialties{
+            padding:80px 20px;
+            color:black;
+        }
+        
+        /* CONTAINER */
+        .gx-wrapper{
+            max-width:1200px;
+            margin:auto;
+        }
+        
+        /* GRID */
+        .gx-row{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:40px;
+            align-items:center;
+        }
+        
+        /* GLASS CARD MAIN */
+        .gx-glass{
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(12px);
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:20px;
+            padding:25px;
+        }
+        
+        /* TITLE */
+        .gx-title h3{
+            color:#0c3931;
+            margin-bottom:10px;
+        }
+        
+        .gx-title h2{
+            font-size:30px;
+            margin-bottom:15px;
+        }
+        
+        .gx-title span{
+            color:#00ffd5;
+        }
+        
+        .gx-title p{
+            color: black;
+        }
+        
+        /* BUTTON */
+        .gx-btn{
+            display:inline-block;
+            margin-top:15px;
+            padding:10px 22px;
+            border-radius:50px;
+            background:rgba(0,255,213,0.1);
+            border:1px solid #00ffd5;
+            color:#00ffd5;
+            text-decoration:none;
+            transition:0.3s;
+        }
+        
+        .gx-btn:hover{
+            background:#00ffd5;
+            color:#000;
+        }
+        
+        /* VIDEO BOX */
+        .gx-video{
+            position:relative;
+            overflow:hidden;
+            border-radius:20px;
+        }
+        
+        .gx-video img{
+            width:100%;
+            display:block;
+            transition:0.4s;
+        }
+        
+        .gx-video:hover img{
+            transform:scale(1.05);
+        }
+        
+        /* PLAY BUTTON */
+        .gx-play{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            width:60px;
+            height:60px;
+            border-radius:50%;
+            background:#00ffd5;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:#000;
+            font-size:20px;
+        }
+        
+        /* LIST */
+        .gx-list{
+            display:grid;
+            gap:20px;
+        }
+        
+        /* SMALL GLASS CARD */
+        .gx-item{
+            display:flex;
+            gap:15px;
+            padding:18px;
+            border-radius:15px;
+        
+            background:rgba(255,255,255,0.04);
+            backdrop-filter:blur(10px);
+            border:1px solid rgba(255,255,255,0.08);
+        
+            transition:0.3s;
+        }
+        
+        /* HOVER */
+        .gx-item:hover{
+            transform:translateY(-5px);
+            border-color:#00ffd5;
+        }
+        
+        /* ICON */
+        .gx-icon{
+            font-size:22px;
+            color:#00ffd5;
+        }
+        
+        /* TEXT */
+        .gx-item h4{
+            margin-bottom:5px;
+        }
+        
+        .gx-item p{
+            font-size:14px;
+            color: black;
+        }
+        
+        /* RESPONSIVE */
+        @media(max-width:992px){
+            .gx-row{
+                grid-template-columns:1fr;
+            }
+        }
+        
+        @media(max-width:600px){
+            .gx-title h2{
+                font-size:24px;
+            }
+        }
+        
+        </style>
+        
+        <div class="gx-wrapper">
+        
+            <div class="gx-row">
+        
+                <!-- LEFT SIDE (VIDEO + TEXT) -->
+                <div class="gx-glass">
+        
+                    <div class="gx-title">
+                        <h3>Our Specialties</h3>
+                        <h2>Trusted experts securing <span>your digital world</span></h2>
+                        <p>We provide advanced cybersecurity solutions using cutting-edge technology.</p>
+                    </div>
+        
+                    <!-- VIDEO -->
+                    <div class="gx-video" style="margin-top:20px;">
+                        <img src="f1.webp" alt="">
+                        <a href="./cyber.mp4" class="gx-play">
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+        
+                    <a href="./404.html" class="gx-btn">Contact Now</a>
+        
+                </div>
+        
+                <!-- RIGHT SIDE (CARDS) -->
+                <div class="gx-list">
+        
+                    <div class="gx-item">
+                        <i class="fas fa-clock gx-icon"></i>
+                        <div>
+                            <h4>24/7 Threat Monitoring</h4>
+                            <p>Continuous monitoring to detect threats instantly.</p>
+                        </div>
+                    </div>
+        
+                    <div class="gx-item">
+                        <i class="fas fa-shield-halved gx-icon"></i>
+                        <div>
+                            <h4>End-to-End Security</h4>
+                            <p>Complete protection from risk assessment to defense.</p>
+                        </div>
+                    </div>
+        
+                    <div class="gx-item">
+                        <i class="fas fa-microchip gx-icon"></i>
+                        <div>
+                            <h4>Cutting-Edge Technology</h4>
+                            <p>AI-driven tools to stay ahead of cyber threats.</p>
+                        </div>
+                    </div>
+        
+                    <div class="gx-item">
+                        <i class="fas fa-user-lock gx-icon"></i>
+                        <div>
+                            <h4>Expert Team</h4>
+                            <p>Certified professionals delivering trusted solutions.</p>
+                        </div>
+                    </div>
+        
+                </div>
+        
+            </div>
+        
+        </div>
+        
+        </section>
+        <!-- ===== KEY FACTS PREMIUM SECTION ===== -->
+    <section class="kf-section">
+    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+        
+        <style>
+        
+        /* SECTION */
+        .kf-section{
+            padding:80px 20px;
+            color: black;
+        }
+        
+        /* CONTAINER */
+        .kf-container{
+            max-width:1200px;
+            margin:auto;
+        }
+        
+        /* GRID */
+        .kf-row{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:50px;
+            align-items:center;
+        }
+        
+        /* TAG */
+        .kf-tag{
+            display:inline-block;
+            padding:6px 14px;
+            border-radius:30px;
+            background:rgba(255,255,255,0.05);
+            border:1px solid rgba(255,255,255,0.1);
+            margin-bottom:15px;
+            font-size:14px;
+        }
+        
+        /* TITLE */
+        .kf-title{
+            font-size:38px;
+            line-height:1.3;
+            margin-bottom:15px;
+        }
+        
+        /* GRADIENT TEXT */
+        .kf-title span{
+            background:linear-gradient(90deg,#00ffd5,#6c63ff);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+        
+        /* TEXT */
+        .kf-text{
+            color:black;
+            margin-bottom:15px;
+        }
+        
+        /* BUTTON */
+        .kf-btn{
+            display:inline-block;
+            margin-top:15px;
+            padding:12px 25px;
+            border-radius:50px;
+            background:linear-gradient(90deg,#4da3ff,#8e2de2);
+            color: black;
+            text-decoration:none;
+        }
+        
+        /* COUNTER */
+        .kf-stats{
+            display:flex;
+            gap:40px;
+            margin-top:30px;
+        }
+        
+        .kf-stat h2{
+            font-size:30px;
+        }
+        
+        .kf-stat p{
+            color:black;
+        }
+        
+        /* IMAGE BOX */
+        .kf-img-box{
+            position:relative;
+        }
+        
+        /* IMAGE */
+        .kf-img{
+            width:100%;
+            border-radius:25px;
+            transition:0.5s;
+        }
+        
+        /* ZOOM */
+        .kf-img-box:hover .kf-img{
+            transform:scale(1.08);
+        }
+        
+        /* FLOAT CARD */
+        .kf-card{
+            position:absolute;
+            top:40%;
+            left:-40px;
+            background:#4da3ff;
+            padding:20px;
+            border-radius:15px;
+            color: black;
+            box-shadow:0 10px 30px rgba(0,0,0,0.4);
+        }
+        
+        /* VIDEO BOX */
+        .kf-video{
+            position:absolute;
+            bottom:20px;
+            right:-40px;
+            background:#1c2038;
+            padding:15px 20px;
+            border-radius:15px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+        }
+        
+        /* PLAY */
+        .kf-play{
+            width:40px;
+            height:40px;
+            border-radius:50%;
+            background:linear-gradient(45deg,#6c63ff,#00ffd5);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        
+        /* SCROLL ANIMATION */
+        .kf-animate{
+            opacity:0;
+            transform:translateY(40px);
+            transition:0.8s ease;
+        }
+        
+        .kf-animate.show{
+            opacity:1;
+            transform:translateY(0);
+        }
+        
+        /* RESPONSIVE */
+        @media(max-width:992px){
+            .kf-row{
+                grid-template-columns:1fr;
+            }
+        
+            .kf-card{
+                left:10px;
+            }
+        
+            .kf-video{
+                right:10px;
+            }
+        }
+        
+        @media(max-width:600px){
+            .kf-title{
+                font-size:26px;
+            }
+        }
+        
+        </style>
+        
+        <div class="kf-container">
+        <div class="kf-row">
+        
+            <!-- LEFT CONTENT -->
+            <div class="kf-animate">
+        
+                <div class="kf-tag">
+                    <i class="fas fa-lock"></i> Our Key Facts
+                </div>
+        
+                <h2 class="kf-title">
+                    Insights into the growing importance <span>of cybersecurity</span>
+                </h2>
+        
+                <p class="kf-text">
+                    In a world where cyberattacks are becoming more sophisticated, your business deserves the best protection.
+                </p>
+        
+                <p class="kf-text">
+                    Our expert team leverages cutting-edge technology to secure your digital future.
+                </p>
+        
+                <a href="./404.html" class="kf-btn">Learn More</a>
+        
+                <!-- STATS -->
+                <div class="kf-stats">
+                    <div class="kf-stat">
+                        <h2>350+</h2>
+                        <p>Projects Success Rate 99%</p>
+                    </div>
+                    <div class="kf-stat">
+                        <h2>293+</h2>
+                        <p>Award For Digital Innovation</p>
+                    </div>
+                </div>
+        
+            </div>
+        
+            <!-- RIGHT IMAGE -->
+            <div class="kf-img-box kf-animate">
+        
+                <img src="./cyber4.webp" class="kf-img">
+        
+                <!-- FLOAT CARD -->
+                <div class="kf-card">
+                    <h2>240+</h2>
+                    <p>Award For Digital Innovation</p>
+                </div>
+        
+                <!-- VIDEO -->
+                <div class="kf-video">
+                    <div class="kf-play">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <span>Let's See How We Did It</span>
+                </div>
+        
+            </div>
+        
+        </div>
+        </div>
+        
+        <script>
+        
+        /* SCROLL ANIMATION */
+        const kfItems = document.querySelectorAll('.kf-animate');
+        
+        const kfObserver = new IntersectionObserver((entries)=>{
+            entries.forEach((entry,i)=>{
+                if(entry.isIntersecting){
+                    setTimeout(()=>{
+                        entry.target.classList.add('show');
+                    }, i*200);
+                }
+            });
+        },{threshold:0.2});
+        
+        kfItems.forEach(el=>kfObserver.observe(el));
+        
+        </script>
+        
+        </section>
+
+
+        <!-- ===== WHY CHOOSE US SECTION ===== -->
+<section class="wc-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .wc-section{
+        padding:80px 20px;
+    }
+    
+    /* CONTAINER */
+    .wc-box{
+        max-width:1200px;
+        margin:auto;
+        padding:50px;
+    
+        border-radius:25px;
+        background:rgba(255,255,255,0.04);
+        backdrop-filter:blur(12px);
+        border:1px solid rgba(255,255,255,0.08);
+    
+        color:black;
+    }
+    
+    /* TAG */
+    .wc-tag{
+        display:inline-block;
+        padding:6px 14px;
+        border-radius:30px;
+        border:1px solid rgba(255,255,255,0.1);
+        margin-bottom:15px;
+    }
+    
+    /* TITLE */
+    .wc-title{
+        font-size:36px;
+        margin-bottom:40px;
+    }
+    
+    .wc-title span{
+        background:linear-gradient(90deg,#00ffd5,#6c63ff);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
+    
+    /* GRID */
+    .wc-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:30px;
+    }
+    
+    /* ITEM */
+    .wc-item{
+        padding:20px;
+        border-radius:15px;
+        transition:0.4s;
+    
+        opacity:0;
+    }
+    
+    /* ICON */
+    .wc-icon{
+        font-size:28px;
+        margin-bottom:15px;
+        color:#4da3ff;
+        cursor:pointer;
+        transition:0.4s;
+    }
+    
+    /* CLICK EFFECT */
+    .wc-icon.active{
+        color:#00ffd5;
+        transform:rotate(15deg) scale(1.2);
+        text-shadow:0 0 15px #00ffd5;
+    }
+    
+    /* TEXT */
+    .wc-item h3{
+        margin-bottom:10px;
+    }
+    
+    .wc-item p{
+        color: black;
+        font-size:14px;
+    }
+    
+    /* ANIMATIONS */
+    .wc-left{transform:translateX(-50px);}
+    .wc-right{transform:translateX(50px);}
+    .wc-up{transform:translateY(50px);}
+    
+    .wc-show{
+        opacity:1;
+        transform:translate(0);
+        transition:0.8s ease;
+    }
+    
+    /* BOTTOM TEXT */
+    .wc-bottom{
+        margin-top:40px;
+        text-align:center;
+        color:#aaa;
+    }
+    
+    .wc-bottom span{
+        color:#6c63ff;
+        font-weight:600;
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .wc-grid{
+            grid-template-columns:1fr;
+        }
+    
+        .wc-title{
+            font-size:26px;
+        }
+    }
+    
+    </style>
+
+    <!-- ===== FAQ SECTION ===== -->
+<section class="faqx-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* RESET (SAFE) */
+    .faqx-section *{
+        box-sizing:border-box;
+        margin:0;
+        padding:0;
+    }
+    
+    /* SECTION */
+    .faqx-section{
+        padding:80px 20px;
+        background:#06090f;
+        color:#fff;
+        font-family:sans-serif;
+    }
+    
+    /* CONTAINER */
+    .faqx-container{
+        max-width:1200px;
+        margin:auto;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:40px;
+        align-items:center;
+    }
+    
+    /* LEFT SIDE */
+    .faqx-left{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+    
+    /* TITLE */
+    .faqx-title{
+        margin-bottom:20px;
+    }
+    
+    .faqx-title h2{
+        font-size:32px;
+    }
+    .faqx-title span{
+        color:#00ffd5;
+    }
+    
+    .faqx-title p{
+        color:#aaa;
+        margin-top:10px;
+    }
+    
+    /* FAQ ITEM */
+    .faqx-item{
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(10px);
+        border-radius:15px;
+        overflow:hidden;
+        transition:0.3s;
+    }
+    
+    /* HEADER */
+    .faqx-question{
+        padding:15px 20px;
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+    }
+    
+    /* ICON */
+    .faqx-icon{
+        font-size:18px;
+        transition:0.3s;
+    }
+    
+    /* ANSWER */
+    .faqx-answer{
+        max-height:0;
+        overflow:hidden;
+        transition:0.4s ease;
+        padding:0 20px;
+        color:#ccc;
+    }
+    
+    /* ACTIVE */
+    .faqx-item.active .faqx-answer{
+        max-height:150px;
+        padding:15px 20px;
+    }
+    
+    .faqx-item.active .faqx-icon{
+        transform:rotate(45deg);
+    }
+    
+    /* RIGHT IMAGE */
+    .faqx-right{
+        position:relative;
+    }
+    
+    .faqx-right img{
+        width:100%;
+        border-radius:20px;
+        transition:0.5s;
+    }
+    
+    /* ZOOM HOVER */
+    .faqx-right:hover img{
+        transform:scale(1.05);
+    }
+    
+    /* GLOW BORDER */
+    .faqx-right::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        border-radius:20px;
+        background:linear-gradient(45deg,#00ffd5,#6c63ff,#00ffd5);
+        opacity:0.2;
+        filter:blur(20px);
+    }
+    
+    /* ANIMATION */
+    .faqx-anim{
+        opacity:0;
+        transform:translateY(40px);
+        transition:0.8s;
+    }
+    .faqx-show{
+        opacity:1;
+        transform:translateY(0);
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .faqx-container{
+            grid-template-columns:1fr;
+        }
+    }
+    
+    @media(max-width:600px){
+        .faqx-title h2{
+            font-size:24px;
+        }
+    }
+    
+    </style>
+    
+    <div class="faqx-container">
+    
+        <!-- LEFT FAQ -->
+        <div class="faqx-left faqx-anim">
+    
+            <div class="faqx-title">
+                <h2>Frequently Asked <span>Questions</span></h2>
+                <p>Your cybersecurity doubts answered clearly.</p>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>What is cybersecurity protection?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    Cybersecurity protects systems, networks, and data from digital attacks and unauthorized access.
+                </div>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>How do you prevent cyber attacks?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    We use AI monitoring, encryption, firewalls, and real-time threat detection systems.
+                </div>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>Is my data safe with your services?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    Yes, we implement multi-layer security with backups and compliance standards.
+                </div>
+            </div>
+    
+            <!-- ITEM -->
+            <div class="faqx-item">
+                <div class="faqx-question">
+                    <span>Do you provide 24/7 monitoring?</span>
+                    <i class="fas fa-plus faqx-icon"></i>
+                </div>
+                <div class="faqx-answer">
+                    Yes, our system continuously monitors threats and responds instantly.
+                </div>
+            </div>
+    
+        </div>
+    
+        <!-- RIGHT IMAGE -->
+        <div class="faqx-right faqx-anim">
+            <img src="./cyber2.webp" alt="faq">
+        </div>
+    
+    </div>
+    
+    <script>
+    
+    /* ACCORDION */
+    document.querySelectorAll(".faqx-question").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            const item = btn.parentElement;
+    
+            document.querySelectorAll(".faqx-item").forEach(i=>{
+                if(i!==item) i.classList.remove("active");
+            });
+    
+            item.classList.toggle("active");
+        });
+    });
+    
+    /* SCROLL ANIMATION */
+    const faqxObserver = new IntersectionObserver(entries=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add("faqx-show");
+            }
+        });
+    },{threshold:0.2});
+    
+    document.querySelectorAll(".faqx-anim").forEach(el=>{
+        faqxObserver.observe(el);
+    });
+    
+    </script>
+    
+    </section>
+    
+    <div class="wc-box">
+    
+        <!-- TAG -->
+        <div class="wc-tag">
+            <i class="fas fa-lock"></i> Why Choose Us
+        </div>
+    
+        <!-- TITLE -->
+        <h2 class="wc-title">
+            Trusted experts committed to securing <span>your digital</span>
+        </h2>
+    
+        <!-- GRID -->
+        <div class="wc-grid">
+    
+            <!-- ITEM 1 -->
+            <div class="wc-item wc-left">
+                <i class="fas fa-cube wc-icon"></i>
+                <h3>Tailored Security Solutions</h3>
+                <p>Customized strategies designed to meet your unique business needs.</p>
+            </div>
+    
+            <!-- ITEM 2 -->
+            <div class="wc-item wc-up">
+                <i class="fas fa-clipboard-list wc-icon"></i>
+                <h3>Advanced Technology</h3>
+                <p>Cutting-edge tools to safeguard your digital infrastructure.</p>
+            </div>
+    
+            <!-- ITEM 3 -->
+            <div class="wc-item wc-right">
+                <i class="fas fa-crosshairs wc-icon"></i>
+                <h3>Real-Time Threat Detection</h3>
+                <p>24/7 monitoring to stay ahead of cyber threats.</p>
+            </div>
+    
+        </div>
+    
+        
+        
+    
+    </div>
+    
+    <script>
+    
+    /* SCROLL ANIMATION */
+    const wcItems = document.querySelectorAll('.wc-item');
+    
+    const wcObserver = new IntersectionObserver((entries)=>{
+        entries.forEach((entry,i)=>{
+            if(entry.isIntersecting){
+                setTimeout(()=>{
+                    entry.target.classList.add('wc-show');
+                }, i*200);
+            }
+        });
+    },{threshold:0.2});
+    
+    wcItems.forEach(el=>wcObserver.observe(el));
+    
+    /* ICON CLICK EFFECT */
+    document.querySelectorAll('.wc-icon').forEach(icon=>{
+        icon.addEventListener('click',()=>{
+            icon.classList.toggle('active');
+        });
+    });
+    
+    </script>
+    
+    </section>
+
+    
+    
+
+
+
+
+    
 
 
     <!-- ================= FOOTER ================= -->

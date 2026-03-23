@@ -11,105 +11,7 @@
     *{margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI",sans-serif;}
     body{height:2000px;background:linear-gradient(120deg,#e0f2fe,#f5f9ff);}
     
-    /* PRELOADER WRAPPER */
-    #preloader {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      background: #05070d;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.6s ease, visibility 0.6s;
-    }
     
-    /* CONTENT */
-    .loader-content {
-      position: relative;
-      text-align: center;
-    }
-    
-    /* LOGO */
-    .loader-logo {
-      width: 120px;
-      animation: pulse 2s infinite;
-      z-index: 2;
-      position: relative;
-    }
-    
-    /* GLOW RING */
-    .loader-ring {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 160px;
-      height: 160px;
-      border: 2px solid rgba(0, 247, 255, 0.2);
-      border-top: 2px solid #00f7ff;
-      border-radius: 50%;
-      transform: translate(-50%, -50%);
-      animation: spin 1.5s linear infinite;
-    }
-    
-    /* PULSE */
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-        filter: drop-shadow(0 0 5px #00f7ff);
-      }
-      50% {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 20px #00f7ff);
-      }
-    }
-    
-    /* SPIN */
-    @keyframes spin {
-      0% { transform: translate(-50%, -50%) rotate(0deg); }
-      100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-    
-    /* HIDE PRELOADER */
-    #preloader.hide {
-      opacity: 0;
-      visibility: hidden;
-    }
-    
-    /* ================= RESPONSIVE ================= */
-    
-    /* TABLET */
-    @media (max-width: 1024px) {
-      .loader-logo {
-        width: 100px;
-      }
-      .loader-ring {
-        width: 140px;
-        height: 140px;
-      }
-    }
-    
-    /* MOBILE */
-    @media (max-width: 768px) {
-      .loader-logo {
-        width: 80px;
-      }
-      .loader-ring {
-        width: 120px;
-        height: 120px;
-      }
-    }
-    
-    /* SMALL MOBILE */
-    @media (max-width: 480px) {
-      .loader-logo {
-        width: 70px;
-      }
-      .loader-ring {
-        width: 100px;
-        height: 100px;
-      }
-    }
     /* HEADER */
     header{
     position:fixed;
@@ -222,13 +124,7 @@
     
     <body>
     
-      <!-- PRELOADER -->
-    <div id="preloader">
-      <div class="loader-content">
-        <img src="./logo.webp" alt="Stackly Logo" class="loader-logo">
-        <div class="loader-ring"></div>
-      </div>
-    </div>
+      
     
     <div class="overlay" id="overlay"></div>
     
@@ -316,7 +212,912 @@
     
     </body>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+    <style>
+    
+        /* INITIAL STATE */
+    .reveal{
+        opacity:0;
+        transform:translateY(40px);
+        transition:all 0.8s ease;
+    }
+    
+    /* ACTIVE STATE */
+    .reveal.active{
+        opacity:1;
+        transform:translateY(0);
+    }
+    
+    /* RESET */
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Poppins', sans-serif;
+    }
+    
+    body{
+        background:#0a0f1c;
+        color:#fff;
+    }
+    
+    /* SECTION */
+    .about-us{
+        padding:80px 20px;
+    }
+    
+    /* TITLE */
+    .section-title{
+        text-align:center;
+        max-width:800px;
+        margin:0 auto 60px;
+    }
+    
+    .section-title h3{
+        color:#00ffd5;
+    }
+    
+    .section-title h2{
+        font-size:40px;
+        line-height:1.3;
+    }
+    
+    .section-title span{
+        color:#00ffd5;
+    }
+    
+    /* COUNTER */
+    .about-counter-box{
+        text-align:center;
+        margin-bottom:60px;
+    }
+    
+    .about-counter-box h2{
+        font-size:50px;
+        color:#00ffd5;
+    }
+    
+    /* ROW */
+    .about-row{
+        display:flex;
+        align-items:center;
+        gap:40px;
+        margin-bottom:60px;
+        flex-wrap:wrap;
+    }
+    
+    /* ===== IMAGE CARD ===== */
+    .about-image{
+        flex:1;
+        min-width:280px;
+        position:relative;
+        border-radius:20px;
+        overflow:hidden;
+    
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(10px);
+    }
+    
+    /* GLOW BORDER */
+    .about-image::before{
+        content:"";
+        position:absolute;
+        inset:0;
+        border-radius:20px;
+        padding:2px;
+        background:linear-gradient(120deg,#00ffd5,#0066ff,#00ffd5);
+        background-size:300% 300%;
+        animation:glowBorder 4s linear infinite;
+    
+        -webkit-mask:
+            linear-gradient(#fff 0 0) content-box,
+            linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+    }
+    
+    @keyframes glowBorder{
+        0%{ background-position:0% 50%; }
+        100%{ background-position:100% 50%; }
+    }
+    
+    /* IMAGE */
+    .about-image img{
+        width:100%;
+        display:block;
+        transition:0.5s ease;
+    }
+    
+    /* ZOOM */
+    .about-image:hover img{
+        transform:scale(1.15);
+    }
+    
+    /* LIGHT EFFECT */
+    .about-image::after{
+        content:"";
+        position:absolute;
+        top:var(--y,50%);
+        left:var(--x,50%);
+        width:200px;
+        height:200px;
+        transform:translate(-50%,-50%);
+        background:radial-gradient(circle, rgba(0,255,213,0.3), transparent 70%);
+        pointer-events:none;
+        opacity:0;
+        transition:opacity 0.3s;
+    }
+    
+    .about-image:hover::after{
+        opacity:1;
+    }
+    
+    /* CONTENT */
+    .about-content{
+        flex:1;
+        min-width:280px;
+        padding:25px;
+    
+        border-radius:15px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(10px);
+        border:1px solid rgba(255,255,255,0.1);
+    }
+    
+    .about-content i{
+        font-size:28px;
+        color:#00ffd5;
+        margin-bottom:10px;
+    }
+    
+    .about-content h3{
+        margin-bottom:15px;
+    }
+    
+    .about-content p{
+        color:#bbb;
+        line-height:1.6;
+    }
+    
+    /* RESPONSIVE */
+    
+    @media(max-width:992px){
+        .about-row{
+            flex-direction:column;
+        }
+    
+        .section-title h2{
+            font-size:32px;
+        }
+    }
+    
+    @media(max-width:600px){
+        .section-title h2{
+            font-size:26px;
+        }
+    
+        .about-counter-box h2{
+            font-size:40px;
+        }
+    }
+    
+    </style>
+    </head>
+    
+    <body>
+    
+    <div class="about-us">
+    
+        <!-- TITLE -->
+        <div class="section-title reveal">
+            <h3>About Us</h3>
+            <h2>
+                We provide innovative solutions to help your cybersecurity startup grow,
+                building a trusted <span>brand with precision</span>
+            </h2>
+        </div>
+    
+        <!-- COUNTER -->
+        <div class="about-counter-box reveal">
+            <h2><span id="counter">0</span>+</h2>
+            <p>Years of cybersecurity expertise</p>
+        </div>
+    
+        <!-- MISSION -->
+        <div class="about-row reveal">
+    
+            <div class="about-image reveal">
+                <img src="./cyber1.webp">
+            </div>
+    
+            <div class="about-content">
+                <i class="fas fa-shield-halved"></i>
+                <h3>Our Mission</h3>
+                <p>
+                    Deliver advanced cybersecurity solutions to protect businesses from evolving threats
+                    with precision and innovation Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Nemo voluptas aspernatur perspiciatis, ipsa cum exercitationem quam. Accusamus officiis illum tenetur.
+    
+                </p>
+            </div>
+    
+        </div>
+    
+        <!-- VISION -->
+        <div class="about-row">
+    
+            <div class="about-content reveal">
+                <i class="fas fa-eye"></i>
+                <h3>Our Vision</h3>
+                <p>
+                    Build intelligent, adaptive security systems that redefine protection in the digital Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                    Qui aspernatur ex, esse praesentium consequuntur id ad sint in quidem ut laboriosam odit, eaque blanditiis rerum.
+                </p>
+            </div>
+    
+            <div class="about-image">
+                <img src="./cyber2.webp">
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    <!-- COUNTER -->
+    <script>
+    let count = 0;
+    let target = 26;
+    
+    let counter = setInterval(()=>{
+        count++;
+        document.getElementById("counter").innerText = count;
+    
+        if(count >= target){
+            clearInterval(counter);
+        }
+    },50);
+    </script>
+    
+    <!-- MOUSE LIGHT EFFECT -->
+    <script>
+    document.querySelectorAll(".about-image").forEach(card => {
+        card.addEventListener("mousemove", e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+    
+            card.style.setProperty('--x', x + 'px');
+            card.style.setProperty('--y', y + 'px');
+        });
+    });
+    
+    
+    
+    const reveals = document.querySelectorAll('.reveal');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+    
+                // delay for one-by-one effect
+                setTimeout(() => {
+                    entry.target.classList.add('active');
+                }, index * 200);
+    
+            }
+        });
+    }, {
+        threshold: 0.2
+    });
+    
+    reveals.forEach(el => observer.observe(el));
+    
+    </script>
+
+
+
+    <!-- ===== CYBER SERVICES SECTION (CENTERED HEADER) ===== -->
+<section class="cs-services">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* WRAPPER */
+    .cs-services{
+        padding:80px 20px;
+        text-align:center;
+    }
+    
+    /* HEADER CENTER */
+    .cs-header{
+        max-width:700px;
+        margin:0 auto 50px;
+    }
+    
+    /* TITLE */
+    .cs-title h3{
+        color:#00ffd5;
+        margin-bottom:10px;
+    }
+    
+    .cs-title h2{
+        font-size:34px;
+        color:#fff;
+        line-height:1.4;
+    }
+    
+    /* HIGHLIGHT */
+    .cs-title span{
+        color:#00ffd5;
+    }
+    
+    /* BUTTON CENTER */
+    .cs-view-btn{
+        margin-top:20px;
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+    
+        padding:12px 25px;
+        border-radius:50px;
+        background:#23263a;
+        color:#fff;
+        text-decoration:none;
+        transition:0.3s;
+    }
+    
+    .cs-view-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    .cs-view-btn i{
+        transition:0.3s;
+    }
+    
+    .cs-view-btn:hover i{
+        transform:translateX(5px);
+    }
+    
+    /* GRID */
+    .cs-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:30px;
+    }
+    
+    /* CARD */
+    .cs-card{
+        padding:30px;
+        border-radius:20px;
+        background:linear-gradient(145deg,#1c2038,#14182c);
+        border:1px solid rgba(255,255,255,0.05);
+    
+        transition:0.4s;
+        opacity:0;
+        transform:translateY(40px);
+    }
+    
+    /* SHOW */
+    .cs-card.cs-show{
+        opacity:1;
+        transform:translateY(0);
+    }
+    
+    /* HOVER */
+    .cs-card:hover{
+        transform:translateY(-10px);
+        box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    }
+    
+    /* ICON */
+    .cs-icon{
+        font-size:30px;
+        margin-bottom:20px;
+        color:#4da3ff;
+        transition:0.4s;
+    }
+    
+    /* ICON GLOW */
+    .cs-card:hover .cs-icon{
+        color:#00ffd5;
+        text-shadow:0 0 15px rgba(0,255,213,0.8);
+        transform:scale(1.2) rotate(-10deg);
+    }
+    
+    /* TEXT */
+    .cs-card h3{
+        font-size:18px;
+        margin-bottom:12px;
+    }
+    
+    .cs-card p{
+        color:#bbb;
+        font-size:14px;
+    }
+    
+    /* READ MORE BUTTON */
+    .cs-btn{
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+    
+        margin-top:15px;
+        padding:10px 20px;
+    
+        border-radius:50px;
+        background:#23263a;
+        color:#fff;
+        text-decoration:none;
+    
+        transition:0.3s;
+        position:relative;
+    }
+    
+    .cs-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    .cs-btn i{
+        transition:0.3s;
+    }
+    
+    .cs-btn:hover i{
+        transform:translateX(5px);
+    }
+    
+    /* LOADING */
+    .cs-btn.cs-loading{
+        pointer-events:none;
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    .cs-btn.cs-loading span{
+        opacity:0;
+    }
+    
+    .cs-btn.cs-loading::after{
+        content:"";
+        width:16px;
+        height:16px;
+        border:2px solid #000;
+        border-top:2px solid transparent;
+        border-radius:50%;
+        position:absolute;
+        animation:cs-spin 1s linear infinite;
+    }
+    
+    @keyframes cs-spin{
+        100%{transform:rotate(360deg);}
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .cs-grid{grid-template-columns:repeat(2,1fr);}
+    }
+    
+    @media(max-width:600px){
+        .cs-grid{grid-template-columns:1fr;}
+    
+        .cs-title h2{
+            font-size:26px;
+        }
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div class="cs-header">
+        <div class="cs-title">
+            <h3>Our Services</h3>
+            <h2>
+                Protecting your business with <span>Cyber Security</span>
+            </h2>
+        </div>
+    
+        <a href="./404.html" class="cs-view-btn">
+            View All Services <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+    
+    <!-- GRID -->
+    <div class="cs-grid">
+    
+        <div class="cs-card">
+            <i class="fas fa-layer-group cs-icon"></i>
+            <h3>Advanced Network Security</h3>
+            <p>Protect systems with real-time monitoring and advanced threat detection.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-shapes cs-icon"></i>
+            <h3>Threat Detection</h3>
+            <p>AI-powered cyber defense to detect and respond instantly.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-database cs-icon"></i>
+            <h3>Managed Security</h3>
+            <p>Complete monitoring and protection for your infrastructure.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-box cs-icon"></i>
+            <h3>Data Encryption</h3>
+            <p>Secure sensitive data with advanced encryption systems.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-gem cs-icon"></i>
+            <h3>Risk Assessment</h3>
+            <p>Identify vulnerabilities and ensure compliance standards.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+        <div class="cs-card">
+            <i class="fas fa-heartbeat cs-icon"></i>
+            <h3>Ransomware Protection</h3>
+            <p>Prevent attacks and recover systems efficiently.</p>
+            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+        </div>
+    
+    </div>
+    
+    <script>
+    (function(){
+        const cards = document.querySelectorAll('.cs-card');
+    
+        const observer = new IntersectionObserver((entries)=>{
+            entries.forEach((entry,i)=>{
+                if(entry.isIntersecting){
+                    setTimeout(()=>{
+                        entry.target.classList.add('cs-show');
+                    }, i*150);
+                }
+            });
+        },{threshold:0.2});
+    
+        cards.forEach(card=>observer.observe(card));
+    
+        document.querySelectorAll(".cs-btn").forEach(btn=>{
+            btn.addEventListener("click",function(e){
+                e.preventDefault();
+    
+                btn.classList.add("cs-loading");
+    
+                setTimeout(()=>{
+                    window.location.href="404.html";
+                },1200);
+            });
+        });
+    })();
+    </script>
+    
+    </section>
+
+
+    <!-- ===== ULTRA TESTIMONIAL WITH LEFT CARD ===== -->
+<section class="tsul-section">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+    
+    /* SECTION */
+    .tsul-section{
+        position:relative;
+        padding:100px 20px;
+        background:#070a14;
+        color:#fff;
+        overflow:hidden;
+    }
+    
+    /* AI GLOW */
+    .tsul-section::before{
+        content:"";
+        position:absolute;
+        width:500px;
+        height:500px;
+        background:radial-gradient(circle,#00ffd5,transparent);
+        top:-100px;
+        left:-100px;
+        filter:blur(120px);
+        animation:tsulGlow 10s infinite alternate;
+    }
+    @keyframes tsulGlow{
+        100%{transform:translate(200px,150px);}
+    }
+    
+    /* HEADER */
+    .tsul-header{
+        text-align:center;
+        margin-bottom:50px;
+    }
+    
+    .tsul-title{
+        font-size:36px;
+    }
+    .tsul-title span{
+        background:linear-gradient(90deg,#00ffd5,#a855f7);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+    }
+    
+    /* LAYOUT */
+    .tsul-wrapper{
+        max-width:1200px;
+        margin:auto;
+        display:grid;
+        grid-template-columns:320px 1fr;
+        gap:40px;
+    }
+    
+    /* LEFT CARD */
+    .tsul-left{
+        padding:35px;
+        border-radius:20px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(12px);
+        text-align:center;
+    }
+    
+    .tsul-rating{
+        font-size:60px;
+        font-weight:bold;
+    }
+    
+    .tsul-stars{
+        color:#a855f7;
+        margin:10px 0;
+    }
+    
+    .tsul-left p{
+        color:#aaa;
+    }
+    
+    /* AVATARS */
+    .tsul-avatars{
+        display:flex;
+        justify-content:center;
+        margin-top:15px;
+    }
+    
+    .tsul-avatars img{
+        width:45px;
+        height:45px;
+        border-radius:50%;
+        border:2px solid #070a14;
+        margin-left:-12px;
+    }
+    
+    /* RIGHT CAROUSEL */
+    .tsul-carousel{
+        overflow:hidden;
+        position:relative;
+    }
+    
+    .tsul-track{
+        display:flex;
+        transition:0.5s;
+    }
+    
+    /* CARD */
+    .tsul-card{
+        min-width:100%;
+        padding:40px;
+        border-radius:20px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(10px);
+    }
+    
+    /* TEXT */
+    .tsul-text{
+        font-size:18px;
+        color:#ccc;
+    }
+    
+    /* USER */
+    .tsul-user{
+        display:flex;
+        align-items:center;
+        gap:15px;
+        margin-top:20px;
+    }
+    .tsul-user img{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+    }
+    
+    /* VIDEO BUTTON */
+    .tsul-video-btn{
+        margin-top:20px;
+        padding:10px 20px;
+        border-radius:30px;
+        background:#111;
+        cursor:pointer;
+        display:inline-flex;
+        gap:10px;
+    }
+    .tsul-video-btn:hover{
+        background:#00ffd5;
+        color:#000;
+    }
+    
+    /* ARROWS */
+    .tsul-arrows{
+        margin-top:20px;
+    }
+    .tsul-arrows button{
+        width:40px;
+        height:40px;
+        border:none;
+        border-radius:10px;
+        background:#1a1f2e;
+        color:#fff;
+        cursor:pointer;
+    }
+    
+    /* MODAL */
+    .tsul-modal{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,0.8);
+        display:none;
+        justify-content:center;
+        align-items:center;
+    }
+    .tsul-modal iframe{
+        width:90%;
+        max-width:700px;
+        height:400px;
+    }
+    
+    /* RESPONSIVE */
+    @media(max-width:992px){
+        .tsul-wrapper{
+            grid-template-columns:1fr;
+        }
+    }
+    
+    @media(max-width:600px){
+        .tsul-title{font-size:24px;}
+    }
+    
+    </style>
+    
+    <!-- HEADER -->
+    <div class="tsul-header">
+        <h2 class="tsul-title">
+            Our clients speak <span>real protection</span>
+        </h2>
+    </div>
+    
+    <!-- MAIN -->
+    <div class="tsul-wrapper">
+    
+        <!-- LEFT RATING CARD -->
+        <div class="tsul-left">
+            <div class="tsul-rating">4.9</div>
+    
+            <div class="tsul-stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+            </div>
+    
+            <p>(40+ Reviews)</p>
+    
+            <div class="tsul-avatars">
+                <img src="./sana.webp">
+                <img src="./nithiya.webp">
+                <img src="./sana.webp">
+                <img src="./nithiya.webp">
+            </div>
+    
+            <p style="margin-top:15px;">Customer experiences that speak for themselves</p>
+        </div>
+    
+        <!-- RIGHT SLIDER -->
+        <div>
+            <div class="tsul-carousel">
+                <div class="tsul-track" id="tsulTrack">
+    
+                    <!-- SLIDE 1 -->
+                    <div class="tsul-card">
+                        <p class="tsul-text">
+                            Our cybersecurity improved drastically. Zero breaches and real-time monitoring changed everything.
+                        </p>
+    
+                        <div class="tsul-user">
+                            <img src="./sana.webp">
+                            <div>
+                                <strong>Sarah Mitchell</strong><br>
+                                <small>Security Analyst</small>
+                            </div>
+                        </div>
+    
+                        <div class="tsul-video-btn" onclick="tsulOpenVideo()">
+                            <i class="fas fa-play"></i> Watch Video
+                        </div>
+                    </div>
+    
+                    <!-- SLIDE 2 -->
+                    <div class="tsul-card">
+                        <p class="tsul-text">
+                            Their AI detection system prevented multiple attacks automatically.
+                        </p>
+    
+                        <div class="tsul-user">
+                            <img src="./nithiya.webp">
+                            <div>
+                                <strong>John Carter</strong><br>
+                                <small>IT Manager</small>
+                            </div>
+                        </div>
+    
+                        <div class="tsul-video-btn" onclick="tsulOpenVideo()">
+                            <i class="fas fa-play"></i> Watch Video
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+    
+            <div class="tsul-arrows">
+                <button onclick="tsulPrev()"><i class="fas fa-arrow-left"></i></button>
+                <button onclick="tsulNext()"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    
+    </div>
+    
+    <!-- VIDEO -->
+    <div class="tsul-modal" id="tsulModal" onclick="tsulCloseVideo()">
+        <iframe src="./cyber.mp4"></iframe>
+    </div>
+    
+    <script>
+    
+    let tsulIndex=0;
+    const tsulTrack=document.getElementById("tsulTrack");
+    const tsulSlides=document.querySelectorAll(".tsul-card");
+    
+    setInterval(()=>tsulNext(),4000);
+    
+    function tsulNext(){
+        tsulIndex=(tsulIndex+1)%tsulSlides.length;
+        tsulTrack.style.transform=`translateX(-${tsulIndex*100}%)`;
+    }
+    function tsulPrev(){
+        tsulIndex=(tsulIndex-1+tsulSlides.length)%tsulSlides.length;
+        tsulTrack.style.transform=`translateX(-${tsulIndex*100}%)`;
+    }
+    
+    /* VIDEO */
+    function tsulOpenVideo(){
+        document.getElementById("tsulModal").style.display="flex";
+    }
+    function tsulCloseVideo(){
+        document.getElementById("tsulModal").style.display="none";
+    }
+    
+    </script>
+    
+    </section>
+
+    
+    
 
     <!-- ================= FOOTER ================= -->
 <footer class="bio-footer">
