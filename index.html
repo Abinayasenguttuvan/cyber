@@ -214,12 +214,126 @@
 
 
 <body>
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber Hero Glass</title>
+
+    
+<style>
+
+/* ===== PRELOADER WRAPPER ===== */
+#preloader {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #0a0f1c;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* ===== CENTER CONTENT ===== */
+.loader-container {
+    text-align: center;
+}
+
+/* ===== SHIELD ICON ===== */
+.loader {
+    width: 90px;
+    height: 90px;
+    border: 3px solid #00f0ff;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 2s linear infinite;
+    box-shadow: 0 0 20px #00f0ff, inset 0 0 20px #00f0ff;
+}
+
+/* INNER GLOW PULSE */
+.loader::before {
+    content: "";
+    position: absolute;
+    width: 55px;
+    height: 55px;
+    background: #00f0ff;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 0 25px #00f0ff;
+}
+
+/* TEXT */
+.loader-text {
+    margin-top: 20px;
+    color: #00f0ff;
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-family: monospace;
+    animation: blink 1.5s infinite;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.4);
+        opacity: 0.3;
+    }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .loader {
+        width: 70px;
+        height: 70px;
+    }
+
+    .loader::before {
+        width: 40px;
+        height: 40px;
+    }
+
+    .loader-text {
+        font-size: 14px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===== PRELOADER ===== -->
+<div id="preloader">
+    <div class="loader-container">
+        <div class="loader"></div>
+        <div class="loader-text">SECURING SYSTEM...</div>
+    </div>
+</div>
+
+
+
+<!-- ===== SCRIPT ===== -->
+<script>
+window.addEventListener("load", function () {
+    document.getElementById("preloader").style.display = "none";
+});
+</script>
+
+
+    
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif;}
