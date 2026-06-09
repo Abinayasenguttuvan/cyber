@@ -90,10 +90,10 @@
     transition:0.3s;
     }
     
-    .login{background:transparent;border:1px solid #00d1a7;color:#00f7ff;}
-    .login:hover{background:#00f7ff;;color:white;}
+    .login{background:transparent;border:1px solid #00d1a7;color:black;}
+    .login:hover{background:#00f7ff;;color:black;}
     
-    .register{background:#00f7ff;;color:white;}
+    .register{background:transparent;border:1px solid #00d1a7;color:black;}
     .register:hover{background:#00f7ff;}
     
     /* MENU */
@@ -365,7 +365,7 @@ body{background:#000;color:#fff;}
     position:absolute;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.6);
+    /* background:rgba(0,0,0,0.6); */
     z-index:2;
 }
 
@@ -601,99 +601,331 @@ body{background:#000;color:#fff;}
 
 <body>
 
-<div class="hero">
+
+<!-- =========================
+     CYBER HERO SECTION
+========================= -->
+
+<section class="cyber-hero">
 
     <!-- VIDEO -->
-    <video autoplay muted loop playsinline>
+    <video class="cyber-video" autoplay muted loop playsinline>
         <source src="./cyber.mp4" type="video/mp4">
     </video>
 
     <!-- OVERLAY -->
-    <div class="overlay"></div>
+    <div class="cyber-overlay"></div>
 
-    <!-- GLASS CONTENT -->
-    <div class="container fade-up">
+    <!-- CONTENT -->
+    <div class="cyber-container cyber-fade-up">
 
-        <div class="hero-content">
+        <div class="cyber-content">
 
-            <h3 class="fade-up">Protect your business from cyber threat</h3>
+            <h3 class="cyber-fade-up">
+                Protect your business from cyber threat
+            </h3>
 
-            <h1 class="fade-up">
-                Advanced cybersecurity <br> solutions tailored to <br>
-                <span style="color:#00ffd5;">keep you safe</span>
+            <h1 class="cyber-fade-up">
+                Advanced cybersecurity <br>
+                solutions tailored to <br>
+                <span style="color:#00ffd5;">
+                    keep you safe
+                </span>
             </h1>
 
-            <p class="fade-up">
-                In a world where cyberattacks are becoming <br> more sophisticated,
-                your business deserves the best protection.
+            <p class="cyber-fade-up">
+                In a world where cyberattacks are becoming <br>
+                more sophisticated, your business deserves
+                the best protection.
             </p>
 
-            <div class="hero-btn fade-up">
-                <a href="./404.html" class="btn-primary">Get Free Assessment</a>
-                <a href="./404.html" class="btn-secondary">View our services</a>
+            <div class="cyber-btns cyber-fade-up">
+
+                <a href="./404.html"
+                   class="cyber-btn-primary">
+                    Get Free Assessment
+                </a>
+
+                <a href="./404.html"
+                   class="cyber-btn-secondary">
+                    View Our Services
+                </a>
+
             </div>
 
         </div>
 
-        <!-- LOGO SLIDER -->
-        <div class="fade-up">
+        <!-- TRUST TEXT -->
 
-            <p style="margin-top:25px;">
-                We're Trusted by <span style="color:#00ffd5;">1000+</span> companies
+        <div class="cyber-fade-up">
+
+            <p class="cyber-trust-text">
+                We're Trusted by
+                <span style="color:#00ffd5;">
+                    1000+
+                </span>
+                companies
             </p>
 
-            <div class="logo-slider">
-                <div class="logo-track">
+            <!-- LOGO SLIDER -->
 
-                    <div class="logo-item"><img src="./IT1.webp"></div>
-                    <div class="logo-item"><img src="./IT2.webp"></div>
-                    <div class="logo-item"><img src="./IT3.webp"></div>
-                    <div class="logo-item"><img src="./IT4.webp"></div>
+            
 
-                    <!-- DUPLICATE -->
-                    <div class="logo-item"><img src="./IT1.webp"></div>
-                    <div class="logo-item"><img src="./IT2.webp"></div>
-                    <div class="logo-item"><img src="./IT3.webp"></div>
-                    <div class="logo-item"><img src="./IT4.webp"></div>
-
-                </div>
             </div>
 
         </div>
 
     </div>
 
-</div>
+</section>
+<style>
+    /* ==========================
+   CYBER HERO SECTION
+========================== */
 
-<script>
-// FADE-UP ANIMATION
-window.addEventListener("load", ()=>{
-    document.querySelectorAll(".fade-up").forEach(el=>{
-        el.classList.add("show");
-    });
-});
-
-// VIDEO OPTIMIZATION
-const video = document.querySelector("video");
-
-document.addEventListener("visibilitychange", ()=>{
-    if(document.hidden){
-        video.pause();
-    } else {
-        video.play();
-    }
-});
-
-// MOBILE PERFORMANCE
-if(window.innerWidth < 480){
-    video.style.display="none";
-    document.querySelector(".hero").style.background =
-        "url('./cyber1.webp') center/cover no-repeat";
+.cyber-hero {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+.cyber-hero video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cyber-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    z-index: 1;
+}
+
+.cyber-container {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+    padding: 120px 0 60px;
+}
+
+.cyber-content h3 {
+    color: #00ffd5;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.cyber-content h1 {
+    color: #fff;
+    font-size: 4rem;
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cyber-content p {
+    color: #ddd;
+    font-size: 17px;
+    line-height: 1.8;
+    margin-bottom: 35px;
+}
+
+.cyber-btns {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cyber-btn-primary,
+.cyber-btn-secondary {
+    padding: 14px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .4s ease;
+}
+
+.cyber-btn-primary {
+    background: #00ffd5;
+    color: #000;
+}
+
+.cyber-btn-primary:hover {
+    transform: translateY(-4px);
+}
+
+.cyber-btn-secondary {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.cyber-btn-secondary:hover {
+    background: #fff;
+    color: #000;
+}
+
+.cyber-trust-text {
+    margin-top: 60px;
+    color: #fff;
+    font-size: 17px;
+}
+
+/* ==========================
+   LOGO SLIDER
+========================== */
+
+.cyber-logo-slider {
+    width: 100%;
+    overflow: hidden;
+    margin-top: 30px;
+    position: relative;
+}
+
+.cyber-logo-track {
+    display: flex;
+    width: max-content;
+    animation: cyberScroll 18s linear infinite;
+}
+
+.cyber-logo-item {
+    min-width: 180px;
+    margin-right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cyber-logo-item img {
+    max-height: 55px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: .85;
+}
+
+@keyframes cyberScroll {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* ==========================
+   ANIMATION
+========================== */
+
+.cyber-fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all .8s ease;
+}
+
+.cyber-fade-up.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media(max-width:992px){
+
+    .cyber-content h1{
+        font-size:3rem;
+    }
+
+    .cyber-content p{
+        font-size:16px;
+    }
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+    .cyber-container{
+        padding:100px 0 40px;
+    }
+
+    .cyber-content h1{
+        font-size:2.2rem;
+    }
+
+    .cyber-content h3{
+        font-size:15px;
+    }
+
+    .cyber-content p{
+        font-size:15px;
+    }
+
+    .cyber-btns{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .cyber-logo-item{
+        min-width:130px;
+    }
+
+    .cyber-logo-item img{
+        max-height:40px;
+    }
+}
+
+@media(max-width:480px){
+
+    .cyber-content h1{
+        font-size:1.8rem;
+    }
+
+    .cyber-content p br,
+    .cyber-content h1 br{
+        display:none;
+    }
+
+}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const fadeElements = document.querySelectorAll(".cyber-fade-up");
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+
+        });
+
+    }, {
+        threshold: 0.2
+    });
+
+    fadeElements.forEach(item => {
+        observer.observe(item);
+    });
+
+});
+
 </script>
-
-
-
 
 
 <!-- KEYFRAME (ONLY PART NOT INLINE) -->
@@ -746,6 +978,7 @@ let interval = setInterval(()=>{
     overflow:hidden;
     padding:30px 0;
     background:rgba(255,255,255,0.02);
+   
 }
 
 /* WRAPPER */
@@ -760,6 +993,7 @@ let interval = setInterval(()=>{
     display:flex;
     width:max-content;
     animation:scrollLeft 25s linear infinite;
+   
 }
 
 /* REVERSE */
@@ -780,10 +1014,10 @@ let interval = setInterval(()=>{
     /* GLASS */
     background:rgba(255,255,255,0.05);
     backdrop-filter:blur(8px);
-    border:1px solid rgba(255,255,255,0.1);
+    border:1px solid rgba(13, 13, 13, 0.1);
 
     font-size:24px;
-    color:#ccc;
+    color: black;
 
     transition:0.3s;
 }
@@ -876,10 +1110,15 @@ let interval = setInterval(()=>{
     font-family:'Poppins', sans-serif;
 }
 
+
+
 body{
-    background:#0a0f1c;
-    color:#fff;
+    background: rgb(228, 247, 249);
+    color: black;
 }
+
+
+
 
 /* SECTION */
 .about-us{
@@ -1015,7 +1254,7 @@ body{
 }
 
 .about-content p{
-    color:#bbb;
+    color: black;
     line-height:1.6;
 }
 
@@ -1154,9 +1393,6 @@ reveals.forEach(el => observer.observe(el));
 
 </script>
 
-
-
-
 <!-- ===== CYBER SERVICES SECTION (CENTERED HEADER) ===== -->
 <section class="cs-services">
 
@@ -1184,7 +1420,7 @@ reveals.forEach(el => observer.observe(el));
     
     .cs-title h2{
         font-size:34px;
-        color:#fff;
+        color:black;
         line-height:1.4;
     }
     
@@ -1202,7 +1438,7 @@ reveals.forEach(el => observer.observe(el));
     
         padding:12px 25px;
         border-radius:50px;
-        background:#23263a;
+        background:linear-gradient(45deg,#6c63ff,#00ffd5);
         color:#fff;
         text-decoration:none;
         transition:0.3s;
@@ -1232,7 +1468,7 @@ reveals.forEach(el => observer.observe(el));
     .cs-card{
         padding:30px;
         border-radius:20px;
-        background:linear-gradient(145deg,#1c2038,#14182c);
+        background:linear-gradient(145deg,#70a2c0,#14182c);
         border:1px solid rgba(255,255,255,0.05);
     
         transition:0.4s;
@@ -1274,7 +1510,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .cs-card p{
-        color:#bbb;
+        color: black;
         font-size:14px;
     }
     
@@ -1455,7 +1691,7 @@ reveals.forEach(el => observer.observe(el));
     /* SECTION */
     .gx-specialties{
         padding:80px 20px;
-        color:#fff;
+        color:black;
     }
     
     /* CONTAINER */
@@ -1497,7 +1733,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .gx-title p{
-        color:#ccc;
+        color:black;
     }
     
     /* BUTTON */
@@ -1506,7 +1742,7 @@ reveals.forEach(el => observer.observe(el));
         margin-top:15px;
         padding:10px 22px;
         border-radius:50px;
-        background:rgba(0,255,213,0.1);
+        background:linear-gradient(45deg,#6c63ff,#00ffd5);
         border:1px solid #00ffd5;
         color:#00ffd5;
         text-decoration:none;
@@ -1591,7 +1827,7 @@ reveals.forEach(el => observer.observe(el));
     
     .gx-item p{
         font-size:14px;
-        color:#bbb;
+        color:black;
     }
     
     /* RESPONSIVE */
@@ -1686,7 +1922,7 @@ reveals.forEach(el => observer.observe(el));
     /* SECTION */
     .kf-section{
         padding:80px 20px;
-        color:#fff;
+        color:black;
     }
     
     /* CONTAINER */
@@ -1730,7 +1966,7 @@ reveals.forEach(el => observer.observe(el));
     
     /* TEXT */
     .kf-text{
-        color:#bbb;
+        color: black;
         margin-bottom:15px;
     }
     
@@ -1740,7 +1976,7 @@ reveals.forEach(el => observer.observe(el));
         margin-top:15px;
         padding:12px 25px;
         border-radius:50px;
-        background:linear-gradient(90deg,#4da3ff,#8e2de2);
+        background:linear-gradient(45deg,#6c63ff,#00ffd5);
         color:#fff;
         text-decoration:none;
     }
@@ -1757,7 +1993,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .kf-stat p{
-        color:#aaa;
+        color:black;
     }
     
     /* IMAGE BOX */
@@ -1811,6 +2047,8 @@ reveals.forEach(el => observer.observe(el));
         display:flex;
         align-items:center;
         justify-content:center;
+        
+        
     }
     
     /* SCROLL ANIMATION */
@@ -1902,7 +2140,7 @@ reveals.forEach(el => observer.observe(el));
                 <div class="kf-play">
                     <i class="fas fa-play"></i>
                 </div>
-                <span>Let's See How We Did It</span>
+                <span style="color: white;">Let's See How We Did It</span>
             </div>
     
         </div>
@@ -1955,7 +2193,7 @@ reveals.forEach(el => observer.observe(el));
         backdrop-filter:blur(12px);
         border:1px solid rgba(255,255,255,0.08);
     
-        color:#fff;
+        color: black;
     }
     
     /* TAG */
@@ -2017,7 +2255,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .wc-item p{
-        color:#bbb;
+        color: black;
         font-size:14px;
     }
     
@@ -2036,7 +2274,7 @@ reveals.forEach(el => observer.observe(el));
     .wc-bottom{
         margin-top:40px;
         text-align:center;
-        color:#aaa;
+        color:black;
     }
     
     .wc-bottom span{
@@ -2138,8 +2376,8 @@ reveals.forEach(el => observer.observe(el));
     /* SECTION */
     .vcs-section{
         padding:80px 20px;
-        background:#0b0f1a;
-        color:#fff;
+        /* background:#0b0f1a; */
+        color: black;
     }
     
     /* HEADER */
@@ -2169,7 +2407,7 @@ reveals.forEach(el => observer.observe(el));
         margin-top:10px;
         padding:10px 22px;
         border-radius:30px;
-        background:#1a1f2e;
+        background:linear-gradient(45deg,#6c63ff,#00ffd5);
         color:#fff;
         text-decoration:none;
     }
@@ -2373,8 +2611,8 @@ reveals.forEach(el => observer.observe(el));
     /* SECTION */
     .ofxb-section{
         padding:80px 20px;
-        background:#0b0f1a;
-        color:#fff;
+       
+        color:black;
         text-align:center;
     }
     
@@ -2396,7 +2634,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .ofxb-sub{
-        color:#aaa;
+        color:black;
         max-width:600px;
         margin:auto;
     }
@@ -2541,7 +2779,7 @@ reveals.forEach(el => observer.observe(el));
     
         <!-- CARD -->
         <div class="ofxb-card" style="background-image:url('./f1.webp')">
-            <div class="ofxb-loader"></div>
+            <!-- <div class="ofxb-loader"></div> -->
             <div class="ofxb-content">
                 <div class="ofxb-icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Advanced Protection</h3>
@@ -2550,7 +2788,7 @@ reveals.forEach(el => observer.observe(el));
         </div>
     
         <div class="ofxb-card" style="background-image:url('./f2.webp')">
-            <div class="ofxb-loader"></div>
+            <!-- <div class="ofxb-loader"></div> -->
             <div class="ofxb-content">
                 <div class="ofxb-icon"><i class="fas fa-user-lock"></i></div>
                 <h3>Identity Security</h3>
@@ -2559,7 +2797,7 @@ reveals.forEach(el => observer.observe(el));
         </div>
     
         <div class="ofxb-card" style="background-image:url('./f3.webp')">
-            <div class="ofxb-loader"></div>
+            <!-- <div class="ofxb-loader"></div> -->
             <div class="ofxb-content">
                 <div class="ofxb-icon"><i class="fas fa-network-wired"></i></div>
                 <h3>Network Monitoring</h3>
@@ -2601,8 +2839,8 @@ reveals.forEach(el => observer.observe(el));
     /* SECTION */
     .prxu-section{
         padding:100px 20px;
-        background:#05070d;
-        color:#fff;
+      
+        color: black;
         text-align:center;
         overflow:hidden;
     }
@@ -2627,7 +2865,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .prxu-sub{
-        color:#aaa;
+        color: black;
         max-width:600px;
         margin:15px auto;
     }
@@ -2739,7 +2977,7 @@ reveals.forEach(el => observer.observe(el));
     
     .prxu-features li{
         margin:10px 0;
-        color:#bbb;
+        color:black;
     }
     
     /* BUTTON */
@@ -2917,8 +3155,8 @@ reveals.forEach(el => observer.observe(el));
     .tsul-section{
         position:relative;
         padding:100px 20px;
-        background:#070a14;
-        color:#fff;
+        /* background:#070a14; */
+        color:black;
         overflow:hidden;
     }
     
@@ -2982,7 +3220,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .tsul-left p{
-        color:#aaa;
+        color:black;
     }
     
     /* AVATARS */
@@ -3023,7 +3261,7 @@ reveals.forEach(el => observer.observe(el));
     /* TEXT */
     .tsul-text{
         font-size:18px;
-        color:#ccc;
+        color:black;
     }
     
     /* USER */
@@ -3048,6 +3286,7 @@ reveals.forEach(el => observer.observe(el));
         cursor:pointer;
         display:inline-flex;
         gap:10px;
+        color:white;
     }
     .tsul-video-btn:hover{
         background:#00ffd5;
@@ -3236,8 +3475,8 @@ reveals.forEach(el => observer.observe(el));
     /* SECTION */
     .cbsx-section{
         padding:80px 15px;
-        background:#06090f;
-        color:#fff;
+        /* background:linear-gradient(90deg,#00ffd5,#a855f7); */
+        color:black;
         font-family:sans-serif;
     }
     
@@ -3266,7 +3505,7 @@ reveals.forEach(el => observer.observe(el));
     
     .cbsx-sub{
         font-size:14px;
-        color:#aaa;
+        color:black;
         margin-top:10px;
     }
     
@@ -3319,8 +3558,9 @@ reveals.forEach(el => observer.observe(el));
     
         transform:translateY(100%);
         transition:0.4s;
-    
+    color:white;
         background:rgba(255,255,255,0.05);
+
     }
     
     /* SHOW CONTENT */
@@ -3546,8 +3786,8 @@ reveals.forEach(el => observer.observe(el));
     /* SECTION */
     .faqx-section{
         padding:80px 20px;
-        background:#06090f;
-        color:#fff;
+        /* background:#ecf7f9; */
+        color:black;
         font-family:sans-serif;
     }
     
@@ -3581,7 +3821,7 @@ reveals.forEach(el => observer.observe(el));
     }
     
     .faqx-title p{
-        color:#aaa;
+        color:black;
         margin-top:10px;
     }
     
@@ -3615,7 +3855,7 @@ reveals.forEach(el => observer.observe(el));
         overflow:hidden;
         transition:0.4s ease;
         padding:0 20px;
-        color:#ccc;
+        color:black;
     }
     
     /* ACTIVE */
