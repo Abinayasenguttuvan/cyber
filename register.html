@@ -248,6 +248,142 @@ body{
     font-size:22px;
   }
 }
+/* ===== GLOBAL ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:40px 15px;
+
+  color:#fff;
+
+  /* FIX SCROLL */
+  overflow-y:auto;
+  overflow-x:hidden;
+
+  /* CYBER BACKGROUND IMAGE */
+  background:
+  linear-gradient(
+    rgba(2,6,23,0.85),
+    rgba(0,0,0,0.90)
+  ),
+  url("./cyber1.webp");
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+}
+
+/* ===== CYBER PARTICLE BG ===== */
+.cyber-bg{
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  z-index:0;
+  pointer-events:none;
+}
+
+.cyber-bg span{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:var(--cyber-primary);
+  border-radius:50%;
+  box-shadow:0 0 12px var(--cyber-primary);
+  animation:cyberParticle 10s linear infinite;
+}
+
+@keyframes cyberParticle{
+  0%{
+    transform:translateY(-50px);
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  90%{
+    opacity:1;
+  }
+
+  100%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+}
+
+/* ===== WRAPPER ===== */
+.cyber-wrapper{
+  width:100%;
+  max-width:780px;
+  padding:20px;
+  z-index:2;
+  position:relative;
+  margin:40px auto;
+}
+
+/* ===== CARD ===== */
+.cyber-card{
+  background:rgba(5,15,30,0.78);
+  border:1px solid rgba(255,255,255,0.12);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  border-radius:18px;
+  padding:35px;
+  color:#fff;
+
+  box-shadow:
+  0 20px 60px rgba(0,0,0,0.5),
+  0 0 30px rgba(0,255,204,0.10);
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* Laptop/Tablet */
+@media(max-width:900px){
+  .cyber-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+/* Mobile */
+@media(max-width:600px){
+
+  body{
+    align-items:flex-start;
+    padding:20px 10px;
+  }
+
+  .cyber-wrapper{
+    padding:10px;
+  }
+
+  .cyber-card{
+    padding:25px 18px;
+  }
+
+  .cyber-title{
+    font-size:22px;
+  }
+
+  .cyber-logo img{
+    height:45px;
+  }
+}
 
 </style>
 </head>
