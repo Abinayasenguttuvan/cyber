@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stackly Biotech </title>
+<title>Stackly cyber security </title>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
@@ -727,51 +727,232 @@
     </div>
     
     <!-- GRID -->
-    <div class="cs-grid">
+    <section class="stkCyberServices">
+
+        <div class="stkCyberGrid">
     
-        <div class="cs-card">
-            <i class="fas fa-layer-group cs-icon"></i>
-            <h3>Advanced Network Security</h3>
-            <p>Protect systems with real-time monitoring and advanced threat detection.</p>
-            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+            <div class="stkCyberCard">
+                <i class="fas fa-layer-group stkCyberIcon"></i>
+                <h3>Advanced Network Security</h3>
+                <p>Protect systems with real-time monitoring and advanced threat detection.</p>
+    
+                <a href="./404.html" class="stkCyberBtn">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+    
+            <div class="stkCyberCard">
+                <i class="fas fa-shapes stkCyberIcon"></i>
+                <h3>Threat Detection</h3>
+                <p>AI-powered cyber defense to detect and respond instantly.</p>
+    
+                <a href="./404.html" class="stkCyberBtn">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+    
+            <div class="stkCyberCard">
+                <i class="fas fa-database stkCyberIcon"></i>
+                <h3>Managed Security</h3>
+                <p>Complete monitoring and protection for your infrastructure.</p>
+    
+                <a href="./404.html" class="stkCyberBtn">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+    
+            <div class="stkCyberCard">
+                <i class="fas fa-box stkCyberIcon"></i>
+                <h3>Data Encryption</h3>
+                <p>Secure sensitive data with advanced encryption systems.</p>
+    
+                <a href="./404.html" class="stkCyberBtn">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+    
+            <div class="stkCyberCard">
+                <i class="fas fa-gem stkCyberIcon"></i>
+                <h3>Risk Assessment</h3>
+                <p>Identify vulnerabilities and ensure compliance standards.</p>
+    
+                <a href="./404.html" class="stkCyberBtn">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+    
+            <div class="stkCyberCard">
+                <i class="fas fa-heartbeat stkCyberIcon"></i>
+                <h3>Ransomware Protection</h3>
+                <p>Prevent attacks and recover systems efficiently.</p>
+    
+                <a href="./404.html" class="stkCyberBtn">
+                    <span>Read More</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+    
         </div>
     
-        <div class="cs-card">
-            <i class="fas fa-shapes cs-icon"></i>
-            <h3>Threat Detection</h3>
-            <p>AI-powered cyber defense to detect and respond instantly.</p>
-            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-    
-        <div class="cs-card">
-            <i class="fas fa-database cs-icon"></i>
-            <h3>Managed Security</h3>
-            <p>Complete monitoring and protection for your infrastructure.</p>
-            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-    
-        <div class="cs-card">
-            <i class="fas fa-box cs-icon"></i>
-            <h3>Data Encryption</h3>
-            <p>Secure sensitive data with advanced encryption systems.</p>
-            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-    
-        <div class="cs-card">
-            <i class="fas fa-gem cs-icon"></i>
-            <h3>Risk Assessment</h3>
-            <p>Identify vulnerabilities and ensure compliance standards.</p>
-            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-    
-        <div class="cs-card">
-            <i class="fas fa-heartbeat cs-icon"></i>
-            <h3>Ransomware Protection</h3>
-            <p>Prevent attacks and recover systems efficiently.</p>
-            <a href="404.html" class="cs-btn"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
-        </div>
-    
-    </div>
+    </section>
+
+    <Style>
+        /* ================= CYBER SERVICES ================= */
+
+.stkCyberServices{
+    width:100%;
+    padding:80px 20px;
+    /* background:#0b1220; */
+}
+
+.stkCyberGrid{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.stkCyberCard{
+    background:#131c2f;
+    padding:30px 25px;
+    border-radius:18px;
+    text-align:center;
+    border:1px solid rgba(255,255,255,0.08);
+    transition:.35s ease;
+
+    display:flex;
+    flex-direction:column;
+}
+
+.stkCyberCard:hover{
+    transform:translateY(-8px);
+}
+
+.stkCyberIcon{
+    font-size:45px;
+    color:#00d4ff;
+    margin-bottom:18px;
+}
+
+.stkCyberCard h3{
+    color:#fff;
+    font-size:22px;
+    margin-bottom:12px;
+    min-height:55px;
+}
+
+.stkCyberCard p{
+    color:#cfd8e3;
+    line-height:1.7;
+    margin-bottom:25px;
+    flex-grow:1;
+}
+
+/* READ MORE BUTTON */
+
+.stkCyberBtn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    width:180px;
+    height:50px;
+
+    margin:0 auto;
+
+    background:#00d4ff;
+    color:#000;
+    text-decoration:none;
+    border-radius:50px;
+    font-weight:600;
+
+    transition:.3s ease;
+}
+
+.stkCyberBtn i{
+    transition:.3s ease;
+}
+
+.stkCyberBtn:hover{
+    transform:translateY(-2px);
+}
+
+.stkCyberBtn:hover i{
+    transform:translateX(6px);
+}
+
+/* ================= LAPTOP ================= */
+
+@media(max-width:1024px){
+
+    .stkCyberGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:768px){
+
+    .stkCyberServices{
+        padding:60px 15px;
+    }
+
+    .stkCyberGrid{
+        grid-template-columns:repeat(2,1fr);
+        gap:18px;
+    }
+
+    .stkCyberCard{
+        padding:25px 18px;
+    }
+
+    .stkCyberCard h3{
+        font-size:20px;
+    }
+
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:576px){
+
+    .stkCyberGrid{
+        grid-template-columns:1fr;
+    }
+
+    .stkCyberCard{
+        padding:22px 15px;
+    }
+
+    .stkCyberIcon{
+        font-size:38px;
+    }
+
+    .stkCyberCard h3{
+        font-size:18px;
+        min-height:auto;
+    }
+
+    .stkCyberCard p{
+        font-size:14px;
+    }
+
+    .stkCyberBtn{
+        width:180px;
+        height:50px;
+    }
+
+}
+    </Style>
     
     <script>
     (function(){
@@ -818,7 +999,7 @@
         position:relative;
         padding:100px 20px;
         /* background:#070a14; */
-        color:#fff;
+        color:black;
         overflow:hidden;
     }
     
@@ -923,7 +1104,7 @@
     /* TEXT */
     .tsul-text{
         font-size:18px;
-        color:#ccc;
+        color:black;
     }
     
     /* USER */
@@ -944,7 +1125,7 @@
         margin-top:20px;
         padding:10px 20px;
         border-radius:30px;
-        background:#111;
+        background:#5f676a;
         cursor:pointer;
         display:inline-flex;
         gap:10px;
@@ -1085,9 +1266,20 @@
     </div>
     
     <!-- VIDEO -->
-    <div class="tsul-modal" id="tsulModal" onclick="tsulCloseVideo()">
-        <iframe src="./cyber.mp4"></iframe>
-    </div>
+    <!-- VIDEO MODAL -->
+<div class="tsulModalWrap" id="tsulModal">
+
+    <button class="tsulModalClose" onclick="tsulCloseVideo()">
+        ✕
+    </button>
+
+    <video class="tsulModalVideo" controls autoplay id="tsulVideoPlayer">
+        <source src="./cyber.mp4" type="video/mp4">
+    </video>
+
+</div>
+
+
     
     <script>
     
@@ -1118,6 +1310,115 @@
     
     </section>
 
+    <style>
+        /* ================= VIDEO MODAL ================= */
+
+.tsulModalWrap{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    z-index:99999;
+
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.tsulModalVideo{
+    width:90%;
+    max-width:900px;
+    max-height:85vh;
+    border-radius:12px;
+    object-fit:contain;
+}
+
+/* CLOSE BUTTON */
+
+.tsulModalClose{
+    position:absolute;
+    top:20px;
+    right:20px;
+
+    width:45px;
+    height:45px;
+
+    border:none;
+    border-radius:50%;
+
+    background:red;
+    color:#fff;
+
+    font-size:24px;
+    font-weight:bold;
+    cursor:pointer;
+
+    z-index:100000;
+}
+
+/* TABLET */
+
+@media(max-width:768px){
+
+    .tsulModalVideo{
+        width:95%;
+    }
+
+    .tsulModalClose{
+        width:40px;
+        height:40px;
+        font-size:20px;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    .tsulModalClose{
+        top:10px;
+        right:10px;
+
+        width:35px;
+        height:35px;
+
+        font-size:18px;
+    }
+
+}
+    </style>
+
+    <script>
+        
+
+function tsulOpenVideo(){
+
+    const modal = document.getElementById("tsulModal");
+    const video = document.getElementById("tsulVideoPlayer");
+
+    modal.style.display = "flex";
+    video.play();
+
+}
+
+function tsulCloseVideo(){
+
+    const modal = document.getElementById("tsulModal");
+    const video = document.getElementById("tsulVideoPlayer");
+
+    video.pause();
+    video.currentTime = 0;
+
+    modal.style.display = "none";
+
+}
+
+</script>
+    
     
     
 

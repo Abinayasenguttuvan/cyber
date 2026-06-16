@@ -392,13 +392,29 @@
                     </div>
         
                     <!-- VIDEO -->
-                    <div class="gx-video" style="margin-top:20px;">
-                        <img src="f1.webp" alt="">
-                        <a href="./cyber.mp4" class="gx-play">
+                    <div class="stkVideoBox">
+
+                        <img src="f1.webp" alt="Video Thumbnail" class="stkVideoThumb">
+                    
+                        <button class="stkVideoPlayBtn" onclick="openStkVideo()">
                             <i class="fas fa-play"></i>
-                        </a>
+                        </button>
+                    
                     </div>
-        
+                    
+                    <!-- VIDEO POPUP -->
+                    
+                    <div class="stkVideoModal" id="stkVideoModal">
+                    
+                        <button class="stkVideoCloseBtn" onclick="closeStkVideo()">
+                            ✕
+                        </button>
+                    
+                        <video class="stkPopupVideo" controls autoplay id="stkPopupVideo">
+                            <source src="./cyber.mp4" type="video/mp4">
+                        </video>
+                    
+                    </div>
                     <a href="./404.html" class="gx-btn">Contact Now</a>
         
                 </div>
@@ -445,6 +461,137 @@
         </div>
         
         </section>
+
+        <style>
+            /* ================= VIDEO THUMBNAIL ================= */
+
+.stkVideoBox{
+    position:relative;
+    width:100%;
+    max-width:600px;
+    margin:20px auto;
+}
+
+.stkVideoThumb{
+    width:100%;
+    display:block;
+    border-radius:12px;
+}
+
+/* PLAY BUTTON */
+
+.stkVideoPlayBtn{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:70px;
+    height:70px;
+    border:none;
+    border-radius:50%;
+    background:#ff0000;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+    z-index:5;
+}
+
+/* ================= VIDEO MODAL ================= */
+
+.stkVideoModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.9);
+    z-index:99999;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.stkPopupVideo{
+    width:90%;
+    max-width:900px;
+    max-height:85vh;
+    border-radius:12px;
+}
+
+/* CLOSE BUTTON */
+
+.stkVideoCloseBtn{
+    position:absolute;
+    top:20px;
+    right:20px;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:red;
+    color:#fff;
+    font-size:24px;
+    cursor:pointer;
+    z-index:100000;
+}
+
+/* TABLET */
+
+@media(max-width:768px){
+
+    .stkPopupVideo{
+        width:95%;
+    }
+
+    .stkVideoCloseBtn{
+        width:40px;
+        height:40px;
+        font-size:20px;
+    }
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+    .stkVideoPlayBtn{
+        width:55px;
+        height:55px;
+        font-size:18px;
+    }
+
+    .stkVideoCloseBtn{
+        top:10px;
+        right:10px;
+        width:35px;
+        height:35px;
+        font-size:18px;
+    }
+
+}
+        </style>
+        <script>
+
+            function openStkVideo(){
+            
+                document.getElementById("stkVideoModal").style.display = "flex";
+            
+                document.getElementById("stkPopupVideo").play();
+            
+            }
+            
+            function closeStkVideo(){
+            
+                let modal = document.getElementById("stkVideoModal");
+                let video = document.getElementById("stkPopupVideo");
+            
+                modal.style.display = "none";
+            
+                video.pause();
+                video.currentTime = 0;
+            
+            }
+            
+            </script>
         <!-- ===== KEY FACTS PREMIUM SECTION ===== -->
     <section class="kf-section">
     
@@ -668,12 +815,12 @@
                 </div>
         
                 <!-- VIDEO -->
-                <div class="kf-video">
+                <!-- <div class="kf-video">
                     <div class="kf-play">
                         <i class="fas fa-play"></i>
                     </div>
                     <span>Let's See How We Did It</span>
-                </div>
+                </div> -->
         
             </div>
         
