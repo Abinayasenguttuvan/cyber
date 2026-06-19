@@ -66,15 +66,24 @@
 
     .form-group { margin-bottom: 20px; display:flex; flex-direction:column; }
     .form-group label { margin-bottom:5px; font-size:14px; color:#c0c0c0; }
-    .form-group input, .form-group select {
-      padding:12px;
-      border-radius:10px;
-      border:none;
-      outline:none;
-      background: rgba(255,255,255,0.1);
-      color:#fff;
-      transition: 0.3s;
-    }
+   .form-group select{
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+
+    background: rgba(255,255,255,0.85);
+    color:#111;               /* dark text */
+    font-weight:500;
+    cursor:pointer;
+
+    appearance:auto;
+    -webkit-appearance:menulist;
+    .form-group select option{
+    background:#ffffff;
+    color:#000000;
+}
+}
     .form-group input:focus, .form-group select:focus { background: rgba(255,255,255,0.2); }
 
     .remember-forgot {
@@ -84,6 +93,26 @@
       color:#c0c0c0;
       margin-bottom:20px;
     }
+    /* INPUT */
+.form-group input{
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    background:rgba(255,255,255,0.1);
+    color:#fff;
+}
+
+/* SELECT */
+.form-group select{
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    outline:none;
+    background:#ffffff;
+    color:#111;
+}
+
     .remember-forgot a { color:#00ffff; text-decoration:none; transition:0.3s; }
     .remember-forgot a:hover { text-decoration:underline; }
 
@@ -172,15 +201,16 @@
     </div>
     <div class="remember-forgot">
       <label><input type="checkbox" id="remember"> Remember me</label>
-      <a href="./404,html">Forgot Password?</a>
+      <a href="./404.html">Forgot Password?</a>
     </div>
     <button class="btn" onclick="login()">Login</button>
-    <div class="signup">Don't have an account? <a href="./register.html">Register now</a></div>
+    <div class="signup" style="color: white;">Don't have an account? <a href="./register.html">Register now</a></div>
   </div>
 
   <!-- Right side - logo + reviews -->
   <div class="login-right">
-    <img src="./logo.webp" alt="Cyber Security Logo">
+    <a href="index.html">
+    <img src="./logo.webp" alt="Cyber Security Logo"></a>
     <div class="reviews">
       <p>"Excellent security services! Highly recommend."</p>
       <p>"Professional team and fast support."</p>
